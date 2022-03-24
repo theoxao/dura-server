@@ -60,6 +60,9 @@ class Crawler {
                         log.error(e.message, e)
                     }
                     override fun onResponse(call: Call, response: Response) {
+                        if (LocalDateTime.now().second==0){
+                           log.info(">>>>>queued call count:{}",  http.dispatcher.queuedCallsCount())
+                        }
                         var status :String? = "undefined"
                         if (response.isSuccessful) {
                             response.body?.string()?.let { json ->
