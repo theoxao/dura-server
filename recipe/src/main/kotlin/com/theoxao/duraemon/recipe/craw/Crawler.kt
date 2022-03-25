@@ -42,11 +42,9 @@ class Crawler {
 
     @PostConstruct
     fun init() {
-        val lines = this::class.java.classLoader.getResource("ids.csv")?.readText()?.lines() ?: return
-        val list = (100000000..100011822).toMutableList()
-        list.addAll(lines.map { it.toInt() })
+        val list = (101051718..110011822).toMutableList()
         list.chunked(2000).forEach { ids ->
-            val recipes = ids.forEach { id ->
+            ids.forEach { id ->
                 val request = Request.Builder()
                     .url("https://www.xiachufang.com/juno/api/v2/recipes/show_v2.json?id=${id}&mode=full")
                     .get()

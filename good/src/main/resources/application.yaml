@@ -2,7 +2,7 @@ server:
   port: 8989
 spring:
   application:
-    name: recipe
+    name: good
   datasource:
     hikari:
       jdbc-url: jdbc:postgresql://www.theoxao.com:5432/duraemon?useSSL=false&characterEncoding=utf8
