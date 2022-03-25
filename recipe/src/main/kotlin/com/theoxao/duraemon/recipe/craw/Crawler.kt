@@ -116,8 +116,7 @@ class Crawler {
                                 }
                             }
                         }
-                        if(status =="ok")
-                            log.info("request@{}, response code:{} , status:{}", id, response.code , status)
+                        log.info("request@{}, response code:{} , status:{}", id, response.code , status)
                         response.closeQuietly()
                     }
                 })
