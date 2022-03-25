@@ -43,10 +43,18 @@ class Crawler {
 
 
     @Scheduled(cron = "0 0 0 1/1 * ?")
-    fun init() {
+    fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
-        val list = (max..(max+1000)).toMutableList()
-        list.chunked(2000).forEach { ids ->
+        val list = (max..(max+1000)).toMutableList().craw()
+    }
+
+    @PostConstruct
+    fun init(){
+        (106000000 downTo 103000000).toMutableList().craw()
+    }
+
+    fun MutableList<Int>.craw(){
+        this.chunked(2000).forEach { ids ->
             ids.forEach { id ->
                 val request = Request.Builder()
                     .url("https://www.xiachufang.com/juno/api/v2/recipes/show_v2.json?id=${id}&mode=full")
@@ -62,7 +70,7 @@ class Crawler {
                     }
                     override fun onResponse(call: Call, response: Response) {
                         if (LocalDateTime.now().second==0){
-                           log.info(">>>>>queued call count:{}",  http.dispatcher.queuedCallsCount())
+                            log.info(">>>>>queued call count:{}",  http.dispatcher.queuedCallsCount())
                         }
                         var status :String? = "undefined"
                         if (response.isSuccessful) {
