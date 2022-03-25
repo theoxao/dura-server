@@ -50,7 +50,7 @@ class Crawler {
 
     @PostConstruct
     fun init(){
-        (106000000 downTo 103000000).toMutableList().craw()
+        (106000000 downTo 104500000).toMutableList().craw()
     }
 
     fun MutableList<Int>.craw(){
