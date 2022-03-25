@@ -12,6 +12,7 @@ import org.jooq.DSLContext
 import org.jooq.JSON
 import org.jooq.impl.DSL
 import org.slf4j.LoggerFactory
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.time.Duration
@@ -41,9 +42,10 @@ class Crawler {
         .connectTimeout(Duration.ofSeconds(30)).build()
 
 
-    @PostConstruct
+    @Scheduled(cron = "0 0 0 1/1 * ?")
     fun init() {
-        val list = (107000000 downTo 106000000).toMutableList()
+        val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
+        val list = (max..(max+1000)).toMutableList()
         list.chunked(2000).forEach { ids ->
             ids.forEach { id ->
                 val request = Request.Builder()
