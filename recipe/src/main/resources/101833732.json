@@ -1,0 +1,215 @@
+{
+  "status": "ok",
+  "content": {
+    "recipe": {
+      "recipe_type": 0,
+      "id": "101833732",
+      "name": "咖喱肉末蛋包饭",
+      "desc": "有一次回成都在coco壹番屋吃到的这个咖喱饭，感觉很特别。回家了，做给小胖吃。虽然不能完全复制这家店的味道，不过小胖也很喜欢，说这个咖喱饭跟之前吃的不一样呀，这个蛋包饭跟之前吃的也不一样呀，哈哈哈。",
+      "photo": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/2/w/620/interlace/1/q/90",
+      "image": {
+        "ident": "f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg",
+        "original_width": 1619,
+        "original_height": 1080,
+        "max_width": 4096,
+        "max_height": 4096,
+        "url_pattern": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/{width}/h/{height}/q/90/format/{format}"
+      },
+      "has_minor_avatar": false,
+      "minor_author": {},
+      "is_adaptation_recipe": false,
+      "adaptation": {
+        "allow_adaptation": false,
+        "n_adaptation": 0,
+        "root_recipe_id": "101833732",
+        "allow_to_change_adaptation_status": false,
+        "adaptation_history_url": ""
+      },
+      "labels": [],
+      "author": {
+        "id": "10214923",
+        "name": "-汤-汤-",
+        "photo": "https://i2.chuimg.com/fd1aaa01a8e04247b91b2cf769e0a7b1_750w_750h.jpg?imageView2/2/w/60/interlace/1/q/90",
+        "photo60": "https://i2.chuimg.com/fd1aaa01a8e04247b91b2cf769e0a7b1_750w_750h.jpg?imageView2/2/w/60/interlace/1/q/90",
+        "photo160": "https://i2.chuimg.com/fd1aaa01a8e04247b91b2cf769e0a7b1_750w_750h.jpg?imageView2/2/w/160/interlace/1/q/90",
+        "image": {
+          "ident": "fd1aaa01a8e04247b91b2cf769e0a7b1_750w_750h.jpg",
+          "original_width": 750,
+          "original_height": 750,
+          "max_width": 4096,
+          "max_height": 4096,
+          "url_pattern": "https://i2.chuimg.com/fd1aaa01a8e04247b91b2cf769e0a7b1_750w_750h.jpg?imageView2/1/w/{width}/h/{height}/q/90/format/{format}"
+        },
+        "mail": "",
+        "is_expert": false,
+        "is_mp": false,
+        "url": "https://www.xiachufang.com/cook/10214923/",
+        "has_user_been_prime": false,
+        "is_prime_avaliable": false,
+        "labels": [],
+        "is_social_verified": false,
+        "social_verified_reason": "",
+        "report_url": "https://www.xiachufang.com/juno/report/?target_id=10214923&target_kind=1002",
+        "is_following": false
+      },
+      "ident": "f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg",
+      "photo80": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/140/h/106/interlace/1/q/90",
+      "photo90": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/280/h/216/interlace/1/q/90",
+      "photo140": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/140/h/106/interlace/1/q/90",
+      "photo280": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/280/h/216/interlace/1/q/90",
+      "photo340": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/2/w/620/interlace/1/q/90",
+      "photo526": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/2/w/620/interlace/1/q/90",
+      "photo580": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/2/w/620/interlace/1/q/90",
+      "photo640": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/2/w/620/interlace/1/q/90",
+      "thumb": "https://i2.chuimg.com/f04100388b2c11e6a9a10242ac110002_1619w_1080h.jpg?imageView2/1/w/140/h/106/interlace/1/q/90",
+      "create_time": "2016-06-16 00:41:10",
+      "friendly_create_time": "2016-06-16",
+      "update_time": "2016-10-06 02:53:01",
+      "score": "",
+      "is_exclusive": true,
+      "is_fullscreen": false,
+      "is_private": false,
+      "is_prime_recipe": false,
+      "url": "https://www.xiachufang.com/recipe/101833732/",
+      "summary": "有一次回成都在coco壹番屋吃到的这个咖喱饭，感觉很特别。回家了，做给小胖吃。虽然不能完全复制这家店的味道，不过小胖也很喜欢，说这个咖喱饭跟之前吃的不一样呀，这个蛋包饭跟之前吃的也不一样呀，哈哈哈。",
+      "ingredient": [
+        {
+          "name": "肉末",
+          "amount": "100g",
+          "cat": "M"
+        },
+        {
+          "name": "咖喱",
+          "amount": "一小块～两小块",
+          "cat": "M"
+        },
+        {
+          "name": "料酒",
+          "amount": "适量（腌肉用）",
+          "cat": "M"
+        },
+        {
+          "name": "黑胡椒",
+          "amount": "适量（腌肉用）",
+          "cat": "M"
+        },
+        {
+          "name": "洋葱",
+          "amount": "少许",
+          "cat": "M"
+        },
+        {
+          "name": "水",
+          "amount": "",
+          "cat": "M"
+        },
+        {
+          "name": "米饭",
+          "amount": "蛋包饭用",
+          "cat": "M"
+        },
+        {
+          "name": "食用油",
+          "amount": "",
+          "cat": "M"
+        },
+        {
+          "name": "鸡蛋",
+          "amount": "2颗（蛋包饭）",
+          "cat": "M"
+        }
+      ],
+      "instruction": [
+        {
+          "step": "0",
+          "text": "猪肉剁成肉末，加适量料酒和黑胡椒腌渍",
+          "ident": "",
+          "video": {},
+          "url": "",
+          "photo800": "",
+          "image": {}
+        },
+        {
+          "step": "1",
+          "text": "洋葱切成肉末大小的颗粒，其实就是尽量小一些。",
+          "ident": "",
+          "video": {},
+          "url": "",
+          "photo800": "",
+          "image": {}
+        },
+        {
+          "step": "2",
+          "text": "做蛋包饭。两个鸡蛋混合全蛋液。平底锅一层油，油热之后加入全蛋液，摊成蛋饼。在蛋液即将全部凝固时，加入适量米饭，四角往里包就好。然后翻入盘子里。这一步要快速轻柔。",
+          "ident": "",
+          "video": {},
+          "url": "",
+          "photo800": "",
+          "image": {}
+        },
+        {
+          "step": "3",
+          "text": "熬好的咖喱肉末浓稠，浇到蛋包饭碗里即可。",
+          "ident": "",
+          "video": {},
+          "url": "",
+          "photo800": "",
+          "image": {}
+        },
+        {
+          "step": "4",
+          "text": "锅里热油，加肉末炒至颜色变白，加洋葱碎翻炒出香味，加水。水的量没过肉为宜。锅内沸腾后加入咖喱块。小火慢熬。",
+          "ident": "",
+          "video": {},
+          "url": "",
+          "photo800": "",
+          "image": {}
+        }
+      ],
+      "tips": "1.这是一个人的量，如果你喜欢咖喱味浓一些，多加咖喱块就可以了。\n2.熬咖喱可以用牛肉汤，也可以加牛奶，椰浆，口感会不一样哦。\n3.还可以添加你自己喜欢的蔬菜水果进去，我个人喜欢加苹果。\n4.趁热吃。",
+      "dish_author": [],
+      "duration": {
+        "value": 0,
+        "text": ""
+      },
+      "difficulty": {
+        "value": 0,
+        "text": ""
+      },
+      "audit_info": {
+        "url": "https://www.xiachufang.com/page/appfaq/published_content_is_locked/",
+        "waiting_for_audit": false
+      },
+      "recipe_cats": [],
+      "original_categories": [],
+      "stats": {
+        "n_dishes": "5",
+        "n_cooked": "5",
+        "n_cooked_last_week": "0",
+        "n_comments": "0",
+        "n_questions": "1",
+        "n_question_and_answers": "2",
+        "n_collects": "168",
+        "n_pv": "3862",
+        "n_vod_played": "",
+        "n_unformatted_collects": "168",
+        "n_unformatted_pv": "3862",
+        "n_unformatted_vod_played": "0",
+        "n_diggs": "",
+        "n_instructions": 5,
+        "cooked_by_me": false
+      },
+      "equipment_related_info": {
+        "equipments": []
+      },
+      "purchase_button": {},
+      "purchase_url": "",
+      "video_url": "",
+      "video_page_url": "",
+      "cover_micro_video": {},
+      "vod_video": {},
+      "summary_desc": "",
+      "property_desc": {}
+    }
+  }
+}

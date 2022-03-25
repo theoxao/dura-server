@@ -30,23 +30,36 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbCategory extends TableImpl<TbCategoryRecord> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public.tb_category</code>
      */
     public static final TbCategory TB_CATEGORY = new TbCategory();
-    private static final long serialVersionUID = 1L;
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<TbCategoryRecord> getRecordType() {
+        return TbCategoryRecord.class;
+    }
+
     /**
      * The column <code>public.tb_category.id</code>.
      */
     public final TableField<TbCategoryRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.tb_category.name</code>.
      */
     public final TableField<TbCategoryRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_category.level</code>.
      */
     public final TableField<TbCategoryRecord, Integer> LEVEL = createField(DSL.name("level"), SQLDataType.INTEGER, this, "");
+
     /**
      * The column <code>public.tb_category.pid</code>.
      */
@@ -79,14 +92,6 @@ public class TbCategory extends TableImpl<TbCategoryRecord> {
      */
     public TbCategory() {
         this(DSL.name("tb_category"), null);
-    }
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<TbCategoryRecord> getRecordType() {
-        return TbCategoryRecord.class;
     }
 
     @Override

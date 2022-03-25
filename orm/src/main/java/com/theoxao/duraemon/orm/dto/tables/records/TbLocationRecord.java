@@ -22,10 +22,24 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
     private static final long serialVersionUID = 1L;
 
     /**
+     * Setter for <code>public.tb_location.id</code>.
+     */
+    public void setId(Integer value) {
+        set(0, value);
+    }
+
+    /**
      * Create a detached TbLocationRecord
      */
     public TbLocationRecord() {
         super(TbLocation.TB_LOCATION);
+    }
+
+    /**
+     * Setter for <code>public.tb_location.room</code>.
+     */
+    public void setRoom(String value) {
+        set(1, value);
     }
 
     /**
@@ -49,10 +63,10 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
     }
 
     /**
-     * Setter for <code>public.tb_location.id</code>.
+     * Getter for <code>public.tb_location.location</code>.
      */
-    public void setId(Integer value) {
-        set(0, value);
+    public String getLocation() {
+        return (String) get(2);
     }
 
     /**
@@ -63,17 +77,10 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
     }
 
     /**
-     * Setter for <code>public.tb_location.room</code>.
+     * Getter for <code>public.tb_location.loc_short</code>.
      */
-    public void setRoom(String value) {
-        set(1, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_location.location</code>.
-     */
-    public String getLocation() {
-        return (String) get(2);
+    public String getLocShort() {
+        return (String) get(3);
     }
 
     /**
@@ -84,24 +91,6 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
     }
 
     /**
-     * Getter for <code>public.tb_location.loc_short</code>.
-     */
-    public String getLocShort() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>public.tb_location.loc_short</code>.
-     */
-    public void setLocShort(String value) {
-        set(3, value);
-    }
-
-    // -------------------------------------------------------------------------
-    // Primary key information
-    // -------------------------------------------------------------------------
-
-    /**
      * Getter for <code>public.tb_location.loc_code</code>.
      */
     public String getLocCode() {
@@ -109,20 +98,17 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
     }
 
     // -------------------------------------------------------------------------
-    // Record5 type implementation
+    // Primary key information
     // -------------------------------------------------------------------------
-
-    /**
-     * Setter for <code>public.tb_location.loc_code</code>.
-     */
-    public void setLocCode(String value) {
-        set(4, value);
-    }
 
     @Override
     public Record1<Integer> key() {
         return (Record1) super.key();
     }
+
+    // -------------------------------------------------------------------------
+    // Record5 type implementation
+    // -------------------------------------------------------------------------
 
     @Override
     public Row5<Integer, String, String, String, String> fieldsRow() {
@@ -233,10 +219,6 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
         return this;
     }
 
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
     @Override
     public TbLocationRecord value5(String value) {
         setLocCode(value);
@@ -251,5 +233,23 @@ public class TbLocationRecord extends UpdatableRecordImpl<TbLocationRecord> impl
         value4(value4);
         value5(value5);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>public.tb_location.loc_short</code>.
+     */
+    public void setLocShort(String value) {
+        set(3, value);
+    }
+
+    /**
+     * Setter for <code>public.tb_location.loc_code</code>.
+     */
+    public void setLocCode(String value) {
+        set(4, value);
     }
 }

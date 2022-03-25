@@ -31,67 +31,91 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbItem extends TableImpl<TbItemRecord> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public.tb_item</code>
      */
     public static final TbItem TB_ITEM = new TbItem();
-    private static final long serialVersionUID = 1L;
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<TbItemRecord> getRecordType() {
+        return TbItemRecord.class;
+    }
+
     /**
      * The column <code>public.tb_item.id</code>.
      */
     public final TableField<TbItemRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.tb_item.good_id</code>.
      */
     public final TableField<TbItemRecord, Integer> GOOD_ID = createField(DSL.name("good_id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.tb_item.name</code>.
      */
     public final TableField<TbItemRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_item.images</code>.
      */
     public final TableField<TbItemRecord, String> IMAGES = createField(DSL.name("images"), SQLDataType.VARCHAR, this, "");
+
     /**
      * The column <code>public.tb_item.desc</code>.
      */
     public final TableField<TbItemRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.VARCHAR(1024), this, "");
+
     /**
      * The column <code>public.tb_item.spec</code>. 规格
      */
     public final TableField<TbItemRecord, String> SPEC = createField(DSL.name("spec"), SQLDataType.VARCHAR(255), this, "规格");
+
     /**
      * The column <code>public.tb_item.price</code>.
      */
     public final TableField<TbItemRecord, Integer> PRICE = createField(DSL.name("price"), SQLDataType.INTEGER, this, "");
+
     /**
      * The column <code>public.tb_item.isbn</code>.
      */
     public final TableField<TbItemRecord, String> ISBN = createField(DSL.name("isbn"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_item.best_favor</code>. 最佳赏味（单位小时）
      */
     public final TableField<TbItemRecord, Integer> BEST_FAVOR = createField(DSL.name("best_favor"), SQLDataType.INTEGER, this, "最佳赏味（单位小时）");
+
     /**
      * The column <code>public.tb_item.shelf_life</code>. 保质期（单位小时）
      */
     public final TableField<TbItemRecord, Integer> SHELF_LIFE = createField(DSL.name("shelf_life"), SQLDataType.INTEGER, this, "保质期（单位小时）");
+
     /**
      * The column <code>public.tb_item.storage</code>. 推荐保存方式
      */
     public final TableField<TbItemRecord, String> STORAGE = createField(DSL.name("storage"), SQLDataType.VARCHAR(255), this, "推荐保存方式");
+
     /**
      * The column <code>public.tb_item.used_storage</code>. 拆分后保存方式
      */
     public final TableField<TbItemRecord, String> USED_STORAGE = createField(DSL.name("used_storage"), SQLDataType.VARCHAR(255), this, "拆分后保存方式");
+
     /**
      * The column <code>public.tb_item.remark</code>.
      */
     public final TableField<TbItemRecord, String> REMARK = createField(DSL.name("remark"), SQLDataType.CLOB, this, "");
+
     /**
      * The column <code>public.tb_item.create_time</code>.
      */
     public final TableField<TbItemRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
     /**
      * The column <code>public.tb_item.update_time</code>.
      */
@@ -124,14 +148,6 @@ public class TbItem extends TableImpl<TbItemRecord> {
      */
     public TbItem() {
         this(DSL.name("tb_item"), null);
-    }
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<TbItemRecord> getRecordType() {
-        return TbItemRecord.class;
     }
 
     @Override

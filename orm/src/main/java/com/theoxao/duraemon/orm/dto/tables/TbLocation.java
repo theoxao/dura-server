@@ -30,27 +30,41 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbLocation extends TableImpl<TbLocationRecord> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public.tb_location</code>
      */
     public static final TbLocation TB_LOCATION = new TbLocation();
-    private static final long serialVersionUID = 1L;
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<TbLocationRecord> getRecordType() {
+        return TbLocationRecord.class;
+    }
+
     /**
      * The column <code>public.tb_location.id</code>.
      */
     public final TableField<TbLocationRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.tb_location.room</code>.
      */
     public final TableField<TbLocationRecord, String> ROOM = createField(DSL.name("room"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_location.location</code>.
      */
     public final TableField<TbLocationRecord, String> LOCATION = createField(DSL.name("location"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_location.loc_short</code>.
      */
     public final TableField<TbLocationRecord, String> LOC_SHORT = createField(DSL.name("loc_short"), SQLDataType.VARCHAR(255), this, "");
+
     /**
      * The column <code>public.tb_location.loc_code</code>.
      */
@@ -83,14 +97,6 @@ public class TbLocation extends TableImpl<TbLocationRecord> {
      */
     public TbLocation() {
         this(DSL.name("tb_location"), null);
-    }
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<TbLocationRecord> getRecordType() {
-        return TbLocationRecord.class;
     }
 
     @Override

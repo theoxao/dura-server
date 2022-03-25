@@ -29,6 +29,13 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     /**
+     * Getter for <code>public.tb_category.id</code>.
+     */
+    public Integer getId() {
+        return (Integer) get(0);
+    }
+
+    /**
      * Create a detached, initialised TbCategoryRecord
      */
     public TbCategoryRecord(Integer id, String name, Integer level, Integer pid) {
@@ -41,10 +48,17 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     /**
-     * Getter for <code>public.tb_category.id</code>.
+     * Getter for <code>public.tb_category.name</code>.
      */
-    public Integer getId() {
-        return (Integer) get(0);
+    public String getName() {
+        return (String) get(1);
+    }
+
+    /**
+     * Setter for <code>public.tb_category.level</code>.
+     */
+    public void setLevel(Integer value) {
+        set(2, value);
     }
 
     /**
@@ -55,36 +69,11 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     /**
-     * Getter for <code>public.tb_category.name</code>.
-     */
-    public String getName() {
-        return (String) get(1);
-    }
-
-    /**
      * Setter for <code>public.tb_category.name</code>.
      */
     public void setName(String value) {
         set(1, value);
     }
-
-    /**
-     * Getter for <code>public.tb_category.level</code>.
-     */
-    public Integer getLevel() {
-        return (Integer) get(2);
-    }
-
-    /**
-     * Setter for <code>public.tb_category.level</code>.
-     */
-    public void setLevel(Integer value) {
-        set(2, value);
-    }
-
-    // -------------------------------------------------------------------------
-    // Primary key information
-    // -------------------------------------------------------------------------
 
     /**
      * Getter for <code>public.tb_category.pid</code>.
@@ -94,20 +83,17 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     // -------------------------------------------------------------------------
-    // Record4 type implementation
+    // Primary key information
     // -------------------------------------------------------------------------
-
-    /**
-     * Setter for <code>public.tb_category.pid</code>.
-     */
-    public void setPid(Integer value) {
-        set(3, value);
-    }
 
     @Override
     public Record1<Integer> key() {
         return (Record1) super.key();
     }
+
+    // -------------------------------------------------------------------------
+    // Record4 type implementation
+    // -------------------------------------------------------------------------
 
     @Override
     public Row4<Integer, String, Integer, Integer> fieldsRow() {
@@ -197,10 +183,6 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
         return this;
     }
 
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
     @Override
     public TbCategoryRecord value4(Integer value) {
         setPid(value);
@@ -214,5 +196,23 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
         value3(value3);
         value4(value4);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Getter for <code>public.tb_category.level</code>.
+     */
+    public Integer getLevel() {
+        return (Integer) get(2);
+    }
+
+    /**
+     * Setter for <code>public.tb_category.pid</code>.
+     */
+    public void setPid(Integer value) {
+        set(3, value);
     }
 }

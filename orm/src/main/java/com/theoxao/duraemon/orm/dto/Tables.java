@@ -4,6 +4,7 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
@@ -17,6 +18,11 @@ import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>public.recipe_json</code>.
+     */
+    public static final RecipeJson RECIPE_JSON = RecipeJson.RECIPE_JSON;
 
     /**
      * The table <code>public.tb_category</code>.

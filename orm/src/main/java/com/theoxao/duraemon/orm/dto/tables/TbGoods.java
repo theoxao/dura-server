@@ -31,51 +31,71 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbGoods extends TableImpl<TbGoodsRecord> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public.tb_goods</code>
      */
     public static final TbGoods TB_GOODS = new TbGoods();
-    private static final long serialVersionUID = 1L;
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<TbGoodsRecord> getRecordType() {
+        return TbGoodsRecord.class;
+    }
+
     /**
      * The column <code>public.tb_goods.id</code>.
      */
     public final TableField<TbGoodsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.tb_goods.name</code>. 品名
      */
     public final TableField<TbGoodsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "品名");
+
     /**
      * The column <code>public.tb_goods.desc</code>.
      */
     public final TableField<TbGoodsRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.VARCHAR(1024), this, "");
+
     /**
      * The column <code>public.tb_goods.cate</code>. 主分类
      */
     public final TableField<TbGoodsRecord, Integer> CATE = createField(DSL.name("cate"), SQLDataType.INTEGER, this, "主分类");
+
     /**
      * The column <code>public.tb_goods.sub_cate</code>. 二级分类
      */
     public final TableField<TbGoodsRecord, Integer> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.INTEGER, this, "二级分类");
+
     /**
      * The column <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
     public final TableField<TbGoodsRecord, Integer> REMAIN_BATCH = createField(DSL.name("remain_batch"), SQLDataType.INTEGER, this, "剩余批次");
+
     /**
      * The column <code>public.tb_goods.recent_price</code>.
      */
     public final TableField<TbGoodsRecord, Integer> RECENT_PRICE = createField(DSL.name("recent_price"), SQLDataType.INTEGER, this, "");
+
     /**
      * The column <code>public.tb_goods.images</code>.
      */
     public final TableField<TbGoodsRecord, String> IMAGES = createField(DSL.name("images"), SQLDataType.VARCHAR, this, "");
+
     /**
      * The column <code>public.tb_goods.need_buy</code>.
      */
     public final TableField<TbGoodsRecord, Integer> NEED_BUY = createField(DSL.name("need_buy"), SQLDataType.INTEGER, this, "");
+
     /**
      * The column <code>public.tb_goods.create_time</code>.
      */
     public final TableField<TbGoodsRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
     /**
      * The column <code>public.tb_goods.update_time</code>.
      */
@@ -108,14 +128,6 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
      */
     public TbGoods() {
         this(DSL.name("tb_goods"), null);
-    }
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<TbGoodsRecord> getRecordType() {
-        return TbGoodsRecord.class;
     }
 
     @Override

@@ -31,6 +31,20 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
+     * Getter for <code>public.tb_item.id</code>.
+     */
+    public Integer getId() {
+        return (Integer) get(0);
+    }
+
+    /**
+     * Setter for <code>public.tb_item.good_id</code>.
+     */
+    public void setGoodId(Integer value) {
+        set(1, value);
+    }
+
+    /**
      * Create a detached, initialised TbItemRecord
      */
     public TbItemRecord(Integer id, Integer goodId, String name, String images, String desc, String spec, Integer price, String isbn, Integer bestFavor, Integer shelfLife, String storage, String usedStorage, String remark, LocalDateTime createTime, LocalDateTime updateTime) {
@@ -54,31 +68,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.id</code>.
-     */
-    public Integer getId() {
-        return (Integer) get(0);
-    }
-
-    /**
      * Setter for <code>public.tb_item.id</code>.
      */
     public void setId(Integer value) {
         set(0, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.good_id</code>.
-     */
-    public Integer getGoodId() {
-        return (Integer) get(1);
-    }
-
-    /**
-     * Setter for <code>public.tb_item.good_id</code>.
-     */
-    public void setGoodId(Integer value) {
-        set(1, value);
     }
 
     /**
@@ -89,10 +82,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.name</code>.
+     * Getter for <code>public.tb_item.good_id</code>.
      */
-    public void setName(String value) {
-        set(2, value);
+    public Integer getGoodId() {
+        return (Integer) get(1);
     }
 
     /**
@@ -103,20 +96,6 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.images</code>.
-     */
-    public void setImages(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.desc</code>.
-     */
-    public String getDesc() {
-        return (String) get(4);
-    }
-
-    /**
      * Setter for <code>public.tb_item.desc</code>.
      */
     public void setDesc(String value) {
@@ -124,10 +103,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.spec</code>. 规格
+     * Setter for <code>public.tb_item.name</code>.
      */
-    public String getSpec() {
-        return (String) get(5);
+    public void setName(String value) {
+        set(2, value);
     }
 
     /**
@@ -138,10 +117,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.price</code>.
+     * Setter for <code>public.tb_item.images</code>.
      */
-    public Integer getPrice() {
-        return (Integer) get(6);
+    public void setImages(String value) {
+        set(3, value);
     }
 
     /**
@@ -152,10 +131,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.isbn</code>.
+     * Getter for <code>public.tb_item.desc</code>.
      */
-    public String getIsbn() {
-        return (String) get(7);
+    public String getDesc() {
+        return (String) get(4);
     }
 
     /**
@@ -166,10 +145,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.best_favor</code>. 最佳赏味（单位小时）
+     * Getter for <code>public.tb_item.spec</code>. 规格
      */
-    public Integer getBestFavor() {
-        return (Integer) get(8);
+    public String getSpec() {
+        return (String) get(5);
     }
 
     /**
@@ -180,10 +159,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.shelf_life</code>. 保质期（单位小时）
+     * Getter for <code>public.tb_item.price</code>.
      */
-    public Integer getShelfLife() {
-        return (Integer) get(9);
+    public Integer getPrice() {
+        return (Integer) get(6);
     }
 
     /**
@@ -194,6 +173,20 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
+     * Getter for <code>public.tb_item.isbn</code>.
+     */
+    public String getIsbn() {
+        return (String) get(7);
+    }
+
+    /**
+     * Getter for <code>public.tb_item.best_favor</code>. 最佳赏味（单位小时）
+     */
+    public Integer getBestFavor() {
+        return (Integer) get(8);
+    }
+
+    /**
      * Getter for <code>public.tb_item.storage</code>. 推荐保存方式
      */
     public String getStorage() {
@@ -201,10 +194,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.storage</code>. 推荐保存方式
+     * Getter for <code>public.tb_item.shelf_life</code>. 保质期（单位小时）
      */
-    public void setStorage(String value) {
-        set(10, value);
+    public Integer getShelfLife() {
+        return (Integer) get(9);
     }
 
     /**
@@ -215,10 +208,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.used_storage</code>. 拆分后保存方式
+     * Setter for <code>public.tb_item.storage</code>. 推荐保存方式
      */
-    public void setUsedStorage(String value) {
-        set(11, value);
+    public void setStorage(String value) {
+        set(10, value);
     }
 
     /**
@@ -229,29 +222,25 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.remark</code>.
-     */
-    public void setRemark(String value) {
-        set(12, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.create_time</code>.
-     */
-    public LocalDateTime getCreateTime() {
-        return (LocalDateTime) get(13);
-    }
-
-    /**
      * Setter for <code>public.tb_item.create_time</code>.
      */
     public void setCreateTime(LocalDateTime value) {
         set(13, value);
     }
 
-    // -------------------------------------------------------------------------
-    // Primary key information
-    // -------------------------------------------------------------------------
+    /**
+     * Setter for <code>public.tb_item.used_storage</code>. 拆分后保存方式
+     */
+    public void setUsedStorage(String value) {
+        set(11, value);
+    }
+
+    /**
+     * Setter for <code>public.tb_item.remark</code>.
+     */
+    public void setRemark(String value) {
+        set(12, value);
+    }
 
     /**
      * Getter for <code>public.tb_item.update_time</code>.
@@ -261,20 +250,17 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     // -------------------------------------------------------------------------
-    // Record15 type implementation
+    // Primary key information
     // -------------------------------------------------------------------------
-
-    /**
-     * Setter for <code>public.tb_item.update_time</code>.
-     */
-    public void setUpdateTime(LocalDateTime value) {
-        set(14, value);
-    }
 
     @Override
     public Record1<Integer> key() {
         return (Record1) super.key();
     }
+
+    // -------------------------------------------------------------------------
+    // Record15 type implementation
+    // -------------------------------------------------------------------------
 
     @Override
     public Row15<Integer, Integer, String, String, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
@@ -595,10 +581,6 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
         return this;
     }
 
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
     @Override
     public TbItemRecord value15(LocalDateTime value) {
         setUpdateTime(value);
@@ -623,5 +605,23 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
         value14(value14);
         value15(value15);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Getter for <code>public.tb_item.create_time</code>.
+     */
+    public LocalDateTime getCreateTime() {
+        return (LocalDateTime) get(13);
+    }
+
+    /**
+     * Setter for <code>public.tb_item.update_time</code>.
+     */
+    public void setUpdateTime(LocalDateTime value) {
+        set(14, value);
     }
 }

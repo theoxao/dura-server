@@ -31,6 +31,13 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
+     * Getter for <code>public.tb_goods.id</code>.
+     */
+    public Integer getId() {
+        return (Integer) get(0);
+    }
+
+    /**
      * Create a detached, initialised TbGoodsRecord
      */
     public TbGoodsRecord(Integer id, String name, String desc, Integer cate, Integer subCate, Integer remainBatch, Integer recentPrice, String images, Integer needBuy, LocalDateTime createTime, LocalDateTime updateTime) {
@@ -50,10 +57,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.id</code>.
+     * Getter for <code>public.tb_goods.name</code>. 品名
      */
-    public Integer getId() {
-        return (Integer) get(0);
+    public String getName() {
+        return (String) get(1);
     }
 
     /**
@@ -64,38 +71,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.name</code>. 品名
-     */
-    public String getName() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>public.tb_goods.name</code>. 品名
-     */
-    public void setName(String value) {
-        set(1, value);
-    }
-
-    /**
      * Getter for <code>public.tb_goods.desc</code>.
      */
     public String getDesc() {
         return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>public.tb_goods.desc</code>.
-     */
-    public void setDesc(String value) {
-        set(2, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_goods.cate</code>. 主分类
-     */
-    public Integer getCate() {
-        return (Integer) get(3);
     }
 
     /**
@@ -106,10 +85,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.sub_cate</code>. 二级分类
+     * Setter for <code>public.tb_goods.name</code>. 品名
      */
-    public Integer getSubCate() {
-        return (Integer) get(4);
+    public void setName(String value) {
+        set(1, value);
     }
 
     /**
@@ -120,10 +99,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.remain_batch</code>. 剩余批次
+     * Setter for <code>public.tb_goods.desc</code>.
      */
-    public Integer getRemainBatch() {
-        return (Integer) get(5);
+    public void setDesc(String value) {
+        set(2, value);
     }
 
     /**
@@ -134,10 +113,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.recent_price</code>.
+     * Getter for <code>public.tb_goods.cate</code>. 主分类
      */
-    public Integer getRecentPrice() {
-        return (Integer) get(6);
+    public Integer getCate() {
+        return (Integer) get(3);
     }
 
     /**
@@ -148,10 +127,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.images</code>.
+     * Getter for <code>public.tb_goods.sub_cate</code>. 二级分类
      */
-    public String getImages() {
-        return (String) get(7);
+    public Integer getSubCate() {
+        return (Integer) get(4);
     }
 
     /**
@@ -162,6 +141,20 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
+     * Getter for <code>public.tb_goods.remain_batch</code>. 剩余批次
+     */
+    public Integer getRemainBatch() {
+        return (Integer) get(5);
+    }
+
+    /**
+     * Getter for <code>public.tb_goods.recent_price</code>.
+     */
+    public Integer getRecentPrice() {
+        return (Integer) get(6);
+    }
+
+    /**
      * Getter for <code>public.tb_goods.need_buy</code>.
      */
     public Integer getNeedBuy() {
@@ -169,10 +162,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.need_buy</code>.
+     * Getter for <code>public.tb_goods.images</code>.
      */
-    public void setNeedBuy(Integer value) {
-        set(8, value);
+    public String getImages() {
+        return (String) get(7);
     }
 
     /**
@@ -183,15 +176,11 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.create_time</code>.
+     * Setter for <code>public.tb_goods.need_buy</code>.
      */
-    public void setCreateTime(LocalDateTime value) {
-        set(9, value);
+    public void setNeedBuy(Integer value) {
+        set(8, value);
     }
-
-    // -------------------------------------------------------------------------
-    // Primary key information
-    // -------------------------------------------------------------------------
 
     /**
      * Getter for <code>public.tb_goods.update_time</code>.
@@ -201,20 +190,17 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     // -------------------------------------------------------------------------
-    // Record11 type implementation
+    // Primary key information
     // -------------------------------------------------------------------------
-
-    /**
-     * Setter for <code>public.tb_goods.update_time</code>.
-     */
-    public void setUpdateTime(LocalDateTime value) {
-        set(10, value);
-    }
 
     @Override
     public Record1<Integer> key() {
         return (Record1) super.key();
     }
+
+    // -------------------------------------------------------------------------
+    // Record11 type implementation
+    // -------------------------------------------------------------------------
 
     @Override
     public Row11<Integer, String, String, Integer, Integer, Integer, Integer, String, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
@@ -451,10 +437,6 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
         return this;
     }
 
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
     @Override
     public TbGoodsRecord value11(LocalDateTime value) {
         setUpdateTime(value);
@@ -475,5 +457,23 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
         value10(value10);
         value11(value11);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Setter for <code>public.tb_goods.create_time</code>.
+     */
+    public void setCreateTime(LocalDateTime value) {
+        set(9, value);
+    }
+
+    /**
+     * Setter for <code>public.tb_goods.update_time</code>.
+     */
+    public void setUpdateTime(LocalDateTime value) {
+        set(10, value);
     }
 }

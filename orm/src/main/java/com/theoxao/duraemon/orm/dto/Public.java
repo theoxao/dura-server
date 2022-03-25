@@ -4,6 +4,7 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
@@ -25,11 +26,18 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
-    private static final long serialVersionUID = 1L;
+
+    /**
+     * The table <code>public.recipe_json</code>.
+     */
+    public final RecipeJson RECIPE_JSON = RecipeJson.RECIPE_JSON;
+
     /**
      * The table <code>public.tb_category</code>.
      */
@@ -76,6 +84,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
+            RecipeJson.RECIPE_JSON,
             TbCategory.TB_CATEGORY,
             TbGoods.TB_GOODS,
             TbItem.TB_ITEM,

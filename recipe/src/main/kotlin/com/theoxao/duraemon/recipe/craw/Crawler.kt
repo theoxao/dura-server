@@ -3,6 +3,7 @@ package com.theoxao.duraemon.recipe.craw
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.theoxao.duraemon.orm.dto.Tables.RECIPE_JSON
 import com.theoxao.duraemon.orm.dto.Tables.TB_RECIPE
 import com.theoxao.duraemon.recipe.model.ResponseWrapper
 import okhttp3.*
@@ -42,7 +43,7 @@ class Crawler {
 
     @PostConstruct
     fun init() {
-        val list = (101051718..110011822).toMutableList()
+        val list = (101100000..110000000).toMutableList()
         list.chunked(2000).forEach { ids ->
             ids.forEach { id ->
                 val request = Request.Builder()
@@ -70,6 +71,13 @@ class Crawler {
                                 objectMapper.propertyNamingStrategy = PropertyNamingStrategies.LOWER_CAMEL_CASE
                                 status = resp.status
                                 if (resp.status == "ok") {
+                                    val raw = RECIPE_JSON.newRecord().apply {
+                                        this.id = id
+                                        this.json = JSON.valueOf(json)
+                                    }
+                                    dslContext.transaction { config->
+                                        DSL.using(config).insertInto(RECIPE_JSON).set(raw).onConflictDoNothing().execute()
+                                    }
                                     resp.content?.get("recipe")?.let {recipe->
                                         val record =  TB_RECIPE.newRecord().apply {
                                             this.id = recipe.id
