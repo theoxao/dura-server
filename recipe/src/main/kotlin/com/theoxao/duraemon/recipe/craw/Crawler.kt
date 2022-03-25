@@ -43,7 +43,7 @@ class Crawler {
 
     @PostConstruct
     fun init() {
-        val list = (101100000..110000000).toMutableList()
+        val list = (110000000 downTo 103100000).toMutableList()
         list.chunked(2000).forEach { ids ->
             ids.forEach { id ->
                 val request = Request.Builder()
