@@ -50,7 +50,7 @@ class Crawler {
 
     @PostConstruct
     fun init(){
-        (104500000 downTo 103000000).toMutableList().craw()
+        (107000000 downTo 100000000).toMutableList().craw()
     }
 
     fun MutableList<Int>.craw(){
@@ -72,75 +72,23 @@ class Crawler {
                         if (LocalDateTime.now().second==0){
                             log.info(">>>>>queued call count:{}",  http.dispatcher.queuedCallsCount())
                         }
-                        var status :String? = "undefined"
                         if (response.isSuccessful) {
                             response.body?.string()?.let { json ->
-                                objectMapper.propertyNamingStrategy = PropertyNamingStrategies.SNAKE_CASE
-                                val resp =
-                                    objectMapper.readValue(json, ResponseWrapper::class.java)
-                                objectMapper.propertyNamingStrategy = PropertyNamingStrategies.LOWER_CAMEL_CASE
-                                status = resp.status
-                                if (resp.status == "ok") {
-                                    val raw = RECIPE_JSON.newRecord().apply {
-                                        this.id = id
-                                        this.json = JSON.valueOf(json)
-                                    }
-                                    dslContext.transaction { config->
-                                        DSL.using(config).insertInto(RECIPE_JSON).set(raw).onConflictDoNothing().execute()
-                                    }
-                                    resp.content?.get("recipe")?.let {recipe->
-                                        val record =  TB_RECIPE.newRecord().apply {
-                                            this.id = recipe.id
-                                            this.desc = recipe.desc
-                                            this.difficulty = recipe.difficulty.toJson()
-                                            this.ident = recipe.ident
-                                            this.image = recipe.image.toJson()
-                                            this.name = recipe.name
-                                            this.photo = mapOf(
-                                                "photo" to recipe.photo,
-                                                "photo80" to recipe.photo80,
-                                                "photo90" to recipe.photo90,
-                                                "photo140" to recipe.photo140,
-                                                "photo280" to recipe.photo280,
-                                                "photo340" to recipe.photo340,
-                                                "photo526" to recipe.photo526,
-                                                "photo580" to recipe.photo580,
-                                                "photo640" to recipe.photo640,
-                                            ).toJson()
-                                            this.score = recipe.score
-                                            this.summary = recipe.summary
-                                            this.thumb = recipe.thumb
-                                            this.tips = recipe.tips
-                                            this.url = recipe.url
-                                            this.author = recipe.author.toJson()
-                                            this.label = recipe.labels.toJson()
-                                            this.createTime = recipe.createTime?.let { LocalDateTime.parse(it, datetimeFormatter) }
-                                            this.ingredient = recipe.ingredient.toJson()
-                                            this.instruction = recipe.instruction.toJson()
-                                            this.duration = recipe.duration.toJson()
-                                            this.recipeCats = recipe.recipeCats.toJson()
-                                            this.stats = recipe.stats.toJson()
-                                            this.equipmentRelatedInfo = recipe.equipmentRelatedInfo.toJson()
-                                            this.videoUrl = recipe.videoUrl
-                                            this.videoPageUrl = recipe.videoPageUrl
-                                            this.coverMicroVideo = recipe.coverMicroVideo.toJson()
-                                            this.vodVideo = recipe.vodVideo.toJson()
-                                            this.summaryDesc = recipe.summaryDesc
-                                        }
-                                        dslContext.transaction { config->
-                                            DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
-                                        }
-                                    }
+                                val raw = RECIPE_JSON.newRecord().apply {
+                                    this.id = id
+                                    this.json = JSON.valueOf(json)
+                                }
+                                dslContext.transaction { config->
+                                    DSL.using(config).insertInto(RECIPE_JSON).set(raw).onConflictDoNothing().execute()
                                 }
                             }
                         }
-                        log.info("request@{}, response code:{} , status:{}", id, response.code , status)
+                        log.info("request@{}, response code:{} ", id, response.code)
                         response.closeQuietly()
                     }
                 })
             }
         }
     }
-    fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 }
 
