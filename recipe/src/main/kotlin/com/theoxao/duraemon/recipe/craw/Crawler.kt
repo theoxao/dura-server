@@ -1,8 +1,6 @@
 package com.theoxao.duraemon.recipe.craw
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategies
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.theoxao.duraemon.orm.dto.Tables.RECIPE_JSON
 import com.theoxao.duraemon.orm.dto.Tables.TB_RECIPE
 import com.theoxao.duraemon.recipe.model.ResponseWrapper
@@ -48,9 +46,9 @@ class Crawler {
         (max..(max+1000)).toMutableList().craw()
     }
 
-    @PostConstruct
+    @Scheduled(cron = "0 20 0 1/1 * ?")
     fun init(){
-        val batch = 2000
+        val batch = 20
         while (true){
            val list =  dslContext.selectFrom(RECIPE_JSON).where(RECIPE_JSON.TO_OBJ.eq(false))
                 .orderBy(RECIPE_JSON.ID).limit(batch).fetch()
