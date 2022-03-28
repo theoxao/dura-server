@@ -50,17 +50,16 @@ class Crawler {
 
     @PostConstruct
     fun init(){
-        val batch = 100
-        var offset= 0
+        val batch = 2000
         while (true){
            val list =  dslContext.selectFrom(RECIPE_JSON).where(RECIPE_JSON.TO_OBJ.eq(false))
-                .orderBy(RECIPE_JSON.ID.desc()).limit(batch).offset(offset*batch).fetch()
+                .orderBy(RECIPE_JSON.ID).limit(batch).fetch()
                 if (list.isEmpty()) break
-            list.forEach {
+           val  records = list.map {
                 val json = it.recipeJson.data()
                 val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
-                resp.content?.get("recipe")?.let {recipe->
-                    val record =  TB_RECIPE.newRecord().apply {
+                return@map  resp.content?.get("recipe")?.let {recipe->
+                    TB_RECIPE.newRecord().apply {
                         this.id = recipe.id
                         this.desc = recipe.desc
                         this.difficulty = recipe.difficulty.toJson()
@@ -98,13 +97,12 @@ class Crawler {
                         this.vodVideo = recipe.vodVideo.toJson()
                         this.summaryDesc = recipe.summaryDesc
                     }
-                    dslContext.transaction { config->
-                        DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
-                        DSL.using(config).update(RECIPE_JSON).set(RECIPE_JSON.TO_OBJ, true).where(RECIPE_JSON.ID.eq(it.id)).execute()
-                    }
                 }
             }
-            offset++
+            dslContext.transaction { config->
+                DSL.using(config).loadInto(TB_RECIPE).batchAll().onDuplicateKeyIgnore().loadRecords(records).fields(*TB_RECIPE.fields()).execute()
+                DSL.using(config).update(RECIPE_JSON).set(RECIPE_JSON.TO_OBJ, true).where(RECIPE_JSON.ID.`in`(list.map { ce->ce.id })).execute()
+            }
         }
 
     }
