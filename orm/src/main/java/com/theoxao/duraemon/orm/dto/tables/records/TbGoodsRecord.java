@@ -25,10 +25,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     private static final long serialVersionUID = 1L;
 
     /**
-     * Create a detached TbGoodsRecord
+     * Setter for <code>public.tb_goods.id</code>.
      */
-    public TbGoodsRecord() {
-        super(TbGoods.TB_GOODS);
+    public void setId(Integer value) {
+        set(0, value);
     }
 
     /**
@@ -39,29 +39,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Create a detached, initialised TbGoodsRecord
+     * Setter for <code>public.tb_goods.name</code>.
      */
-    public TbGoodsRecord(Integer id, String name, String desc, Integer cate, String subCate, Integer remainBatch, Integer recentPrice, JSON images, Integer needBuy, LocalDateTime createTime, LocalDateTime updateTime) {
-        super(TbGoods.TB_GOODS);
-
-        setId(id);
-        setName(name);
-        setDesc(desc);
-        setCate(cate);
-        setSubCate(subCate);
-        setRemainBatch(remainBatch);
-        setRecentPrice(recentPrice);
-        setImages(images);
-        setNeedBuy(needBuy);
-        setCreateTime(createTime);
-        setUpdateTime(updateTime);
-    }
-
-    /**
-     * Setter for <code>public.tb_goods.id</code>.
-     */
-    public void setId(Integer value) {
-        set(0, value);
+    public void setName(String value) {
+        set(1, value);
     }
 
     /**
@@ -72,20 +53,6 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.desc</code>.
-     */
-    public String getDesc() {
-        return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>public.tb_goods.name</code>.
-     */
-    public void setName(String value) {
-        set(1, value);
-    }
-
-    /**
      * Setter for <code>public.tb_goods.desc</code>.
      */
     public void setDesc(String value) {
@@ -93,10 +60,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.cate</code>.
+     * Getter for <code>public.tb_goods.desc</code>.
      */
-    public Integer getCate() {
-        return (Integer) get(3);
+    public String getDesc() {
+        return (String) get(2);
     }
 
     /**
@@ -107,10 +74,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.sub_cate</code>.
+     * Getter for <code>public.tb_goods.cate</code>.
      */
-    public String getSubCate() {
-        return (String) get(4);
+    public Integer getCate() {
+        return (Integer) get(3);
     }
 
     /**
@@ -118,6 +85,27 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
      */
     public void setSubCate(String value) {
         set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_goods.sub_cate</code>.
+     */
+    public String getSubCate() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>public.tb_goods.remain_batch</code>.
+     */
+    public void setRemainBatch(Integer value) {
+        set(5, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_goods.remain_batch</code>.
+     */
+    public Integer getRemainBatch() {
+        return (Integer) get(5);
     }
 
     /**
@@ -135,17 +123,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Getter for <code>public.tb_goods.remain_batch</code>.
+     * Setter for <code>public.tb_goods.images</code>.
      */
-    public Integer getRemainBatch() {
-        return (Integer) get(5);
-    }
-
-    /**
-     * Setter for <code>public.tb_goods.remain_batch</code>.
-     */
-    public void setRemainBatch(Integer value) {
-        set(5, value);
+    public void setImages(JSON value) {
+        set(7, value);
     }
 
     /**
@@ -156,6 +137,13 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
+     * Setter for <code>public.tb_goods.need_buy</code>.
+     */
+    public void setNeedBuy(Integer value) {
+        set(8, value);
+    }
+
+    /**
      * Getter for <code>public.tb_goods.need_buy</code>.
      */
     public Integer getNeedBuy() {
@@ -163,10 +151,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.images</code>.
+     * Setter for <code>public.tb_goods.create_time</code>.
      */
-    public void setImages(JSON value) {
-        set(7, value);
+    public void setCreateTime(LocalDateTime value) {
+        set(9, value);
     }
 
     /**
@@ -177,10 +165,10 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.need_buy</code>.
+     * Setter for <code>public.tb_goods.update_time</code>.
      */
-    public void setNeedBuy(Integer value) {
-        set(8, value);
+    public void setUpdateTime(LocalDateTime value) {
+        set(10, value);
     }
 
     /**
@@ -203,18 +191,14 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     // Record11 type implementation
     // -------------------------------------------------------------------------
 
-    /**
-     * Setter for <code>public.tb_goods.create_time</code>.
-     */
-    public void setCreateTime(LocalDateTime value) {
-        set(9, value);
+    @Override
+    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row11) super.fieldsRow();
     }
 
-    /**
-     * Setter for <code>public.tb_goods.update_time</code>.
-     */
-    public void setUpdateTime(LocalDateTime value) {
-        set(10, value);
+    @Override
+    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> valuesRow() {
+        return (Row11) super.valuesRow();
     }
 
     @Override
@@ -238,8 +222,8 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row11) super.fieldsRow();
+    public Field<String> field5() {
+        return TbGoods.TB_GOODS.SUB_CATE;
     }
 
     @Override
@@ -253,8 +237,8 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> valuesRow() {
-        return (Row11) super.valuesRow();
+    public Field<JSON> field8() {
+        return TbGoods.TB_GOODS.IMAGES;
     }
 
     @Override
@@ -293,8 +277,8 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public Field<String> field5() {
-        return TbGoods.TB_GOODS.SUB_CATE;
+    public String component5() {
+        return getSubCate();
     }
 
     @Override
@@ -308,8 +292,8 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public Field<JSON> field8() {
-        return TbGoods.TB_GOODS.IMAGES;
+    public JSON component8() {
+        return getImages();
     }
 
     @Override
@@ -348,7 +332,7 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public String component5() {
+    public String value5() {
         return getSubCate();
     }
 
@@ -363,7 +347,7 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public JSON component8() {
+    public JSON value8() {
         return getImages();
     }
 
@@ -407,8 +391,9 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public String value5() {
-        return getSubCate();
+    public TbGoodsRecord value5(String value) {
+        setSubCate(value);
+        return this;
     }
 
     @Override
@@ -424,8 +409,9 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public JSON value8() {
-        return getImages();
+    public TbGoodsRecord value8(JSON value) {
+        setImages(value);
+        return this;
     }
 
     @Override
@@ -447,22 +433,6 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     @Override
-    public TbGoodsRecord value5(String value) {
-        setSubCate(value);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    @Override
-    public TbGoodsRecord value8(JSON value) {
-        setImages(value);
-        return this;
-    }
-
-    @Override
     public TbGoodsRecord values(Integer value1, String value2, String value3, Integer value4, String value5, Integer value6, Integer value7, JSON value8, Integer value9, LocalDateTime value10, LocalDateTime value11) {
         value1(value1);
         value2(value2);
@@ -476,5 +446,35 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
         value10(value10);
         value11(value11);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Create a detached TbGoodsRecord
+     */
+    public TbGoodsRecord() {
+        super(TbGoods.TB_GOODS);
+    }
+
+    /**
+     * Create a detached, initialised TbGoodsRecord
+     */
+    public TbGoodsRecord(Integer id, String name, String desc, Integer cate, String subCate, Integer remainBatch, Integer recentPrice, JSON images, Integer needBuy, LocalDateTime createTime, LocalDateTime updateTime) {
+        super(TbGoods.TB_GOODS);
+
+        setId(id);
+        setName(name);
+        setDesc(desc);
+        setCate(cate);
+        setSubCate(subCate);
+        setRemainBatch(remainBatch);
+        setRecentPrice(recentPrice);
+        setImages(images);
+        setNeedBuy(needBuy);
+        setCreateTime(createTime);
+        setUpdateTime(updateTime);
     }
 }

@@ -25,10 +25,10 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     private static final long serialVersionUID = 1L;
 
     /**
-     * Create a detached RecipeJsonRecord
+     * Setter for <code>public.recipe_json.id</code>.
      */
-    public RecipeJsonRecord() {
-        super(RecipeJson.RECIPE_JSON);
+    public void setId(Integer value) {
+        set(0, value);
     }
 
     /**
@@ -39,29 +39,24 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     }
 
     /**
-     * Create a detached, initialised RecipeJsonRecord
+     * Setter for <code>public.recipe_json.recipe_json</code>.
      */
-    public RecipeJsonRecord(Integer id, JSON json, LocalDateTime insertTime, Boolean toObj) {
-        super(RecipeJson.RECIPE_JSON);
-
-        setId(id);
-        setJson(json);
-        setInsertTime(insertTime);
-        setToObj(toObj);
+    public void setRecipeJson(JSON value) {
+        set(1, value);
     }
 
     /**
-     * Getter for <code>public.recipe_json.json</code>.
+     * Getter for <code>public.recipe_json.recipe_json</code>.
      */
-    public JSON getJson() {
+    public JSON getRecipeJson() {
         return (JSON) get(1);
     }
 
     /**
-     * Setter for <code>public.recipe_json.id</code>.
+     * Setter for <code>public.recipe_json.insert_time</code>.
      */
-    public void setId(Integer value) {
-        set(0, value);
+    public void setInsertTime(LocalDateTime value) {
+        set(2, value);
     }
 
     /**
@@ -72,17 +67,17 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     }
 
     /**
-     * Setter for <code>public.recipe_json.json</code>.
+     * Setter for <code>public.recipe_json.to_obj</code>.
      */
-    public void setJson(JSON value) {
-        set(1, value);
+    public void setToObj(Boolean value) {
+        set(3, value);
     }
 
     /**
-     * Setter for <code>public.recipe_json.insert_time</code>.
+     * Getter for <code>public.recipe_json.to_obj</code>.
      */
-    public void setInsertTime(LocalDateTime value) {
-        set(2, value);
+    public Boolean getToObj() {
+        return (Boolean) get(3);
     }
 
     // -------------------------------------------------------------------------
@@ -98,18 +93,14 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     // Record4 type implementation
     // -------------------------------------------------------------------------
 
-    /**
-     * Getter for <code>public.recipe_json.to_obj</code>.
-     */
-    public Boolean getToObj() {
-        return (Boolean) get(3);
+    @Override
+    public Row4<Integer, JSON, LocalDateTime, Boolean> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
-    /**
-     * Setter for <code>public.recipe_json.to_obj</code>.
-     */
-    public void setToObj(Boolean value) {
-        set(3, value);
+    @Override
+    public Row4<Integer, JSON, LocalDateTime, Boolean> valuesRow() {
+        return (Row4) super.valuesRow();
     }
 
     @Override
@@ -119,7 +110,7 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
 
     @Override
     public Field<JSON> field2() {
-        return RecipeJson.RECIPE_JSON.JSON;
+        return RecipeJson.RECIPE_JSON.RECIPE_JSON_;
     }
 
     @Override
@@ -128,8 +119,8 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     }
 
     @Override
-    public Row4<Integer, JSON, LocalDateTime, Boolean> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Field<Boolean> field4() {
+        return RecipeJson.RECIPE_JSON.TO_OBJ;
     }
 
     @Override
@@ -139,7 +130,7 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
 
     @Override
     public JSON component2() {
-        return getJson();
+        return getRecipeJson();
     }
 
     @Override
@@ -148,8 +139,8 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     }
 
     @Override
-    public Row4<Integer, JSON, LocalDateTime, Boolean> valuesRow() {
-        return (Row4) super.valuesRow();
+    public Boolean component4() {
+        return getToObj();
     }
 
     @Override
@@ -159,7 +150,7 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
 
     @Override
     public JSON value2() {
-        return getJson();
+        return getRecipeJson();
     }
 
     @Override
@@ -168,8 +159,8 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
     }
 
     @Override
-    public Field<Boolean> field4() {
-        return RecipeJson.RECIPE_JSON.TO_OBJ;
+    public Boolean value4() {
+        return getToObj();
     }
 
     @Override
@@ -180,7 +171,7 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
 
     @Override
     public RecipeJsonRecord value2(JSON value) {
-        setJson(value);
+        setRecipeJson(value);
         return this;
     }
 
@@ -189,20 +180,6 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
         setInsertTime(value);
         return this;
     }
-
-    @Override
-    public Boolean component4() {
-        return getToObj();
-    }
-
-    @Override
-    public Boolean value4() {
-        return getToObj();
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
 
     @Override
     public RecipeJsonRecord value4(Boolean value) {
@@ -217,5 +194,28 @@ public class RecipeJsonRecord extends UpdatableRecordImpl<RecipeJsonRecord> impl
         value3(value3);
         value4(value4);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Create a detached RecipeJsonRecord
+     */
+    public RecipeJsonRecord() {
+        super(RecipeJson.RECIPE_JSON);
+    }
+
+    /**
+     * Create a detached, initialised RecipeJsonRecord
+     */
+    public RecipeJsonRecord(Integer id, JSON recipeJson, LocalDateTime insertTime, Boolean toObj) {
+        super(RecipeJson.RECIPE_JSON);
+
+        setId(id);
+        setRecipeJson(recipeJson);
+        setInsertTime(insertTime);
+        setToObj(toObj);
     }
 }

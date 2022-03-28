@@ -25,10 +25,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     private static final long serialVersionUID = 1L;
 
     /**
-     * Create a detached TbItemRecord
+     * Setter for <code>public.tb_item.id</code>.
      */
-    public TbItemRecord() {
-        super(TbItem.TB_ITEM);
+    public void setId(Integer value) {
+        set(0, value);
     }
 
     /**
@@ -60,54 +60,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Create a detached, initialised TbItemRecord
-     */
-    public TbItemRecord(Integer id, Integer goodId, String name, JSON images, String desc, String spec, Integer price, String isbn, Integer bestFavor, Integer shelfLife, String storage, String usedStorage, String remark, LocalDateTime createTime, LocalDateTime updateTime) {
-        super(TbItem.TB_ITEM);
-
-        setId(id);
-        setGoodId(goodId);
-        setName(name);
-        setImages(images);
-        setDesc(desc);
-        setSpec(spec);
-        setPrice(price);
-        setIsbn(isbn);
-        setBestFavor(bestFavor);
-        setShelfLife(shelfLife);
-        setStorage(storage);
-        setUsedStorage(usedStorage);
-        setRemark(remark);
-        setCreateTime(createTime);
-        setUpdateTime(updateTime);
-    }
-
-    /**
-     * Setter for <code>public.tb_item.id</code>.
-     */
-    public void setId(Integer value) {
-        set(0, value);
-    }
-
-    /**
      * Getter for <code>public.tb_item.name</code>.
      */
     public String getName() {
         return (String) get(2);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.images</code>.
-     */
-    public JSON getImages() {
-        return (JSON) get(3);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.desc</code>.
-     */
-    public String getDesc() {
-        return (String) get(4);
     }
 
     /**
@@ -118,6 +74,13 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
+     * Getter for <code>public.tb_item.images</code>.
+     */
+    public JSON getImages() {
+        return (JSON) get(3);
+    }
+
+    /**
      * Setter for <code>public.tb_item.desc</code>.
      */
     public void setDesc(String value) {
@@ -125,17 +88,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.spec</code>.
+     * Getter for <code>public.tb_item.desc</code>.
      */
-    public String getSpec() {
-        return (String) get(5);
-    }
-
-    /**
-     * Getter for <code>public.tb_item.price</code>.
-     */
-    public Integer getPrice() {
-        return (Integer) get(6);
+    public String getDesc() {
+        return (String) get(4);
     }
 
     /**
@@ -146,10 +102,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.isbn</code>.
+     * Getter for <code>public.tb_item.spec</code>.
      */
-    public String getIsbn() {
-        return (String) get(7);
+    public String getSpec() {
+        return (String) get(5);
     }
 
     /**
@@ -160,6 +116,13 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
+     * Getter for <code>public.tb_item.price</code>.
+     */
+    public Integer getPrice() {
+        return (Integer) get(6);
+    }
+
+    /**
      * Setter for <code>public.tb_item.isbn</code>.
      */
     public void setIsbn(String value) {
@@ -167,10 +130,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.best_favor</code>.
+     * Getter for <code>public.tb_item.isbn</code>.
      */
-    public Integer getBestFavor() {
-        return (Integer) get(8);
+    public String getIsbn() {
+        return (String) get(7);
     }
 
     /**
@@ -181,10 +144,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.shelf_life</code>.
+     * Getter for <code>public.tb_item.best_favor</code>.
      */
-    public Integer getShelfLife() {
-        return (Integer) get(9);
+    public Integer getBestFavor() {
+        return (Integer) get(8);
     }
 
     /**
@@ -195,10 +158,10 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Getter for <code>public.tb_item.storage</code>.
+     * Getter for <code>public.tb_item.shelf_life</code>.
      */
-    public String getStorage() {
-        return (String) get(10);
+    public Integer getShelfLife() {
+        return (Integer) get(9);
     }
 
     /**
@@ -209,10 +172,31 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
+     * Getter for <code>public.tb_item.storage</code>.
+     */
+    public String getStorage() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>public.tb_item.used_storage</code>.
+     */
+    public void setUsedStorage(String value) {
+        set(11, value);
+    }
+
+    /**
      * Getter for <code>public.tb_item.used_storage</code>.
      */
     public String getUsedStorage() {
         return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>public.tb_item.remark</code>.
+     */
+    public void setRemark(String value) {
+        set(12, value);
     }
 
     /**
@@ -230,17 +214,17 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     /**
-     * Setter for <code>public.tb_item.used_storage</code>.
+     * Getter for <code>public.tb_item.create_time</code>.
      */
-    public void setUsedStorage(String value) {
-        set(11, value);
+    public LocalDateTime getCreateTime() {
+        return (LocalDateTime) get(13);
     }
 
     /**
-     * Setter for <code>public.tb_item.remark</code>.
+     * Setter for <code>public.tb_item.update_time</code>.
      */
-    public void setRemark(String value) {
-        set(12, value);
+    public void setUpdateTime(LocalDateTime value) {
+        set(14, value);
     }
 
     /**
@@ -263,18 +247,14 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     // Record15 type implementation
     // -------------------------------------------------------------------------
 
-    /**
-     * Getter for <code>public.tb_item.create_time</code>.
-     */
-    public LocalDateTime getCreateTime() {
-        return (LocalDateTime) get(13);
+    @Override
+    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row15) super.fieldsRow();
     }
 
-    /**
-     * Setter for <code>public.tb_item.update_time</code>.
-     */
-    public void setUpdateTime(LocalDateTime value) {
-        set(14, value);
+    @Override
+    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> valuesRow() {
+        return (Row15) super.valuesRow();
     }
 
     @Override
@@ -293,8 +273,8 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     @Override
-    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Field<JSON> field4() {
+        return TbItem.TB_ITEM.IMAGES;
     }
 
     @Override
@@ -368,8 +348,8 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     @Override
-    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> valuesRow() {
-        return (Row15) super.valuesRow();
+    public JSON component4() {
+        return getImages();
     }
 
     @Override
@@ -443,8 +423,8 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     @Override
-    public Field<JSON> field4() {
-        return TbItem.TB_ITEM.IMAGES;
+    public JSON value4() {
+        return getImages();
     }
 
     @Override
@@ -521,8 +501,9 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     @Override
-    public JSON component4() {
-        return getImages();
+    public TbItemRecord value4(JSON value) {
+        setImages(value);
+        return this;
     }
 
     @Override
@@ -592,21 +573,6 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
     }
 
     @Override
-    public JSON value4() {
-        return getImages();
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    @Override
-    public TbItemRecord value4(JSON value) {
-        setImages(value);
-        return this;
-    }
-
-    @Override
     public TbItemRecord values(Integer value1, Integer value2, String value3, JSON value4, String value5, String value6, Integer value7, String value8, Integer value9, Integer value10, String value11, String value12, String value13, LocalDateTime value14, LocalDateTime value15) {
         value1(value1);
         value2(value2);
@@ -624,5 +590,39 @@ public class TbItemRecord extends UpdatableRecordImpl<TbItemRecord> implements R
         value14(value14);
         value15(value15);
         return this;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Create a detached TbItemRecord
+     */
+    public TbItemRecord() {
+        super(TbItem.TB_ITEM);
+    }
+
+    /**
+     * Create a detached, initialised TbItemRecord
+     */
+    public TbItemRecord(Integer id, Integer goodId, String name, JSON images, String desc, String spec, Integer price, String isbn, Integer bestFavor, Integer shelfLife, String storage, String usedStorage, String remark, LocalDateTime createTime, LocalDateTime updateTime) {
+        super(TbItem.TB_ITEM);
+
+        setId(id);
+        setGoodId(goodId);
+        setName(name);
+        setImages(images);
+        setDesc(desc);
+        setSpec(spec);
+        setPrice(price);
+        setIsbn(isbn);
+        setBestFavor(bestFavor);
+        setShelfLife(shelfLife);
+        setStorage(storage);
+        setUsedStorage(usedStorage);
+        setRemark(remark);
+        setCreateTime(createTime);
+        setUpdateTime(updateTime);
     }
 }

@@ -22,10 +22,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Create a detached TbRecipeRecord
+     * Setter for <code>public.tb_recipe.id</code>.
      */
-    public TbRecipeRecord() {
-        super(TbRecipe.TB_RECIPE);
+    public void setId(Integer value) {
+        set(0, value);
     }
 
     /**
@@ -33,6 +33,418 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
      */
     public Integer getId() {
         return (Integer) get(0);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.desc</code>.
+     */
+    public void setDesc(String value) {
+        set(1, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.desc</code>.
+     */
+    public String getDesc() {
+        return (String) get(1);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.difficulty</code>.
+     */
+    public void setDifficulty(JSON value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.difficulty</code>.
+     */
+    public JSON getDifficulty() {
+        return (JSON) get(2);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.ident</code>.
+     */
+    public void setIdent(String value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.ident</code>.
+     */
+    public String getIdent() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.image</code>.
+     */
+    public void setImage(JSON value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.image</code>.
+     */
+    public JSON getImage() {
+        return (JSON) get(4);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.name</code>.
+     */
+    public void setName(String value) {
+        set(5, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.name</code>.
+     */
+    public String getName() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.photo</code>.
+     */
+    public void setPhoto(JSON value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.photo</code>.
+     */
+    public JSON getPhoto() {
+        return (JSON) get(6);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.score</code>.
+     */
+    public void setScore(String value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.score</code>.
+     */
+    public String getScore() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.summary</code>.
+     */
+    public void setSummary(String value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.summary</code>.
+     */
+    public String getSummary() {
+        return (String) get(8);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.thumb</code>.
+     */
+    public void setThumb(String value) {
+        set(9, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.thumb</code>.
+     */
+    public String getThumb() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.tips</code>.
+     */
+    public void setTips(String value) {
+        set(10, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.tips</code>.
+     */
+    public String getTips() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.url</code>.
+     */
+    public void setUrl(String value) {
+        set(11, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.url</code>.
+     */
+    public String getUrl() {
+        return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.author</code>.
+     */
+    public void setAuthor(JSON value) {
+        set(12, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.author</code>.
+     */
+    public JSON getAuthor() {
+        return (JSON) get(12);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.label</code>.
+     */
+    public void setLabel(JSON value) {
+        set(13, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.label</code>.
+     */
+    public JSON getLabel() {
+        return (JSON) get(13);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.create_time</code>.
+     */
+    public void setCreateTime(LocalDateTime value) {
+        set(14, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.create_time</code>.
+     */
+    public LocalDateTime getCreateTime() {
+        return (LocalDateTime) get(14);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.ingredient</code>.
+     */
+    public void setIngredient(JSON value) {
+        set(15, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.ingredient</code>.
+     */
+    public JSON getIngredient() {
+        return (JSON) get(15);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.instruction</code>.
+     */
+    public void setInstruction(JSON value) {
+        set(16, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.instruction</code>.
+     */
+    public JSON getInstruction() {
+        return (JSON) get(16);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.duration</code>.
+     */
+    public void setDuration(JSON value) {
+        set(17, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.duration</code>.
+     */
+    public JSON getDuration() {
+        return (JSON) get(17);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.recipe_cats</code>.
+     */
+    public void setRecipeCats(JSON value) {
+        set(18, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.recipe_cats</code>.
+     */
+    public JSON getRecipeCats() {
+        return (JSON) get(18);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.original_cate</code>.
+     */
+    public void setOriginalCate(JSON value) {
+        set(19, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.original_cate</code>.
+     */
+    public JSON getOriginalCate() {
+        return (JSON) get(19);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.stats</code>.
+     */
+    public void setStats(JSON value) {
+        set(20, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.stats</code>.
+     */
+    public JSON getStats() {
+        return (JSON) get(20);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.equipment_related_info</code>.
+     */
+    public void setEquipmentRelatedInfo(JSON value) {
+        set(21, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.equipment_related_info</code>.
+     */
+    public JSON getEquipmentRelatedInfo() {
+        return (JSON) get(21);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.video_url</code>.
+     */
+    public void setVideoUrl(String value) {
+        set(22, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.video_url</code>.
+     */
+    public String getVideoUrl() {
+        return (String) get(22);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.video_page_url</code>.
+     */
+    public void setVideoPageUrl(String value) {
+        set(23, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.video_page_url</code>.
+     */
+    public String getVideoPageUrl() {
+        return (String) get(23);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.cover_micro_video</code>.
+     */
+    public void setCoverMicroVideo(JSON value) {
+        set(24, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.cover_micro_video</code>.
+     */
+    public JSON getCoverMicroVideo() {
+        return (JSON) get(24);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.vod_video</code>.
+     */
+    public void setVodVideo(JSON value) {
+        set(25, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.vod_video</code>.
+     */
+    public JSON getVodVideo() {
+        return (JSON) get(25);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.summary_desc</code>.
+     */
+    public void setSummaryDesc(String value) {
+        set(26, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.summary_desc</code>.
+     */
+    public String getSummaryDesc() {
+        return (String) get(26);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public void setInsertTime(LocalDateTime value) {
+        set(27, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public LocalDateTime getInsertTime() {
+        return (LocalDateTime) get(27);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.update_time</code>.
+     */
+    public void setUpdateTime(LocalDateTime value) {
+        set(28, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.update_time</code>.
+     */
+    public LocalDateTime getUpdateTime() {
+        return (LocalDateTime) get(28);
+    }
+
+    // -------------------------------------------------------------------------
+    // Primary key information
+    // -------------------------------------------------------------------------
+
+    @Override
+    public Record1<Integer> key() {
+        return (Record1) super.key();
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    /**
+     * Create a detached TbRecipeRecord
+     */
+    public TbRecipeRecord() {
+        super(TbRecipe.TB_RECIPE);
     }
 
     /**
@@ -70,417 +482,5 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
         setSummaryDesc(summaryDesc);
         setInsertTime(insertTime);
         setUpdateTime(updateTime);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.desc</code>.
-     */
-    public String getDesc() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.id</code>.
-     */
-    public void setId(Integer value) {
-        set(0, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.difficulty</code>.
-     */
-    public JSON getDifficulty() {
-        return (JSON) get(2);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.ident</code>.
-     */
-    public void setIdent(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.desc</code>.
-     */
-    public void setDesc(String value) {
-        set(1, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.image</code>.
-     */
-    public void setImage(JSON value) {
-        set(4, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.difficulty</code>.
-     */
-    public void setDifficulty(JSON value) {
-        set(2, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.ident</code>.
-     */
-    public String getIdent() {
-        return (String) get(3);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.name</code>.
-     */
-    public String getName() {
-        return (String) get(5);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.photo</code>.
-     */
-    public void setPhoto(JSON value) {
-        set(6, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.photo</code>.
-     */
-    public JSON getPhoto() {
-        return (JSON) get(6);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.image</code>.
-     */
-    public JSON getImage() {
-        return (JSON) get(4);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.score</code>.
-     */
-    public String getScore() {
-        return (String) get(7);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.summary</code>.
-     */
-    public void setSummary(String value) {
-        set(8, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.name</code>.
-     */
-    public void setName(String value) {
-        set(5, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.thumb</code>.
-     */
-    public void setThumb(String value) {
-        set(9, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.score</code>.
-     */
-    public void setScore(String value) {
-        set(7, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.tips</code>.
-     */
-    public void setTips(String value) {
-        set(10, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.summary</code>.
-     */
-    public String getSummary() {
-        return (String) get(8);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.url</code>.
-     */
-    public void setUrl(String value) {
-        set(11, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.thumb</code>.
-     */
-    public String getThumb() {
-        return (String) get(9);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.author</code>.
-     */
-    public void setAuthor(JSON value) {
-        set(12, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.tips</code>.
-     */
-    public String getTips() {
-        return (String) get(10);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.url</code>.
-     */
-    public String getUrl() {
-        return (String) get(11);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.label</code>.
-     */
-    public JSON getLabel() {
-        return (JSON) get(13);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.author</code>.
-     */
-    public JSON getAuthor() {
-        return (JSON) get(12);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.label</code>.
-     */
-    public void setLabel(JSON value) {
-        set(13, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.create_time</code>.
-     */
-    public LocalDateTime getCreateTime() {
-        return (LocalDateTime) get(14);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.ingredient</code>.
-     */
-    public JSON getIngredient() {
-        return (JSON) get(15);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.instruction</code>.
-     */
-    public void setInstruction(JSON value) {
-        set(16, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.create_time</code>.
-     */
-    public void setCreateTime(LocalDateTime value) {
-        set(14, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.duration</code>.
-     */
-    public void setDuration(JSON value) {
-        set(17, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.ingredient</code>.
-     */
-    public void setIngredient(JSON value) {
-        set(15, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.instruction</code>.
-     */
-    public JSON getInstruction() {
-        return (JSON) get(16);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.recipe_cats</code>.
-     */
-    public JSON getRecipeCats() {
-        return (JSON) get(18);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.duration</code>.
-     */
-    public JSON getDuration() {
-        return (JSON) get(17);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.original_cate</code>.
-     */
-    public JSON getOriginalCate() {
-        return (JSON) get(19);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.recipe_cats</code>.
-     */
-    public void setRecipeCats(JSON value) {
-        set(18, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.stats</code>.
-     */
-    public JSON getStats() {
-        return (JSON) get(20);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.original_cate</code>.
-     */
-    public void setOriginalCate(JSON value) {
-        set(19, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.equipment_related_info</code>.
-     */
-    public JSON getEquipmentRelatedInfo() {
-        return (JSON) get(21);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.stats</code>.
-     */
-    public void setStats(JSON value) {
-        set(20, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.video_url</code>.
-     */
-    public String getVideoUrl() {
-        return (String) get(22);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.video_page_url</code>.
-     */
-    public void setVideoPageUrl(String value) {
-        set(23, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.equipment_related_info</code>.
-     */
-    public void setEquipmentRelatedInfo(JSON value) {
-        set(21, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.cover_micro_video</code>.
-     */
-    public void setCoverMicroVideo(JSON value) {
-        set(24, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.cover_micro_video</code>.
-     */
-    public JSON getCoverMicroVideo() {
-        return (JSON) get(24);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.video_url</code>.
-     */
-    public void setVideoUrl(String value) {
-        set(22, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.video_page_url</code>.
-     */
-    public String getVideoPageUrl() {
-        return (String) get(23);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.vod_video</code>.
-     */
-    public JSON getVodVideo() {
-        return (JSON) get(25);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.summary_desc</code>.
-     */
-    public String getSummaryDesc() {
-        return (String) get(26);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.vod_video</code>.
-     */
-    public void setVodVideo(JSON value) {
-        set(25, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.summary_desc</code>.
-     */
-    public void setSummaryDesc(String value) {
-        set(26, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.insert_time</code>.
-     */
-    public LocalDateTime getInsertTime() {
-        return (LocalDateTime) get(27);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.insert_time</code>.
-     */
-    public void setInsertTime(LocalDateTime value) {
-        set(27, value);
-    }
-
-    // -------------------------------------------------------------------------
-    // Primary key information
-    // -------------------------------------------------------------------------
-
-    @Override
-    public Record1<Integer> key() {
-        return (Record1) super.key();
-    }
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
-
-    /**
-     * Getter for <code>public.tb_recipe.update_time</code>.
-     */
-    public LocalDateTime getUpdateTime() {
-        return (LocalDateTime) get(28);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.update_time</code>.
-     */
-    public void setUpdateTime(LocalDateTime value) {
-        set(28, value);
     }
 }

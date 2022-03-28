@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row4;
 import org.jooq.Schema;
@@ -37,25 +38,6 @@ public class RecipeJson extends TableImpl<RecipeJsonRecord> {
      * The reference instance of <code>public.recipe_json</code>
      */
     public static final RecipeJson RECIPE_JSON = new RecipeJson();
-    /**
-     * The column <code>public.recipe_json.to_obj</code>.
-     */
-    public final TableField<RecipeJsonRecord, Boolean> TO_OBJ = createField(DSL.name("to_obj"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
-
-    /**
-     * The column <code>public.recipe_json.id</code>.
-     */
-    public final TableField<RecipeJsonRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>public.recipe_json.json</code>.
-     */
-    public final TableField<RecipeJsonRecord, org.jooq.JSON> JSON = createField(DSL.name("json"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.recipe_json.insert_time</code>.
-     */
-    public final TableField<RecipeJsonRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The class holding records for this type
@@ -64,6 +46,26 @@ public class RecipeJson extends TableImpl<RecipeJsonRecord> {
     public Class<RecipeJsonRecord> getRecordType() {
         return RecipeJsonRecord.class;
     }
+
+    /**
+     * The column <code>public.recipe_json.id</code>.
+     */
+    public final TableField<RecipeJsonRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.recipe_json.recipe_json</code>.
+     */
+    public final TableField<RecipeJsonRecord, JSON> RECIPE_JSON_ = createField(DSL.name("recipe_json"), SQLDataType.JSON, this, "");
+
+    /**
+     * The column <code>public.recipe_json.insert_time</code>.
+     */
+    public final TableField<RecipeJsonRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.recipe_json.to_obj</code>.
+     */
+    public final TableField<RecipeJsonRecord, Boolean> TO_OBJ = createField(DSL.name("to_obj"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
 
     private RecipeJson(Name alias, Table<RecipeJsonRecord> aliased) {
         this(alias, aliased, null);
@@ -142,7 +144,7 @@ public class RecipeJson extends TableImpl<RecipeJsonRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, org.jooq.JSON, LocalDateTime, Boolean> fieldsRow() {
+    public Row4<Integer, JSON, LocalDateTime, Boolean> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 }

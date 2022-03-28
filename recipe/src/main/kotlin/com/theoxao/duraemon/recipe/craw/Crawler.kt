@@ -57,9 +57,8 @@ class Crawler {
                 .orderBy(RECIPE_JSON.ID.desc()).limit(batch).offset(offset*batch).fetch()
                 if (list.isEmpty()) break
             list.forEach {
-                val json = it.json.data()
-                val resp =
-                    objectMapper.readValue(json, ResponseWrapper::class.java)
+                val json = it.recipeJson.data()
+                val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
                 resp.content?.get("recipe")?.let {recipe->
                     val record =  TB_RECIPE.newRecord().apply {
                         this.id = recipe.id
@@ -101,6 +100,7 @@ class Crawler {
                     }
                     dslContext.transaction { config->
                         DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
+                        DSL.using(config).update(RECIPE_JSON).set(RECIPE_JSON.TO_OBJ, true).where(RECIPE_JSON.ID.eq(it.id)).execute()
                     }
                 }
             }
@@ -133,7 +133,7 @@ class Crawler {
                             response.body?.string()?.let { json ->
                                 val raw = RECIPE_JSON.newRecord().apply {
                                     this.id = id
-                                    this.json = JSON.valueOf(json)
+                                    this.recipeJson = JSON.valueOf(json)
                                 }
                                 dslContext.transaction { config->
                                     DSL.using(config).insertInto(RECIPE_JSON).set(raw).onConflictDoNothing().execute()

@@ -22,10 +22,10 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     private static final long serialVersionUID = 1L;
 
     /**
-     * Create a detached TbCategoryRecord
+     * Setter for <code>public.tb_category.id</code>.
      */
-    public TbCategoryRecord() {
-        super(TbCategory.TB_CATEGORY);
+    public void setId(Integer value) {
+        set(0, value);
     }
 
     /**
@@ -36,15 +36,10 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     /**
-     * Create a detached, initialised TbCategoryRecord
+     * Setter for <code>public.tb_category.name</code>.
      */
-    public TbCategoryRecord(Integer id, String name, Integer level, Integer pid) {
-        super(TbCategory.TB_CATEGORY);
-
-        setId(id);
-        setName(name);
-        setLevel(level);
-        setPid(pid);
+    public void setName(String value) {
+        set(1, value);
     }
 
     /**
@@ -62,17 +57,17 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     }
 
     /**
-     * Setter for <code>public.tb_category.id</code>.
+     * Getter for <code>public.tb_category.level</code>.
      */
-    public void setId(Integer value) {
-        set(0, value);
+    public Integer getLevel() {
+        return (Integer) get(2);
     }
 
     /**
-     * Setter for <code>public.tb_category.name</code>.
+     * Setter for <code>public.tb_category.pid</code>.
      */
-    public void setName(String value) {
-        set(1, value);
+    public void setPid(Integer value) {
+        set(3, value);
     }
 
     /**
@@ -203,16 +198,21 @@ public class TbCategoryRecord extends UpdatableRecordImpl<TbCategoryRecord> impl
     // -------------------------------------------------------------------------
 
     /**
-     * Getter for <code>public.tb_category.level</code>.
+     * Create a detached TbCategoryRecord
      */
-    public Integer getLevel() {
-        return (Integer) get(2);
+    public TbCategoryRecord() {
+        super(TbCategory.TB_CATEGORY);
     }
 
     /**
-     * Setter for <code>public.tb_category.pid</code>.
+     * Create a detached, initialised TbCategoryRecord
      */
-    public void setPid(Integer value) {
-        set(3, value);
+    public TbCategoryRecord(Integer id, String name, Integer level, Integer pid) {
+        super(TbCategory.TB_CATEGORY);
+
+        setId(id);
+        setName(name);
+        setLevel(level);
+        setPid(pid);
     }
 }
