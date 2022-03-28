@@ -21,6 +21,7 @@ public class RecipeJson implements Serializable {
     private Integer       id;
     private JSON          json;
     private LocalDateTime insertTime;
+    private Boolean       toObj;
 
     public RecipeJson() {}
 
@@ -28,16 +29,19 @@ public class RecipeJson implements Serializable {
         this.id = value.id;
         this.json = value.json;
         this.insertTime = value.insertTime;
+        this.toObj = value.toObj;
     }
 
     public RecipeJson(
         Integer       id,
         JSON          json,
-        LocalDateTime insertTime
+        LocalDateTime insertTime,
+        Boolean       toObj
     ) {
         this.id = id;
         this.json = json;
         this.insertTime = insertTime;
+        this.toObj = toObj;
     }
 
     /**
@@ -82,6 +86,20 @@ public class RecipeJson implements Serializable {
         this.insertTime = insertTime;
     }
 
+    /**
+     * Getter for <code>public.recipe_json.to_obj</code>.
+     */
+    public Boolean getToObj() {
+        return this.toObj;
+    }
+
+    /**
+     * Setter for <code>public.recipe_json.to_obj</code>.
+     */
+    public void setToObj(Boolean toObj) {
+        this.toObj = toObj;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RecipeJson (");
@@ -89,6 +107,7 @@ public class RecipeJson implements Serializable {
         sb.append(id);
         sb.append(", ").append(json);
         sb.append(", ").append(insertTime);
+        sb.append(", ").append(toObj);
 
         sb.append(")");
         return sb.toString();

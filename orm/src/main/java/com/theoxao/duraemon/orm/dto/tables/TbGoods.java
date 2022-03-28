@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row11;
 import org.jooq.Schema;
@@ -52,29 +53,29 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     public final TableField<TbGoodsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>public.tb_goods.name</code>. 品名
+     * The column <code>public.tb_goods.name</code>.
      */
-    public final TableField<TbGoodsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "品名");
+    public final TableField<TbGoodsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>public.tb_goods.desc</code>.
      */
-    public final TableField<TbGoodsRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.VARCHAR(1024), this, "");
+    public final TableField<TbGoodsRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.tb_goods.cate</code>. 主分类
+     * The column <code>public.tb_goods.cate</code>.
      */
-    public final TableField<TbGoodsRecord, Integer> CATE = createField(DSL.name("cate"), SQLDataType.INTEGER, this, "主分类");
+    public final TableField<TbGoodsRecord, Integer> CATE = createField(DSL.name("cate"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.tb_goods.sub_cate</code>. 二级分类
+     * The column <code>public.tb_goods.sub_cate</code>.
      */
-    public final TableField<TbGoodsRecord, Integer> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.INTEGER, this, "二级分类");
+    public final TableField<TbGoodsRecord, String> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>public.tb_goods.remain_batch</code>. 剩余批次
+     * The column <code>public.tb_goods.remain_batch</code>.
      */
-    public final TableField<TbGoodsRecord, Integer> REMAIN_BATCH = createField(DSL.name("remain_batch"), SQLDataType.INTEGER, this, "剩余批次");
+    public final TableField<TbGoodsRecord, Integer> REMAIN_BATCH = createField(DSL.name("remain_batch"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.tb_goods.recent_price</code>.
@@ -84,7 +85,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     /**
      * The column <code>public.tb_goods.images</code>.
      */
-    public final TableField<TbGoodsRecord, String> IMAGES = createField(DSL.name("images"), SQLDataType.VARCHAR, this, "");
+    public final TableField<TbGoodsRecord, JSON> IMAGES = createField(DSL.name("images"), SQLDataType.JSON, this, "");
 
     /**
      * The column <code>public.tb_goods.need_buy</code>.
@@ -94,12 +95,12 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     /**
      * The column <code>public.tb_goods.create_time</code>.
      */
-    public final TableField<TbGoodsRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<TbGoodsRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>public.tb_goods.update_time</code>.
      */
-    public final TableField<TbGoodsRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<TbGoodsRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
     private TbGoods(Name alias, Table<TbGoodsRecord> aliased) {
         this(alias, aliased, null);
@@ -137,13 +138,13 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
 
     @Override
     public UniqueKey<TbGoodsRecord> getPrimaryKey() {
-        return Internal.createUniqueKey(TbGoods.TB_GOODS, DSL.name("goods_pkey"), new TableField[] { TbGoods.TB_GOODS.ID }, true);
+        return Internal.createUniqueKey(TbGoods.TB_GOODS, DSL.name("tb_goods_pkey"), new TableField[] { TbGoods.TB_GOODS.ID }, true);
     }
 
     @Override
     public List<UniqueKey<TbGoodsRecord>> getKeys() {
         return Arrays.<UniqueKey<TbGoodsRecord>>asList(
-              Internal.createUniqueKey(TbGoods.TB_GOODS, DSL.name("goods_pkey"), new TableField[] { TbGoods.TB_GOODS.ID }, true)
+              Internal.createUniqueKey(TbGoods.TB_GOODS, DSL.name("tb_goods_pkey"), new TableField[] { TbGoods.TB_GOODS.ID }, true)
         );
     }
 
@@ -178,7 +179,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, String, String, Integer, Integer, Integer, Integer, String, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
+    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
         return (Row11) super.fieldsRow();
     }
 }

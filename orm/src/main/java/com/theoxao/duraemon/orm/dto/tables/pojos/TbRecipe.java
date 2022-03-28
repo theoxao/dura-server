@@ -45,6 +45,8 @@ public class TbRecipe implements Serializable {
     private JSON          coverMicroVideo;
     private JSON          vodVideo;
     private String        summaryDesc;
+    private LocalDateTime insertTime;
+    private LocalDateTime updateTime;
 
     public TbRecipe() {}
 
@@ -76,6 +78,8 @@ public class TbRecipe implements Serializable {
         this.coverMicroVideo = value.coverMicroVideo;
         this.vodVideo = value.vodVideo;
         this.summaryDesc = value.summaryDesc;
+        this.insertTime = value.insertTime;
+        this.updateTime = value.updateTime;
     }
 
     public TbRecipe(
@@ -105,7 +109,9 @@ public class TbRecipe implements Serializable {
         String        videoPageUrl,
         JSON          coverMicroVideo,
         JSON          vodVideo,
-        String        summaryDesc
+        String        summaryDesc,
+        LocalDateTime insertTime,
+        LocalDateTime updateTime
     ) {
         this.id = id;
         this.desc = desc;
@@ -134,6 +140,8 @@ public class TbRecipe implements Serializable {
         this.coverMicroVideo = coverMicroVideo;
         this.vodVideo = vodVideo;
         this.summaryDesc = summaryDesc;
+        this.insertTime = insertTime;
+        this.updateTime = updateTime;
     }
 
     /**
@@ -514,6 +522,34 @@ public class TbRecipe implements Serializable {
         this.summaryDesc = summaryDesc;
     }
 
+    /**
+     * Getter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public LocalDateTime getInsertTime() {
+        return this.insertTime;
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public void setInsertTime(LocalDateTime insertTime) {
+        this.insertTime = insertTime;
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.update_time</code>.
+     */
+    public LocalDateTime getUpdateTime() {
+        return this.updateTime;
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.update_time</code>.
+     */
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbRecipe (");
@@ -545,6 +581,8 @@ public class TbRecipe implements Serializable {
         sb.append(", ").append(coverMicroVideo);
         sb.append(", ").append(vodVideo);
         sb.append(", ").append(summaryDesc);
+        sb.append(", ").append(insertTime);
+        sb.append(", ").append(updateTime);
 
         sb.append(")");
         return sb.toString();

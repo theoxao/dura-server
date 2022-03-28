@@ -45,13 +45,70 @@ class Crawler {
     @Scheduled(cron = "0 0 0 1/1 * ?")
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
-        val list = (max..(max+1000)).toMutableList().craw()
+        (max..(max+1000)).toMutableList().craw()
     }
 
     @PostConstruct
     fun init(){
-        (107000000 downTo 100000000).toMutableList().craw()
+        val batch = 100
+        var offset= 0
+        while (true){
+           val list =  dslContext.selectFrom(RECIPE_JSON).where(RECIPE_JSON.TO_OBJ.eq(false))
+                .orderBy(RECIPE_JSON.ID.desc()).limit(batch).offset(offset*batch).fetch()
+                if (list.isEmpty()) break
+            list.forEach {
+                val json = it.json.data()
+                val resp =
+                    objectMapper.readValue(json, ResponseWrapper::class.java)
+                resp.content?.get("recipe")?.let {recipe->
+                    val record =  TB_RECIPE.newRecord().apply {
+                        this.id = recipe.id
+                        this.desc = recipe.desc
+                        this.difficulty = recipe.difficulty.toJson()
+                        this.ident = recipe.ident
+                        this.image = recipe.image.toJson()
+                        this.name = recipe.name
+                        this.photo = mapOf(
+                            "photo" to recipe.photo,
+                            "photo80" to recipe.photo80,
+                            "photo90" to recipe.photo90,
+                            "photo140" to recipe.photo140,
+                            "photo280" to recipe.photo280,
+                            "photo340" to recipe.photo340,
+                            "photo526" to recipe.photo526,
+                            "photo580" to recipe.photo580,
+                            "photo640" to recipe.photo640,
+                        ).toJson()
+                        this.score = recipe.score
+                        this.summary = recipe.summary
+                        this.thumb = recipe.thumb
+                        this.tips = recipe.tips
+                        this.url = recipe.url
+                        this.author = recipe.author.toJson()
+                        this.label = recipe.labels.toJson()
+                        this.createTime = recipe.createTime?.let { LocalDateTime.parse(it, datetimeFormatter) }
+                        this.ingredient = recipe.ingredient.toJson()
+                        this.instruction = recipe.instruction.toJson()
+                        this.duration = recipe.duration.toJson()
+                        this.recipeCats = recipe.recipeCats.toJson()
+                        this.stats = recipe.stats.toJson()
+                        this.equipmentRelatedInfo = recipe.equipmentRelatedInfo.toJson()
+                        this.videoUrl = recipe.videoUrl
+                        this.videoPageUrl = recipe.videoPageUrl
+                        this.coverMicroVideo = recipe.coverMicroVideo.toJson()
+                        this.vodVideo = recipe.vodVideo.toJson()
+                        this.summaryDesc = recipe.summaryDesc
+                    }
+                    dslContext.transaction { config->
+                        DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
+                    }
+                }
+            }
+            offset++
+        }
+
     }
+    fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
     fun MutableList<Int>.craw(){
         this.chunked(2000).forEach { ids ->

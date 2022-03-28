@@ -38,7 +38,7 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     /**
      * Create a detached, initialised TbRecipeRecord
      */
-    public TbRecipeRecord(Integer id, String desc, JSON difficulty, String ident, JSON image, String name, JSON photo, String score, String summary, String thumb, String tips, String url, JSON author, JSON label, LocalDateTime createTime, JSON ingredient, JSON instruction, JSON duration, JSON recipeCats, JSON originalCate, JSON stats, JSON equipmentRelatedInfo, String videoUrl, String videoPageUrl, JSON coverMicroVideo, JSON vodVideo, String summaryDesc) {
+    public TbRecipeRecord(Integer id, String desc, JSON difficulty, String ident, JSON image, String name, JSON photo, String score, String summary, String thumb, String tips, String url, JSON author, JSON label, LocalDateTime createTime, JSON ingredient, JSON instruction, JSON duration, JSON recipeCats, JSON originalCate, JSON stats, JSON equipmentRelatedInfo, String videoUrl, String videoPageUrl, JSON coverMicroVideo, JSON vodVideo, String summaryDesc, LocalDateTime insertTime, LocalDateTime updateTime) {
         super(TbRecipe.TB_RECIPE);
 
         setId(id);
@@ -68,6 +68,8 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
         setCoverMicroVideo(coverMicroVideo);
         setVodVideo(vodVideo);
         setSummaryDesc(summaryDesc);
+        setInsertTime(insertTime);
+        setUpdateTime(updateTime);
     }
 
     /**
@@ -141,27 +143,6 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.image</code>.
-     */
-    public JSON getImage() {
-        return (JSON) get(4);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.score</code>.
-     */
-    public void setScore(String value) {
-        set(7, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.name</code>.
-     */
-    public void setName(String value) {
-        set(5, value);
-    }
-
-    /**
      * Getter for <code>public.tb_recipe.photo</code>.
      */
     public JSON getPhoto() {
@@ -169,10 +150,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.summary</code>.
+     * Getter for <code>public.tb_recipe.image</code>.
      */
-    public String getSummary() {
-        return (String) get(8);
+    public JSON getImage() {
+        return (JSON) get(4);
     }
 
     /**
@@ -183,13 +164,6 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.thumb</code>.
-     */
-    public String getThumb() {
-        return (String) get(9);
-    }
-
-    /**
      * Setter for <code>public.tb_recipe.summary</code>.
      */
     public void setSummary(String value) {
@@ -197,10 +171,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.tips</code>.
+     * Setter for <code>public.tb_recipe.name</code>.
      */
-    public String getTips() {
-        return (String) get(10);
+    public void setName(String value) {
+        set(5, value);
     }
 
     /**
@@ -211,10 +185,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.url</code>.
+     * Setter for <code>public.tb_recipe.score</code>.
      */
-    public String getUrl() {
-        return (String) get(11);
+    public void setScore(String value) {
+        set(7, value);
     }
 
     /**
@@ -222,6 +196,55 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
      */
     public void setTips(String value) {
         set(10, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.summary</code>.
+     */
+    public String getSummary() {
+        return (String) get(8);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.url</code>.
+     */
+    public void setUrl(String value) {
+        set(11, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.thumb</code>.
+     */
+    public String getThumb() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.author</code>.
+     */
+    public void setAuthor(JSON value) {
+        set(12, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.tips</code>.
+     */
+    public String getTips() {
+        return (String) get(10);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.url</code>.
+     */
+    public String getUrl() {
+        return (String) get(11);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.label</code>.
+     */
+    public JSON getLabel() {
+        return (JSON) get(13);
     }
 
     /**
@@ -239,31 +262,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Setter for <code>public.tb_recipe.url</code>.
+     * Getter for <code>public.tb_recipe.create_time</code>.
      */
-    public void setUrl(String value) {
-        set(11, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.create_time</code>.
-     */
-    public void setCreateTime(LocalDateTime value) {
-        set(14, value);
-    }
-
-    /**
-     * Setter for <code>public.tb_recipe.author</code>.
-     */
-    public void setAuthor(JSON value) {
-        set(12, value);
-    }
-
-    /**
-     * Getter for <code>public.tb_recipe.label</code>.
-     */
-    public JSON getLabel() {
-        return (JSON) get(13);
+    public LocalDateTime getCreateTime() {
+        return (LocalDateTime) get(14);
     }
 
     /**
@@ -281,10 +283,10 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.create_time</code>.
+     * Setter for <code>public.tb_recipe.create_time</code>.
      */
-    public LocalDateTime getCreateTime() {
-        return (LocalDateTime) get(14);
+    public void setCreateTime(LocalDateTime value) {
+        set(14, value);
     }
 
     /**
@@ -393,6 +395,13 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
+     * Getter for <code>public.tb_recipe.cover_micro_video</code>.
+     */
+    public JSON getCoverMicroVideo() {
+        return (JSON) get(24);
+    }
+
+    /**
      * Setter for <code>public.tb_recipe.video_url</code>.
      */
     public void setVideoUrl(String value) {
@@ -414,17 +423,38 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     }
 
     /**
-     * Getter for <code>public.tb_recipe.cover_micro_video</code>.
-     */
-    public JSON getCoverMicroVideo() {
-        return (JSON) get(24);
-    }
-
-    /**
      * Getter for <code>public.tb_recipe.summary_desc</code>.
      */
     public String getSummaryDesc() {
         return (String) get(26);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.vod_video</code>.
+     */
+    public void setVodVideo(JSON value) {
+        set(25, value);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.summary_desc</code>.
+     */
+    public void setSummaryDesc(String value) {
+        set(26, value);
+    }
+
+    /**
+     * Getter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public LocalDateTime getInsertTime() {
+        return (LocalDateTime) get(27);
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.insert_time</code>.
+     */
+    public void setInsertTime(LocalDateTime value) {
+        set(27, value);
     }
 
     // -------------------------------------------------------------------------
@@ -441,16 +471,16 @@ public class TbRecipeRecord extends UpdatableRecordImpl<TbRecipeRecord> {
     // -------------------------------------------------------------------------
 
     /**
-     * Setter for <code>public.tb_recipe.vod_video</code>.
+     * Getter for <code>public.tb_recipe.update_time</code>.
      */
-    public void setVodVideo(JSON value) {
-        set(25, value);
+    public LocalDateTime getUpdateTime() {
+        return (LocalDateTime) get(28);
     }
 
     /**
-     * Setter for <code>public.tb_recipe.summary_desc</code>.
+     * Setter for <code>public.tb_recipe.update_time</code>.
      */
-    public void setSummaryDesc(String value) {
-        set(26, value);
+    public void setUpdateTime(LocalDateTime value) {
+        set(28, value);
     }
 }

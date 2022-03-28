@@ -8,8 +8,6 @@ import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
-import com.theoxao.duraemon.orm.dto.tables.TbItemDetail;
-import com.theoxao.duraemon.orm.dto.tables.TbLocation;
 import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
 
 import java.util.Arrays;
@@ -54,16 +52,6 @@ public class Public extends SchemaImpl {
     public final TbItem TB_ITEM = TbItem.TB_ITEM;
 
     /**
-     * The table <code>public.tb_item_detail</code>.
-     */
-    public final TbItemDetail TB_ITEM_DETAIL = TbItemDetail.TB_ITEM_DETAIL;
-
-    /**
-     * The table <code>public.tb_location</code>.
-     */
-    public final TbLocation TB_LOCATION = TbLocation.TB_LOCATION;
-
-    /**
      * The table <code>public.tb_recipe</code>.
      */
     public final TbRecipe TB_RECIPE = TbRecipe.TB_RECIPE;
@@ -88,8 +76,6 @@ public class Public extends SchemaImpl {
             TbCategory.TB_CATEGORY,
             TbGoods.TB_GOODS,
             TbItem.TB_ITEM,
-            TbItemDetail.TB_ITEM_DETAIL,
-            TbLocation.TB_LOCATION,
             TbRecipe.TB_RECIPE);
     }
 }

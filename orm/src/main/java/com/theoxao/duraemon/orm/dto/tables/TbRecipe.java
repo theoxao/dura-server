@@ -119,7 +119,7 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     /**
      * The column <code>public.tb_recipe.create_time</code>.
      */
-    public final TableField<TbRecipeRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6), this, "");
+    public final TableField<TbRecipeRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(0), this, "");
 
     /**
      * The column <code>public.tb_recipe.ingredient</code>.
@@ -181,6 +181,16 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
      */
     public final TableField<TbRecipeRecord, String> SUMMARY_DESC = createField(DSL.name("summary_desc"), SQLDataType.CLOB, this, "");
 
+    /**
+     * The column <code>public.tb_recipe.insert_time</code>.
+     */
+    public final TableField<TbRecipeRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.update_time</code>.
+     */
+    public final TableField<TbRecipeRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
     private TbRecipe(Name alias, Table<TbRecipeRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -217,13 +227,13 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
 
     @Override
     public UniqueKey<TbRecipeRecord> getPrimaryKey() {
-        return Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true);
+        return Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true);
     }
 
     @Override
     public List<UniqueKey<TbRecipeRecord>> getKeys() {
         return Arrays.<UniqueKey<TbRecipeRecord>>asList(
-              Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true)
+              Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true)
         );
     }
 

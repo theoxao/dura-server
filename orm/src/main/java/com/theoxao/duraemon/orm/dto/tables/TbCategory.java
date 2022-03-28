@@ -101,13 +101,13 @@ public class TbCategory extends TableImpl<TbCategoryRecord> {
 
     @Override
     public UniqueKey<TbCategoryRecord> getPrimaryKey() {
-        return Internal.createUniqueKey(TbCategory.TB_CATEGORY, DSL.name("category_pkey"), new TableField[] { TbCategory.TB_CATEGORY.ID }, true);
+        return Internal.createUniqueKey(TbCategory.TB_CATEGORY, DSL.name("tb_category_pkey"), new TableField[] { TbCategory.TB_CATEGORY.ID }, true);
     }
 
     @Override
     public List<UniqueKey<TbCategoryRecord>> getKeys() {
         return Arrays.<UniqueKey<TbCategoryRecord>>asList(
-              Internal.createUniqueKey(TbCategory.TB_CATEGORY, DSL.name("category_pkey"), new TableField[] { TbCategory.TB_CATEGORY.ID }, true)
+              Internal.createUniqueKey(TbCategory.TB_CATEGORY, DSL.name("tb_category_pkey"), new TableField[] { TbCategory.TB_CATEGORY.ID }, true)
         );
     }
 

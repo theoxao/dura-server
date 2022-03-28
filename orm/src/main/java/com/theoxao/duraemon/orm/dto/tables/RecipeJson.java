@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.Name;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -31,23 +31,39 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RecipeJson extends TableImpl<RecipeJsonRecord> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The reference instance of <code>public.recipe_json</code>
      */
     public static final RecipeJson RECIPE_JSON = new RecipeJson();
-    private static final long serialVersionUID = 1L;
+    /**
+     * The column <code>public.recipe_json.to_obj</code>.
+     */
+    public final TableField<RecipeJsonRecord, Boolean> TO_OBJ = createField(DSL.name("to_obj"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
+
     /**
      * The column <code>public.recipe_json.id</code>.
      */
     public final TableField<RecipeJsonRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+
     /**
      * The column <code>public.recipe_json.json</code>.
      */
     public final TableField<RecipeJsonRecord, org.jooq.JSON> JSON = createField(DSL.name("json"), SQLDataType.JSON, this, "");
+
     /**
      * The column <code>public.recipe_json.insert_time</code>.
      */
     public final TableField<RecipeJsonRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<RecipeJsonRecord> getRecordType() {
+        return RecipeJsonRecord.class;
+    }
 
     private RecipeJson(Name alias, Table<RecipeJsonRecord> aliased) {
         this(alias, aliased, null);
@@ -76,14 +92,6 @@ public class RecipeJson extends TableImpl<RecipeJsonRecord> {
      */
     public RecipeJson() {
         this(DSL.name("recipe_json"), null);
-    }
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<RecipeJsonRecord> getRecordType() {
-        return RecipeJsonRecord.class;
     }
 
     @Override
@@ -130,11 +138,11 @@ public class RecipeJson extends TableImpl<RecipeJsonRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, org.jooq.JSON, LocalDateTime> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Integer, org.jooq.JSON, LocalDateTime, Boolean> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

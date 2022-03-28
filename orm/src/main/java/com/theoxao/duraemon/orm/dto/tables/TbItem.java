@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row15;
 import org.jooq.Schema;
@@ -54,7 +55,7 @@ public class TbItem extends TableImpl<TbItemRecord> {
     /**
      * The column <code>public.tb_item.good_id</code>.
      */
-    public final TableField<TbItemRecord, Integer> GOOD_ID = createField(DSL.name("good_id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TbItemRecord, Integer> GOOD_ID = createField(DSL.name("good_id"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.tb_item.name</code>.
@@ -64,17 +65,17 @@ public class TbItem extends TableImpl<TbItemRecord> {
     /**
      * The column <code>public.tb_item.images</code>.
      */
-    public final TableField<TbItemRecord, String> IMAGES = createField(DSL.name("images"), SQLDataType.VARCHAR, this, "");
+    public final TableField<TbItemRecord, JSON> IMAGES = createField(DSL.name("images"), SQLDataType.JSON, this, "");
 
     /**
      * The column <code>public.tb_item.desc</code>.
      */
-    public final TableField<TbItemRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.VARCHAR(1024), this, "");
+    public final TableField<TbItemRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.tb_item.spec</code>. 规格
+     * The column <code>public.tb_item.spec</code>.
      */
-    public final TableField<TbItemRecord, String> SPEC = createField(DSL.name("spec"), SQLDataType.VARCHAR(255), this, "规格");
+    public final TableField<TbItemRecord, String> SPEC = createField(DSL.name("spec"), SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>public.tb_item.price</code>.
@@ -87,24 +88,24 @@ public class TbItem extends TableImpl<TbItemRecord> {
     public final TableField<TbItemRecord, String> ISBN = createField(DSL.name("isbn"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>public.tb_item.best_favor</code>. 最佳赏味（单位小时）
+     * The column <code>public.tb_item.best_favor</code>.
      */
-    public final TableField<TbItemRecord, Integer> BEST_FAVOR = createField(DSL.name("best_favor"), SQLDataType.INTEGER, this, "最佳赏味（单位小时）");
+    public final TableField<TbItemRecord, Integer> BEST_FAVOR = createField(DSL.name("best_favor"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.tb_item.shelf_life</code>. 保质期（单位小时）
+     * The column <code>public.tb_item.shelf_life</code>.
      */
-    public final TableField<TbItemRecord, Integer> SHELF_LIFE = createField(DSL.name("shelf_life"), SQLDataType.INTEGER, this, "保质期（单位小时）");
+    public final TableField<TbItemRecord, Integer> SHELF_LIFE = createField(DSL.name("shelf_life"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.tb_item.storage</code>. 推荐保存方式
+     * The column <code>public.tb_item.storage</code>.
      */
-    public final TableField<TbItemRecord, String> STORAGE = createField(DSL.name("storage"), SQLDataType.VARCHAR(255), this, "推荐保存方式");
+    public final TableField<TbItemRecord, String> STORAGE = createField(DSL.name("storage"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>public.tb_item.used_storage</code>. 拆分后保存方式
+     * The column <code>public.tb_item.used_storage</code>.
      */
-    public final TableField<TbItemRecord, String> USED_STORAGE = createField(DSL.name("used_storage"), SQLDataType.VARCHAR(255), this, "拆分后保存方式");
+    public final TableField<TbItemRecord, String> USED_STORAGE = createField(DSL.name("used_storage"), SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>public.tb_item.remark</code>.
@@ -114,12 +115,12 @@ public class TbItem extends TableImpl<TbItemRecord> {
     /**
      * The column <code>public.tb_item.create_time</code>.
      */
-    public final TableField<TbItemRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<TbItemRecord, LocalDateTime> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>public.tb_item.update_time</code>.
      */
-    public final TableField<TbItemRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<TbItemRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
     private TbItem(Name alias, Table<TbItemRecord> aliased) {
         this(alias, aliased, null);
@@ -157,13 +158,13 @@ public class TbItem extends TableImpl<TbItemRecord> {
 
     @Override
     public UniqueKey<TbItemRecord> getPrimaryKey() {
-        return Internal.createUniqueKey(TbItem.TB_ITEM, DSL.name("item_pkey"), new TableField[] { TbItem.TB_ITEM.ID }, true);
+        return Internal.createUniqueKey(TbItem.TB_ITEM, DSL.name("tb_item_pkey"), new TableField[] { TbItem.TB_ITEM.ID }, true);
     }
 
     @Override
     public List<UniqueKey<TbItemRecord>> getKeys() {
         return Arrays.<UniqueKey<TbItemRecord>>asList(
-              Internal.createUniqueKey(TbItem.TB_ITEM, DSL.name("item_pkey"), new TableField[] { TbItem.TB_ITEM.ID }, true)
+              Internal.createUniqueKey(TbItem.TB_ITEM, DSL.name("tb_item_pkey"), new TableField[] { TbItem.TB_ITEM.ID }, true)
         );
     }
 
@@ -198,7 +199,7 @@ public class TbItem extends TableImpl<TbItemRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Integer, Integer, String, String, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
         return (Row15) super.fieldsRow();
     }
 }
