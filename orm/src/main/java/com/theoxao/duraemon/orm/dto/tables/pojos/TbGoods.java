@@ -22,7 +22,7 @@ public class TbGoods implements Serializable {
     private String        name;
     private String        desc;
     private Integer       cate;
-    private String        subCate;
+    private Integer       subCate;
     private Integer       remainBatch;
     private Integer       recentPrice;
     private JSON          images;
@@ -51,7 +51,7 @@ public class TbGoods implements Serializable {
         String        name,
         String        desc,
         Integer       cate,
-        String        subCate,
+        Integer       subCate,
         Integer       remainBatch,
         Integer       recentPrice,
         JSON          images,
@@ -131,14 +131,14 @@ public class TbGoods implements Serializable {
     /**
      * Getter for <code>public.tb_goods.sub_cate</code>.
      */
-    public String getSubCate() {
+    public Integer getSubCate() {
         return this.subCate;
     }
 
     /**
      * Setter for <code>public.tb_goods.sub_cate</code>.
      */
-    public void setSubCate(String subCate) {
+    public void setSubCate(Integer subCate) {
         this.subCate = subCate;
     }
 

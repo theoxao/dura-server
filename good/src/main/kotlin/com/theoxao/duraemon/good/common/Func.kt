@@ -10,6 +10,6 @@ fun DSLContext.trans(context: DSLContext.() -> Unit) = this.transaction { config
     context.invoke(DSL.using(config))
 }
 
-infix fun ObjectMapper.list2Json(list: List<String>?): String? {
+infix fun ObjectMapper.list2Json(list: List<String>?): JSON? {
     return list?.let { JSON.valueOf(this.writeValueAsString(it)) } ?: JSON.valueOf("[]")
 }

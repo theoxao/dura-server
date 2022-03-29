@@ -50,7 +50,7 @@ class Crawler {
     @Scheduled(cron = "0 0 0 1/1 * ?")
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
-        (max..(max+2000)).toMutableList().craw()
+        ((max-2000)..(max+2000)).toMutableList().craw()
     }
 
     @Scheduled(cron = "0 20 0 1/1 * ?")

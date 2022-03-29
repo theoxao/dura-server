@@ -8,6 +8,8 @@ import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
+import com.theoxao.duraemon.orm.dto.tables.TbItemDetail;
+import com.theoxao.duraemon.orm.dto.tables.TbLocation;
 import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
 
 
@@ -36,6 +38,16 @@ public class Tables {
      * The table <code>public.tb_item</code>.
      */
     public static final TbItem TB_ITEM = TbItem.TB_ITEM;
+
+    /**
+     * The table <code>public.tb_item_detail</code>.
+     */
+    public static final TbItemDetail TB_ITEM_DETAIL = TbItemDetail.TB_ITEM_DETAIL;
+
+    /**
+     * The table <code>public.tb_location</code>.
+     */
+    public static final TbLocation TB_LOCATION = TbLocation.TB_LOCATION;
 
     /**
      * The table <code>public.tb_recipe</code>.

@@ -70,7 +70,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     /**
      * The column <code>public.tb_goods.sub_cate</code>.
      */
-    public final TableField<TbGoodsRecord, String> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<TbGoodsRecord, Integer> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.tb_goods.remain_batch</code>.
@@ -179,7 +179,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, String, String, Integer, String, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
+    public Row11<Integer, String, String, Integer, Integer, Integer, Integer, JSON, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
         return (Row11) super.fieldsRow();
     }
 }
