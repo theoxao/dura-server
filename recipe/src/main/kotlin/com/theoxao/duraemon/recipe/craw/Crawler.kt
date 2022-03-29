@@ -39,11 +39,17 @@ class Crawler {
         .writeTimeout(Duration.ofSeconds(30))
         .connectTimeout(Duration.ofSeconds(30)).build()
 
+    @PostConstruct
+    fun initSchedule(){
+        scheduled()
+        Thread.sleep(Duration.ofMinutes(5).toMillis())
+    }
+
 
     @Scheduled(cron = "0 0 0 1/1 * ?")
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
-        (max..(max+1000)).toMutableList().craw()
+        (max..(max+2000)).toMutableList().craw()
     }
 
     @Scheduled(cron = "0 20 0 1/1 * ?")
