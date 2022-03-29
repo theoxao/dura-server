@@ -43,6 +43,7 @@ class Crawler {
     fun initSchedule(){
         scheduled()
         Thread.sleep(Duration.ofMinutes(5).toMillis())
+        init()
     }
 
 
