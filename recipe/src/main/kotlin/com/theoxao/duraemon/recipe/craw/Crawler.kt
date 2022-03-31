@@ -121,7 +121,7 @@ class Crawler {
                         }
                         if (response.isSuccessful) {
                             response.body?.string()?.let { json ->
-                                json.toRecipe().let { recipe->
+                                json.toRecipe()?.let { recipe->
                                     dslContext.transaction { config ->
                                         DSL.using(config).insertInto(TB_RECIPE).set(recipe).onConflictDoNothing().execute()
                                     }
