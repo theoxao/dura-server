@@ -14,6 +14,7 @@ import java.util.List;
 import org.jooq.Field;
 import org.jooq.JSON;
 import org.jooq.Name;
+import org.jooq.Row20;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -62,11 +63,6 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     public final TableField<TbRecipeRecord, JSON> DIFFICULTY = createField(DSL.name("difficulty"), SQLDataType.JSON, this, "");
 
     /**
-     * The column <code>public.tb_recipe.ident</code>.
-     */
-    public final TableField<TbRecipeRecord, String> IDENT = createField(DSL.name("ident"), SQLDataType.CLOB, this, "");
-
-    /**
      * The column <code>public.tb_recipe.image</code>.
      */
     public final TableField<TbRecipeRecord, JSON> IMAGE = createField(DSL.name("image"), SQLDataType.JSON, this, "");
@@ -74,17 +70,7 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     /**
      * The column <code>public.tb_recipe.name</code>.
      */
-    public final TableField<TbRecipeRecord, String> NAME = createField(DSL.name("name"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.photo</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> PHOTO = createField(DSL.name("photo"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.score</code>.
-     */
-    public final TableField<TbRecipeRecord, String> SCORE = createField(DSL.name("score"), SQLDataType.CLOB, this, "");
+    public final TableField<TbRecipeRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(128), this, "");
 
     /**
      * The column <code>public.tb_recipe.summary</code>.
@@ -92,24 +78,9 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     public final TableField<TbRecipeRecord, String> SUMMARY = createField(DSL.name("summary"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.tb_recipe.thumb</code>.
-     */
-    public final TableField<TbRecipeRecord, String> THUMB = createField(DSL.name("thumb"), SQLDataType.CLOB, this, "");
-
-    /**
      * The column <code>public.tb_recipe.tips</code>.
      */
     public final TableField<TbRecipeRecord, String> TIPS = createField(DSL.name("tips"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.url</code>.
-     */
-    public final TableField<TbRecipeRecord, String> URL = createField(DSL.name("url"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.author</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> AUTHOR = createField(DSL.name("author"), SQLDataType.JSON, this, "");
 
     /**
      * The column <code>public.tb_recipe.label</code>.
@@ -137,51 +108,6 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     public final TableField<TbRecipeRecord, JSON> DURATION = createField(DSL.name("duration"), SQLDataType.JSON, this, "");
 
     /**
-     * The column <code>public.tb_recipe.recipe_cats</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> RECIPE_CATS = createField(DSL.name("recipe_cats"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.original_cate</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> ORIGINAL_CATE = createField(DSL.name("original_cate"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.stats</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> STATS = createField(DSL.name("stats"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.equipment_related_info</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> EQUIPMENT_RELATED_INFO = createField(DSL.name("equipment_related_info"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.video_url</code>.
-     */
-    public final TableField<TbRecipeRecord, String> VIDEO_URL = createField(DSL.name("video_url"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.video_page_url</code>.
-     */
-    public final TableField<TbRecipeRecord, String> VIDEO_PAGE_URL = createField(DSL.name("video_page_url"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.cover_micro_video</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> COVER_MICRO_VIDEO = createField(DSL.name("cover_micro_video"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.vod_video</code>.
-     */
-    public final TableField<TbRecipeRecord, JSON> VOD_VIDEO = createField(DSL.name("vod_video"), SQLDataType.JSON, this, "");
-
-    /**
-     * The column <code>public.tb_recipe.summary_desc</code>.
-     */
-    public final TableField<TbRecipeRecord, String> SUMMARY_DESC = createField(DSL.name("summary_desc"), SQLDataType.CLOB, this, "");
-
-    /**
      * The column <code>public.tb_recipe.insert_time</code>.
      */
     public final TableField<TbRecipeRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
@@ -190,6 +116,36 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
      * The column <code>public.tb_recipe.update_time</code>.
      */
     public final TableField<TbRecipeRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.author_name</code>.
+     */
+    public final TableField<TbRecipeRecord, String> AUTHOR_NAME = createField(DSL.name("author_name"), SQLDataType.VARCHAR(128), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.author_id</code>.
+     */
+    public final TableField<TbRecipeRecord, String> AUTHOR_ID = createField(DSL.name("author_id"), SQLDataType.VARCHAR(32), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.pv</code>.
+     */
+    public final TableField<TbRecipeRecord, String> PV = createField(DSL.name("pv"), SQLDataType.VARCHAR(10), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.comment</code>.
+     */
+    public final TableField<TbRecipeRecord, String> COMMENT = createField(DSL.name("comment"), SQLDataType.VARCHAR(10), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.cooked</code>.
+     */
+    public final TableField<TbRecipeRecord, String> COOKED = createField(DSL.name("cooked"), SQLDataType.VARCHAR(10), this, "");
+
+    /**
+     * The column <code>public.tb_recipe.collect</code>.
+     */
+    public final TableField<TbRecipeRecord, String> COLLECT = createField(DSL.name("collect"), SQLDataType.VARCHAR(10), this, "");
 
     private TbRecipe(Name alias, Table<TbRecipeRecord> aliased) {
         this(alias, aliased, null);
@@ -227,13 +183,13 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
 
     @Override
     public UniqueKey<TbRecipeRecord> getPrimaryKey() {
-        return Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true);
+        return Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_copy1_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true);
     }
 
     @Override
     public List<UniqueKey<TbRecipeRecord>> getKeys() {
         return Arrays.<UniqueKey<TbRecipeRecord>>asList(
-              Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true)
+              Internal.createUniqueKey(TbRecipe.TB_RECIPE, DSL.name("tb_recipe_copy1_pkey"), new TableField[] { TbRecipe.TB_RECIPE.ID }, true)
         );
     }
 
@@ -261,5 +217,14 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     @Override
     public TbRecipe rename(Name name) {
         return new TbRecipe(name, null);
+    }
+
+    // -------------------------------------------------------------------------
+    // Row20 type methods
+    // -------------------------------------------------------------------------
+
+    @Override
+    public Row20<Integer, String, JSON, JSON, String, String, String, JSON, LocalDateTime, JSON, JSON, JSON, LocalDateTime, LocalDateTime, String, String, String, String, String, String> fieldsRow() {
+        return (Row20) super.fieldsRow();
     }
 }
