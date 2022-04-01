@@ -1,9 +1,11 @@
 package com.theoxao.duraemon.recipe.craw
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.theoxao.duraemon.orm.dto.Tables.RECIPE_JSON
+import com.theoxao.duraemon.orm.dto.Tables
 import com.theoxao.duraemon.orm.dto.Tables.TB_RECIPE
+import com.theoxao.duraemon.orm.dto.tables.records.ImageMapperRecord
 import com.theoxao.duraemon.orm.dto.tables.records.TbRecipeRecord
+import com.theoxao.duraemon.recipe.model.RecipeModel
 import com.theoxao.duraemon.recipe.model.ResponseWrapper
 import okhttp3.*
 import okhttp3.internal.closeQuietly
@@ -17,7 +19,7 @@ import java.io.IOException
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.annotation.PostConstruct
+import java.util.*
 import javax.annotation.Resource
 
 val datetimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -27,9 +29,12 @@ class Crawler {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    @Resource
-    lateinit var dslContext: DSLContext
+    @Resource(name = "masterDSLContext")
+    lateinit var masterDSLContext: DSLContext
 
+
+    @Resource(name="slaveDSLContext")
+    lateinit var slaveDSLContent: DSLContext
 
     @Resource
     lateinit var objectMapper: ObjectMapper
@@ -40,42 +45,20 @@ class Crawler {
         .writeTimeout(Duration.ofSeconds(30))
         .connectTimeout(Duration.ofSeconds(30)).build()
 
-    @PostConstruct
+//    @PostConstruct
     fun initSchedule(){
         scheduled()
     }
 
 
-    @Scheduled(cron = "0 0 0 1/1 * ?")
+    @Scheduled(cron = "* * 12 1/1 * ?")
     fun scheduled() {
-        val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
+        val max = masterDSLContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max-2000)..(max+2000)).toMutableList().craw()
     }
 
-//    @Scheduled(cron = "0 20 0 1/1 * ?")
-    fun init(){
-        val batch = 20
-        while (true){
-            val list =  dslContext.selectFrom(RECIPE_JSON).where(RECIPE_JSON.TO_OBJ.eq(false))
-                .orderBy(RECIPE_JSON.ID).limit(batch).fetch()
-                if (list.isEmpty()) break
-            val records = list.map {
-                val json = it.recipeJson.data()
-                return@map json.toRecipe()
-            }
-            dslContext.transaction { config->
-                DSL.using(config).loadInto(TB_RECIPE).batchAll().onDuplicateKeyIgnore().loadRecords(records).fields(*TB_RECIPE.fields()).execute()
-                DSL.using(config).update(RECIPE_JSON).set(RECIPE_JSON.TO_OBJ, true).where(RECIPE_JSON.ID.`in`(list.map { ce->ce.id })).execute()
-            }
-        }
-
-    }
-
-    fun String?.toRecipe():TbRecipeRecord?{
-        this?:return null
-        val resp = objectMapper.readValue(this, ResponseWrapper::class.java)
-        if ( resp.status != "ok") return null
-        return resp.content?.get("recipe")?.let { recipe ->
+    fun RecipeModel?.toRecipe():TbRecipeRecord? {
+        return this?.let { recipe ->
             TB_RECIPE.newRecord().apply {
                 this.id = recipe.id
                 this.desc = recipe.desc
@@ -121,9 +104,40 @@ class Crawler {
                         }
                         if (response.isSuccessful) {
                             response.body?.string()?.let { json ->
-                                json.toRecipe()?.let { recipe->
-                                    dslContext.transaction { config ->
-                                        DSL.using(config).insertInto(TB_RECIPE).set(recipe).onConflictDoNothing().execute()
+                                val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
+                                if ( resp.status != "ok") return@let
+                                resp.content?.get("recipe")?.let { recipe->
+                                    val mapperList = arrayListOf<ImageMapperRecord>()
+                                    recipe.instruction?.filterNotNull()?.forEach {
+                                        it.image?.ident?.let { ident->
+                                            mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
+                                                val uid = UUID.randomUUID().toString()
+                                                this.uuid= uid
+                                                it.image?.uuid = uid
+                                                this.oid = recipe.id
+                                                this.type = 0
+                                                this.imageUrl = ident
+                                            })
+                                        }
+                                        it.video?.url?.let { url->
+                                            mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
+                                                val uid = UUID.randomUUID().toString()
+                                                this.uuid= uid
+                                                it.video?.uuid = uid
+                                                this.oid = recipe.id
+                                                this.type = 1
+                                                this.imageUrl = url
+                                            })
+                                        }
+                                    }
+                                    val record = recipe.toRecipe()
+                                    masterDSLContext.transaction { config ->
+                                        record?.let {
+                                            DSL.using(config).insertInto(TB_RECIPE).set(it).onConflictDoNothing().execute()
+                                        }
+                                        if (mapperList.isNotEmpty()){
+                                            DSL.using(config).batchInsert(mapperList).execute()
+                                        }
                                     }
                                 }
                             }

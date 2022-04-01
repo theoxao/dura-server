@@ -4,6 +4,7 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.ImageMapper;
 import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
@@ -18,6 +19,11 @@ import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>public.image_mapper</code>.
+     */
+    public static final ImageMapper IMAGE_MAPPER = ImageMapper.IMAGE_MAPPER;
 
     /**
      * The table <code>public.recipe_json</code>.

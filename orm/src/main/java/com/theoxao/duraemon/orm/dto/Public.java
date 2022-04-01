@@ -4,6 +4,7 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.ImageMapper;
 import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
@@ -32,6 +33,11 @@ public class Public extends SchemaImpl {
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>public.image_mapper</code>.
+     */
+    public final ImageMapper IMAGE_MAPPER = ImageMapper.IMAGE_MAPPER;
 
     /**
      * The table <code>public.recipe_json</code>.
@@ -84,6 +90,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
+            ImageMapper.IMAGE_MAPPER,
             RecipeJson.RECIPE_JSON,
             TbCategory.TB_CATEGORY,
             TbGoods.TB_GOODS,

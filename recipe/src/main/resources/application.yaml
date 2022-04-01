@@ -4,9 +4,25 @@ spring:
   application:
     name: recipe
   datasource:
-    hikari:
-      jdbc-url: jdbc:postgresql://127.0.0.1:5432/duraemon?useSSL=false&characterEncoding=utf8
+    type: com.zaxxer.hikari.HikariDataSource
+    slave:
+      username: postgres
+      jdbc-url: jdbc:postgresql://172.29.135.216:15432/duraemon?useSSL=false&characterEncoding=utf8
+      driver-class-name: org.postgresql.Driver
+      password: ${MONGO_PASSWORD}
+      hikari:
+        maximum-pool-size: 15
+        idle-timeout: 10000
+        minimum-idle: 5
+    master:
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbc-url: jdbc:postgresql://172.29.67.205:5432/duraemon?useSSL=false&characterEncoding=utf8
+      driver-class-name: org.postgresql.Driver
       username: postgres
       password: ${MONGO_PASSWORD}
-    url: jdbc:postgresql://127.0.0.1:5432/duraemon?useSSL=false&characterEncoding=utf8
-    driver-class-name: org.postgresql.Driver
+      hikari:
+        maximum-pool-size: 15
+        idle-timeout: 10000
+        minimum-idle: 5
+
+
