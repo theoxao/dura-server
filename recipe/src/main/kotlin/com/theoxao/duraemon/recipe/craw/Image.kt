@@ -57,7 +57,7 @@ class Image {
                     }
                     override fun onResponse(call: Call, response: Response) {
                         if (response.isSuccessful){
-                            val base =File(baseDir+ "${mapper.oid.mod(100)}/${mapper.oid}")
+                            val base =File(baseDir, "${mapper.oid.mod(100)}/${mapper.oid}")
                             if (!base.exists()){
                                 base.mkdirs()
                             }
