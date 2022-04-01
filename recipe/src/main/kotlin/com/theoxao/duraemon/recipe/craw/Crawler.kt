@@ -108,6 +108,16 @@ class Crawler {
                                 if ( resp.status != "ok") return@let
                                 resp.content?.get("recipe")?.let { recipe->
                                     val mapperList = arrayListOf<ImageMapperRecord>()
+                                    recipe.image?.ident?.let { ident->
+                                        mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
+                                            val id = UUID.randomUUID().toString()
+                                            this.uuid= id
+                                            recipe.image?.uuid =   id
+                                            this.oid = recipe.id
+                                            this.type = 0
+                                            this.imageUrl = ident
+                                        })
+                                    }
                                     recipe.instruction?.filterNotNull()?.forEach {
                                         it.image?.ident?.let { ident->
                                             mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
