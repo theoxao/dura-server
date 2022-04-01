@@ -57,7 +57,11 @@ class Image {
                     }
                     override fun onResponse(call: Call, response: Response) {
                         if (response.isSuccessful){
-                            val file = File(baseDir,"${mapper.oid.mod(100).toString()}/${mapper.oid.toString()}/${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".")}")
+                            val base =File(baseDir+ "${mapper.oid.mod(100)}/${mapper.oid}")
+                            if (!base.exists()){
+                                base.mkdirs()
+                            }
+                            val file = File(base,"${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".")}")
                             response.body?.bytes()?.let {
                                 file.writeBytes(it)
                                 masterDSLContext.transaction { config->
