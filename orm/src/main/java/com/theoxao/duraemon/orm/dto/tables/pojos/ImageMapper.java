@@ -21,7 +21,7 @@ public class ImageMapper implements Serializable {
     private String        imageUrl;
     private LocalDateTime insertTime;
     private Integer       type;
-    private Boolean       download;
+    private Short         download;
 
     public ImageMapper() {}
 
@@ -40,7 +40,7 @@ public class ImageMapper implements Serializable {
         String        imageUrl,
         LocalDateTime insertTime,
         Integer       type,
-        Boolean       download
+        Short         download
     ) {
         this.uuid = uuid;
         this.oid = oid;
@@ -123,14 +123,14 @@ public class ImageMapper implements Serializable {
     /**
      * Getter for <code>public.image_mapper.download</code>.
      */
-    public Boolean getDownload() {
+    public Short getDownload() {
         return this.download;
     }
 
     /**
      * Setter for <code>public.image_mapper.download</code>.
      */
-    public void setDownload(Boolean download) {
+    public void setDownload(Short download) {
         this.download = download;
     }
 

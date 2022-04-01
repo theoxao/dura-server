@@ -38,7 +38,7 @@ class Job {
 
     fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
-    @PostConstruct
+//    @PostConstruct
     fun init(){
         val batch = 1000
         var last:Int? = 0

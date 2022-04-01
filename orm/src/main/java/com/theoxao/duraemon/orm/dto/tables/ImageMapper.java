@@ -74,7 +74,7 @@ public class ImageMapper extends TableImpl<ImageMapperRecord> {
     /**
      * The column <code>public.image_mapper.download</code>.
      */
-    public final TableField<ImageMapperRecord, Boolean> DOWNLOAD = createField(DSL.name("download"), SQLDataType.BOOLEAN.defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
+    public final TableField<ImageMapperRecord, Short> DOWNLOAD = createField(DSL.name("download"), SQLDataType.SMALLINT.defaultValue(DSL.field("0", SQLDataType.SMALLINT)), this, "");
 
     private ImageMapper(Name alias, Table<ImageMapperRecord> aliased) {
         this(alias, aliased, null);
@@ -153,7 +153,7 @@ public class ImageMapper extends TableImpl<ImageMapperRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<String, Integer, String, LocalDateTime, Integer, Boolean> fieldsRow() {
+    public Row6<String, Integer, String, LocalDateTime, Integer, Short> fieldsRow() {
         return (Row6) super.fieldsRow();
     }
 }
