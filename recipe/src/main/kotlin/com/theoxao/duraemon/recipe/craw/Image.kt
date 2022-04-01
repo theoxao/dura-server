@@ -45,6 +45,7 @@ class Image {
                 DSL.using(config).batchUpdate(list).execute()
             }
             list.forEach { mapper->
+                log.info("mapper:{}" , mapper.uuid)
                 val request = if (mapper.type ==0){
                     Request.Builder().url("https://i2.chuimg.com/${mapper.imageUrl}").get().build()
                 }else{
