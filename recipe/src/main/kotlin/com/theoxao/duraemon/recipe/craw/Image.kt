@@ -27,7 +27,7 @@ class Image {
         .writeTimeout(Duration.ofSeconds(0))
         .connectTimeout(Duration.ofSeconds(0)).build()
 
-    private val baseDir = "~/static/recipe"
+    private val baseDir = "/home/theo/static/recipe"
 
     @PostConstruct
     fun init(){
