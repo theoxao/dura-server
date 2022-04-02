@@ -22,10 +22,10 @@ class Image {
     lateinit var masterDSLContext: DSLContext
 
     val http = OkHttpClient.Builder()
-        .callTimeout(Duration.ofSeconds(30))
-        .readTimeout(Duration.ofSeconds(30))
-        .writeTimeout(Duration.ofSeconds(30))
-        .connectTimeout(Duration.ofSeconds(30)).build()
+        .callTimeout(Duration.ofSeconds(0))
+        .readTimeout(Duration.ofSeconds(0))
+        .writeTimeout(Duration.ofSeconds(0))
+        .connectTimeout(Duration.ofSeconds(0)).build()
 
     private val baseDir = "~/static/recipe"
 
