@@ -42,7 +42,7 @@ class Job {
     @PostConstruct
     fun init() {
         val batch = 1000
-        var last: Int? = 0
+        var last: Int? = Int.MAX_VALUE
         while (true) {
             val list = masterDSLContext.selectFrom(TB_RECIPE)
                 .where(TB_RECIPE.ID.lt(last))
