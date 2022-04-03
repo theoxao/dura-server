@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.time.Duration
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 import javax.annotation.PostConstruct
@@ -46,7 +47,7 @@ class Job {
         while (true) {
             val list = masterDSLContext.selectFrom(TB_RECIPE)
                 .where(TB_RECIPE.ID.lt(last))
-                .and(TB_RECIPE.UPDATE_TIME.le(LocalDateTime.now().minusDays(1)))
+                .and(TB_RECIPE.UPDATE_TIME.le(LocalDate.now().atStartOfDay()))
                 .orderBy(TB_RECIPE.ID.desc()).limit(batch).fetch()
             last = list.lastOrNull()?.id
             if (list.isEmpty() || last == null) break
