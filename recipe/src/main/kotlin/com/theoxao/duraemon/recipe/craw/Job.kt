@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.time.Duration
+import java.time.LocalDateTime
 import java.util.*
 import javax.annotation.PostConstruct
 import javax.annotation.Resource
@@ -104,6 +105,7 @@ class Job {
                                     DSL.using(config).update(TB_RECIPE)
                                         .set(TB_RECIPE.INGREDIENT, recipe.ingredient.toJson())
                                         .set(TB_RECIPE.INSTRUCTION , recipe.instruction.toJson())
+                                        .set(TB_RECIPE.UPDATE_TIME, LocalDateTime.now())
                                         .where(TB_RECIPE.ID.eq(recipe.id)).execute()
                                 }
                             }
