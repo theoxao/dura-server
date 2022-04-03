@@ -45,12 +45,13 @@ class Job {
         http.dispatcher.maxRequests = 500
         http.dispatcher.maxRequestsPerHost=500
         val batch = 1000
-        var last: Int? = Int.MAX_VALUE
+        var last: Int? = 0
         while (true) {
             val list = masterDSLContext.selectFrom(TB_RECIPE)
-                .where(TB_RECIPE.ID.lt(last))
-                .and(TB_RECIPE.UPDATE_TIME.le(LocalDate.now().atStartOfDay()))
-                .orderBy(TB_RECIPE.ID.desc()).limit(batch).fetch()
+                .where(TB_RECIPE.ID.gt(last))
+                .and(TB_RECIPE.ID.lt(103000000))
+                .and(TB_RECIPE.UPDATE_TIME.le(LocalDate.of(2022, 4,1).atStartOfDay()))
+                .orderBy(TB_RECIPE.ID).limit(batch).fetch()
             last = list.lastOrNull()?.id
             if (list.isEmpty() || last == null) break
             list.forEach { record ->
@@ -117,6 +118,7 @@ class Job {
                                 masterDSLContext.transaction { config ->
                                     if (mapperList.isNotEmpty())
                                         DSL.using(config).batchInsert(mapperList).execute()
+                                    record.updateTime = LocalDateTime.now().minusMonths(1)
                                     DSL.using(config).executeUpdate(record)
                                 }
                                 log.info("id@{} is not ok", record.id)
@@ -164,7 +166,7 @@ class Job {
                                     DSL.using(config).update(TB_RECIPE)
                                         .set(TB_RECIPE.IMAGE, recipe.image.toJson())
                                         .set(TB_RECIPE.INSTRUCTION, recipe.instruction.toJson())
-                                        .set(TB_RECIPE.UPDATE_TIME, LocalDateTime.now())
+                                        .set(TB_RECIPE.UPDATE_TIME, LocalDateTime.now().minusMonths(1))
                                         .where(TB_RECIPE.ID.eq(recipe.id)).execute()
                                 }
                             }
