@@ -43,7 +43,7 @@ class Job {
         var last:Int? = 0
         while (true){
             val list =masterDSLContext.selectFrom(TB_RECIPE)
-                .where(TB_RECIPE.ID.gt(last))
+                .where(TB_RECIPE.ID.lt(last))
                 .and(TB_RECIPE.UPDATE_TIME.le(LocalDateTime.now().minusDays(1)))
                 .orderBy(TB_RECIPE.ID.desc()).limit(batch).fetch()
             last = list.lastOrNull()?.id
