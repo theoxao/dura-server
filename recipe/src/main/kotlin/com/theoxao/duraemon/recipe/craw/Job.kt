@@ -64,7 +64,10 @@ class Job {
                     override fun onResponse(call: Call, response: Response) {
                         if (response.isSuccessful){
                             val wrapper = objectMapper.readValue(response.body?.string(), ResponseWrapper::class.java)
-                            if (wrapper.status != "ok") return
+                            if (wrapper.status != "ok") {
+                                log.info("id@{} is not ok", record.id)
+                                return
+                            }
                             log.info("id@{} is ok", record.id)
                             wrapper.content?.get("recipe")?.let { recipe->
                                 val mapperList = arrayListOf<ImageMapperRecord>()
