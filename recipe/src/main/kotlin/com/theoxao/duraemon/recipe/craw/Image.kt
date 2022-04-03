@@ -29,7 +29,7 @@ class Image {
 
     private val baseDir = "/home/theo/static/recipe"
 
-//    @PostConstruct
+    @PostConstruct
     fun init(){
         while (true){
             val list = masterDSLContext.selectFrom(IMAGE_MAPPER).where(IMAGE_MAPPER.DOWNLOAD.eq(0))
