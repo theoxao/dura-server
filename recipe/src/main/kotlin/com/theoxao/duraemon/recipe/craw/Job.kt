@@ -51,7 +51,7 @@ class Job {
                 .where(TB_RECIPE.ID.lt(last))
 //                .and(TB_RECIPE.ID.lt(103000000))
                 .and(TB_RECIPE.UPDATE_TIME.le(LocalDate.of(2022, 4,1).atStartOfDay()))
-                .orderBy(TB_RECIPE.ID).limit(batch).fetch()
+                .orderBy(TB_RECIPE.ID.desc()).limit(batch).fetch()
             last = list.lastOrNull()?.id
             if (list.isEmpty() || last == null) break
             list.forEach { record ->
