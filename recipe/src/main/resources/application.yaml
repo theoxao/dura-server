@@ -21,7 +21,7 @@ spring:
       username: postgres
       password: ${MONGO_PASSWORD}
       hikari:
-        maximum-pool-size: 200
+        maximum-pool-size: 15
         idle-timeout: 10000
         minimum-idle: 5
 

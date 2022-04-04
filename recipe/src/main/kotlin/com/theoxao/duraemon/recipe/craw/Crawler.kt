@@ -79,8 +79,6 @@ class Crawler {
 
     @PostConstruct
     fun i() {
-        http.dispatcher.maxRequestsPerHost=100
-        http.dispatcher.maxRequests = 100
         (106724821 downTo 100000000).toMutableList().craw()
     }
 
