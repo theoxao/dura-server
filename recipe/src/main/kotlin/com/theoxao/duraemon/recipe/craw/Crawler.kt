@@ -117,11 +117,11 @@ class Crawler {
                                 }
                                 val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
                                 if ( resp.status != "ok") {
-                                    log.error("request@{} is not ok")
+                                    log.error("request@{} is not ok" , id)
                                     response.closeQuietly()
                                     return@let
                                 }
-                                log.error("request@{} is ok")
+                                log.error("request@{} is ok" , id)
                                 resp.content?.get("recipe")?.let { recipe->
                                     val mapperList = arrayListOf<ImageMapperRecord>()
                                     recipe.image?.ident?.let { ident->
