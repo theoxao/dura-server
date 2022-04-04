@@ -78,12 +78,11 @@ class Crawler {
 
     @PostConstruct
     fun i(){
-        (106724821 downTo 100000000).chunked(672482).forEach { list->
+        (106724821 downTo 100000000).chunked(672483).forEach { list->
             Thread{
                 list.craw()
-            }
+            }.start()
         }
-
     }
 
     fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
