@@ -45,11 +45,11 @@ class Job {
         http.dispatcher.maxRequests = 500
         http.dispatcher.maxRequestsPerHost=500
         val batch = 1000
-        var last: Int? = 0
+        var last: Int? = Int.MAX_VALUE
         while (true) {
             val list = masterDSLContext.selectFrom(TB_RECIPE)
-                .where(TB_RECIPE.ID.gt(last))
-                .and(TB_RECIPE.ID.lt(103000000))
+                .where(TB_RECIPE.ID.lt(last))
+//                .and(TB_RECIPE.ID.lt(103000000))
                 .and(TB_RECIPE.UPDATE_TIME.le(LocalDate.of(2022, 4,1).atStartOfDay()))
                 .orderBy(TB_RECIPE.ID).limit(batch).fetch()
             last = list.lastOrNull()?.id
