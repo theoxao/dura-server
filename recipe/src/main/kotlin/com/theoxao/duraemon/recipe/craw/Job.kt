@@ -40,7 +40,7 @@ class Job {
 
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
-    @PostConstruct
+//    @PostConstruct
     fun init() {
         http.dispatcher.maxRequests = 500
         http.dispatcher.maxRequestsPerHost=500

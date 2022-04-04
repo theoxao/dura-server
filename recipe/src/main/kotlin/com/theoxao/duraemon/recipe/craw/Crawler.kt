@@ -2,6 +2,7 @@ package com.theoxao.duraemon.recipe.craw
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.theoxao.duraemon.orm.dto.Tables
+import com.theoxao.duraemon.orm.dto.Tables.RECIPE_JSON
 import com.theoxao.duraemon.orm.dto.Tables.TB_RECIPE
 import com.theoxao.duraemon.orm.dto.tables.records.ImageMapperRecord
 import com.theoxao.duraemon.orm.dto.tables.records.TbRecipeRecord
@@ -17,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.time.Duration
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -36,13 +38,13 @@ class Crawler {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-    val http = OkHttpClient.Builder()
-        .callTimeout(Duration.ofSeconds(30))
-        .readTimeout(Duration.ofSeconds(30))
-        .writeTimeout(Duration.ofSeconds(30))
-        .connectTimeout(Duration.ofSeconds(30)).build()
+//    val http = OkHttpClient.Builder()
+//        .callTimeout(Duration.ofSeconds(30))
+//        .readTimeout(Duration.ofSeconds(30))
+//        .writeTimeout(Duration.ofSeconds(30))
+//        .connectTimeout(Duration.ofSeconds(30)).build()
 
-    @Scheduled(cron = "* * 12 1/1 * ?")
+//    @Scheduled(cron = "* * 12 1/1 * ?")
     fun scheduled() {
         val max = masterDSLContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max-2000)..(max+2000)).toMutableList().craw()
@@ -60,6 +62,7 @@ class Crawler {
                 this.tips = recipe.tips
                 this.label = recipe.labels.toJson()
                 this.createTime = recipe.createTime?.let { LocalDateTime.parse(it, datetimeFormatter) }
+                this.updateTime = LocalDate.of(1970,1,1).atStartOfDay()
                 this.ingredient = recipe.ingredient.toJson()
                 this.instruction = recipe.instruction.toJson()
                 this.duration = recipe.duration.toJson()
@@ -73,10 +76,27 @@ class Crawler {
         }
     }
 
+    @PostConstruct
+    fun i(){
+        (106724821 downTo 100000000).chunked(672482).forEach { list->
+            Thread{
+                list.craw()
+            }
+        }
+
+    }
+
     fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
-    fun MutableList<Int>.craw() {
-            this.forEach { id ->
+    fun List<Int>.craw() {
+        val http = OkHttpClient.Builder()
+            .callTimeout(Duration.ofSeconds(30))
+            .readTimeout(Duration.ofSeconds(30))
+            .writeTimeout(Duration.ofSeconds(30))
+            .connectTimeout(Duration.ofSeconds(30)).build()
+        http.dispatcher.maxRequestsPerHost=500
+        http.dispatcher.maxRequests = 500
+        this.forEach { id ->
                 val request = Request.Builder()
                     .url("https://www.xiachufang.com/juno/api/v2/recipes/show_v2.json?id=${id}&mode=full")
                     .get()
@@ -90,13 +110,21 @@ class Crawler {
                         log.error(e.message, e)
                     }
                     override fun onResponse(call: Call, response: Response) {
-                        if (LocalDateTime.now().second == 0) {
-                            log.info(">>>>>queued call count:{}", http.dispatcher.queuedCallsCount())
-                        }
                         if (response.isSuccessful) {
                             response.body?.string()?.let { json ->
+                                masterDSLContext.transaction { config->
+                                    RECIPE_JSON.newRecord().apply{
+                                        this.id = id
+                                        this.recipeJson = JSON.valueOf(json)
+                                    }
+                                }
                                 val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
-                                if ( resp.status != "ok") return@let
+                                if ( resp.status != "ok") {
+                                    log.error("request@{} is not ok")
+                                    response.closeQuietly()
+                                    return@let
+                                }
+                                log.error("request@{} is ok")
                                 resp.content?.get("recipe")?.let { recipe->
                                     val mapperList = arrayListOf<ImageMapperRecord>()
                                     recipe.image?.ident?.let { ident->
