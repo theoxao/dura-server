@@ -79,6 +79,8 @@ class Crawler {
 
     @PostConstruct
     fun i() {
+        http.dispatcher.maxRequestsPerHost=100
+        http.dispatcher.maxRequests = 100
         (106724821 downTo 100000000).toMutableList().craw()
     }
 
@@ -86,14 +88,13 @@ class Crawler {
 
     val base = "/home/theo/recipe"
 
+    val http = OkHttpClient.Builder()
+        .callTimeout(Duration.ofSeconds(30))
+        .readTimeout(Duration.ofSeconds(30))
+        .writeTimeout(Duration.ofSeconds(30))
+        .connectTimeout(Duration.ofSeconds(30)).build()
+
     fun List<Int>.craw() {
-        val http = OkHttpClient.Builder()
-            .callTimeout(Duration.ofSeconds(30))
-            .readTimeout(Duration.ofSeconds(30))
-            .writeTimeout(Duration.ofSeconds(30))
-            .connectTimeout(Duration.ofSeconds(30)).build()
-        http.dispatcher.maxRequestsPerHost=500
-        http.dispatcher.maxRequests = 500
         this.forEach { id ->
                 val request = Request.Builder()
                     .url("https://www.xiachufang.com/juno/api/v2/recipes/show_v2.json?id=${id}&mode=full")
@@ -110,17 +111,15 @@ class Crawler {
                     override fun onResponse(call: Call, response: Response) {
                         if (response.isSuccessful) {
                             log.error("request@{} is ok" , id)
-                            response.body?.bytes()?.let { bytes ->
-                                val file = File(base ,"${id%1000}/$id")
-                                file.writeBytes(bytes)
-//                                masterDSLContext.transaction { config->
-//                                    RECIPE_JSON.newRecord().apply{
-//                                        this.id = id
-//                                        this.recipeJson = JSON.valueOf(json)
-//                                    }.let{
-//                                        DSL.using(config).executeInsert(it)
-//                                    }
-//                                }
+                            response.body?.string()?.let { bytes ->
+                                masterDSLContext.transaction { config->
+                                    RECIPE_JSON.newRecord().apply{
+                                        this.id = id
+                                        this.recipeJson = JSON.valueOf(bytes)
+                                    }.let{
+                                        DSL.using(config).executeInsert(it)
+                                    }
+                                }
 //                                val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
 //                                if ( resp.status != "ok") {
 //                                    log.error("request@{} is not ok" , id)
