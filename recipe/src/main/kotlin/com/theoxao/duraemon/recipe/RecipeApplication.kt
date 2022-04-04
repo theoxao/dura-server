@@ -1,5 +1,7 @@
 package com.theoxao.duraemon.recipe
 
+import org.jooq.DSLContext
+import org.jooq.impl.DSL
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.runApplication
@@ -11,4 +13,8 @@ class RecipeApplication
 
 fun main(args: Array<String>) {
     runApplication<RecipeApplication>(*args)
+}
+
+fun DSLContext.trans(context: DSLContext.() -> Unit) = this.transaction { config ->
+    context.invoke(DSL.using(config))
 }
