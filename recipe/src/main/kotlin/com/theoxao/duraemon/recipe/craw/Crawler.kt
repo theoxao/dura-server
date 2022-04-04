@@ -77,12 +77,8 @@ class Crawler {
     }
 
     @PostConstruct
-    fun i(){
-        (106724821 downTo 100000000).chunked(672483).forEach { list->
-            Thread{
-                list.craw()
-            }.start()
-        }
+    fun i() {
+        (106724821 downTo 100000000).toMutableList().craw()
     }
 
     fun Any?.toJson(): JSON?=  this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
@@ -93,8 +89,8 @@ class Crawler {
             .readTimeout(Duration.ofSeconds(30))
             .writeTimeout(Duration.ofSeconds(30))
             .connectTimeout(Duration.ofSeconds(30)).build()
-        http.dispatcher.maxRequestsPerHost=500
-        http.dispatcher.maxRequests = 500
+        http.dispatcher.maxRequestsPerHost=200
+        http.dispatcher.maxRequests = 200
         this.forEach { id ->
                 val request = Request.Builder()
                     .url("https://www.xiachufang.com/juno/api/v2/recipes/show_v2.json?id=${id}&mode=full")
@@ -170,7 +166,6 @@ class Crawler {
                                 }
                             }
                         }
-                        log.info("request@{}, response code:{} ", id, response.code)
                         response.closeQuietly()
                     }
                 })
