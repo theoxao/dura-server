@@ -111,6 +111,8 @@ class Crawler {
                                     RECIPE_JSON.newRecord().apply{
                                         this.id = id
                                         this.recipeJson = JSON.valueOf(json)
+                                    }.let{
+                                        DSL.using(config).executeInsert(it)
                                     }
                                 }
                                 val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
