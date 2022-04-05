@@ -90,7 +90,11 @@ class Crawler {
             val ids = list.map { it.id }
             val records = list
                 .map { json ->
-                    val resp = objectMapper.readValue(json.recipeJson.data(), ResponseWrapper::class.java)
+                    val resp = objectMapper.readValue(json.recipeJson.data()
+                        .replace("\u0000" , "")
+                        .replace("0x00", "")
+                        .replace("\\u0000",""),
+                        ResponseWrapper::class.java)
                     if (resp.status != "ok") {
                         log.error("request@{} is not ok", json.id)
                         return@map  null
