@@ -8,7 +8,6 @@ import org.jooq.impl.DSL
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.io.File
-import java.io.IOException
 import java.time.Duration
 import javax.annotation.PostConstruct
 import javax.annotation.Resource
@@ -30,51 +29,44 @@ class Image {
     private val baseDir = "/Volumes/shared/static/recipe"
 
     @PostConstruct
-    fun init(){
-        while (true){
+    fun init() {
+        while (true) {
             val list = masterDSLContext.selectFrom(IMAGE_MAPPER).where(IMAGE_MAPPER.DOWNLOAD.eq(0))
-                .and(IMAGE_MAPPER.TYPE.notIn(2,3))
+                .and(IMAGE_MAPPER.TYPE.notIn(2, 3))
                 .limit(1000).fetch()
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 break
             }
             list.forEach {
                 it.download = -1
             }
-            masterDSLContext.transaction { config->
+            masterDSLContext.transaction { config ->
                 DSL.using(config).batchUpdate(list).execute()
             }
-            list.forEach { mapper->
-                log.info("mapper:{}" , mapper.uuid)
-                val request = if (mapper.type ==0){
+            list.forEach { mapper ->
+                log.info("mapper:{}", mapper.uuid)
+                val request = if (mapper.type == 0) {
                     Request.Builder().url("https://i2.chuimg.com/${mapper.imageUrl}").get().build()
-                }else{
+                } else {
                     Request.Builder().url(mapper.imageUrl).get().build()
                 }
-                http.newCall(request).enqueue(object:Callback{
-                    override fun onFailure(call: Call, e: IOException) {
-                        log.error(e.message,e)
+                val response = http.newCall(request).execute()
+                if (response.isSuccessful) {
+                    val base = File(baseDir, "${mapper.oid.mod(100)}/${mapper.oid}")
+                    if (!base.exists()) {
+                        base.mkdirs()
                     }
-                    override fun onResponse(call: Call, response: Response) {
-                        if (response.isSuccessful){
-                            val base =File(baseDir, "${mapper.oid.mod(100)}/${mapper.oid}")
-                            if (!base.exists()){
-                                base.mkdirs()
-                            }
-                            val file = File(base,"${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".")}")
-                            response.body?.bytes()?.let {
-                                file.writeBytes(it)
-                                masterDSLContext.transaction { config->
-                                    DSL.using(config).update(IMAGE_MAPPER).set(IMAGE_MAPPER.DOWNLOAD,1)
-                                        .where(IMAGE_MAPPER.UUID.eq(mapper.uuid)).execute()
-                                }
-                            }
+                    val file = File(base, "${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".")}")
+                    response.body?.bytes()?.let {
+                        file.writeBytes(it)
+                        masterDSLContext.transaction { config ->
+                            DSL.using(config).update(IMAGE_MAPPER).set(IMAGE_MAPPER.DOWNLOAD, 1)
+                                .where(IMAGE_MAPPER.UUID.eq(mapper.uuid)).execute()
                         }
-                        response.closeQuietly()
                     }
-                })
+                }
+                response.closeQuietly()
             }
-            Thread.sleep(Duration.ofMinutes(5).toMillis())
         }
     }
 }
