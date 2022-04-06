@@ -37,7 +37,7 @@ class Video {
         .writeTimeout(Duration.ofSeconds(0))
         .connectTimeout(Duration.ofSeconds(0)).build()
 
-    private val baseDir = "/Users/theo/workspace/theo/static/recipe"
+    private val baseDir = "/home/theo/static/recipe"
 
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
