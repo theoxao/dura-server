@@ -43,10 +43,13 @@ class Video {
 
     @PostConstruct
     fun init() {
-        dslContext.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER)
-            .where(IMAGE_MAPPER.TYPE.eq(2))
-            .groupBy(IMAGE_MAPPER.OID)
-            .fetch().map { it.value1() }.forEach { oid ->
+        dslContext.select(DSL.field("t2.oid", Int::class.java)).from(
+            DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(2)).groupBy(IMAGE_MAPPER.OID)
+                .asTable("t2")
+        ).leftJoin( DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(2)).groupBy(IMAGE_MAPPER.OID)
+            .asTable("t4")).on(DSL.field("t4.oid", Int::class.java).eq(DSL.field("t2.oid", Int::class.java)))
+            .where(DSL.field("t4.oid").isNull).fetch().map { it.value1() }
+            .forEach { oid ->
                 log.info("oid:{}", oid)
                 val mapperList = arrayListOf<ImageMapperRecord>()
                 val recipe = getRecipe(oid) ?: return@forEach
