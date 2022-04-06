@@ -81,7 +81,7 @@ class Crawler {
         (106724821 downTo 100000000).toMutableList().craw()
     }
 
-    @PostConstruct
+//    @PostConstruct
     fun ii() {
         val batch = 1000
         while (true) {

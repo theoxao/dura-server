@@ -342,7 +342,7 @@ class RecipeModel {
         var url: String? = null
 
         @JsonProperty("video")
-        var video: Video? = null
+        var video: VideoModel? = null
 
         class Image {
 
