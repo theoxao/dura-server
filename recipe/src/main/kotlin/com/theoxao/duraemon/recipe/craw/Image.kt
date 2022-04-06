@@ -27,16 +27,16 @@ class Image {
         .writeTimeout(Duration.ofSeconds(0))
         .connectTimeout(Duration.ofSeconds(0)).build()
 
-    private val baseDir = "/home/theo/static/recipe"
+    private val baseDir = "/Users/theo/workspace/theo/static/recipe"
 
-//    @PostConstruct
+    @PostConstruct
     fun init(){
         while (true){
             val list = masterDSLContext.selectFrom(IMAGE_MAPPER).where(IMAGE_MAPPER.DOWNLOAD.eq(0))
-                .limit(100).fetch()
+                .and(IMAGE_MAPPER.DOWNLOAD.ne(2))
+                .limit(1000).fetch()
             if (list.isEmpty()){
-                Thread.sleep(5000)
-                continue
+                break
             }
             list.forEach {
                 it.download = -1
