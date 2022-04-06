@@ -47,7 +47,7 @@ class Video {
             DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(2)).groupBy(IMAGE_MAPPER.OID)
                 .asTable("t2")
         ).leftJoin(
-            DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(2)).groupBy(IMAGE_MAPPER.OID)
+            DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(4)).groupBy(IMAGE_MAPPER.OID)
                 .asTable("t4")
         ).on(DSL.field("t4.oid", Int::class.java).eq(DSL.field("t2.oid", Int::class.java)))
             .where(DSL.field("t4.oid").isNull)
