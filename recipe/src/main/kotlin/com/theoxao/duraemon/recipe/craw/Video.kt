@@ -37,11 +37,11 @@ class Video {
         .writeTimeout(Duration.ofSeconds(0))
         .connectTimeout(Duration.ofSeconds(0)).build()
 
-    private val baseDir = "/Volumes/shared/static/recipe"
+    private val baseDir = "/Users/theo/workspace/theo/static/recipe"
 
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
-//    @PostConstruct
+    @PostConstruct
     fun init() {
         dslContext.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER)
             .where(IMAGE_MAPPER.TYPE.eq(2))
@@ -59,7 +59,7 @@ class Video {
                             this.uuid = id
                             it.video?.uuid = id
                             this.oid = oid
-                            this.type = 3
+                            this.type = 4
                             this.imageUrl = url
                         })
                     }
