@@ -73,7 +73,7 @@ class Video {
                         if (!base.exists()) {
                             base.mkdirs()
                         }
-                        val file = File(base, "${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".")}")
+                        val file = File(base, "${mapper.uuid}.${mapper.imageUrl.substringAfterLast(".").substringBefore("?")}")
                         response.body?.bytes()?.let {
                             file.writeBytes(it)
                             dslContext.transaction { config ->
