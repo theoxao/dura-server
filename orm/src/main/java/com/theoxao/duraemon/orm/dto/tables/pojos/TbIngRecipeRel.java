@@ -15,44 +15,48 @@ public class TbIngRecipeRel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer iid;
+    private Integer id;
     private Integer rid;
     private String  amount;
     private String  cat;
+    private String  name;
 
     public TbIngRecipeRel() {}
 
     public TbIngRecipeRel(TbIngRecipeRel value) {
-        this.iid = value.iid;
+        this.id = value.id;
         this.rid = value.rid;
         this.amount = value.amount;
         this.cat = value.cat;
+        this.name = value.name;
     }
 
     public TbIngRecipeRel(
-        Integer iid,
+        Integer id,
         Integer rid,
         String  amount,
-        String  cat
+        String  cat,
+        String  name
     ) {
-        this.iid = iid;
+        this.id = id;
         this.rid = rid;
         this.amount = amount;
         this.cat = cat;
+        this.name = name;
     }
 
     /**
-     * Getter for <code>public.tb_ing_recipe_rel.iid</code>.
+     * Getter for <code>public.tb_ing_recipe_rel.id</code>.
      */
-    public Integer getIid() {
-        return this.iid;
+    public Integer getId() {
+        return this.id;
     }
 
     /**
-     * Setter for <code>public.tb_ing_recipe_rel.iid</code>.
+     * Setter for <code>public.tb_ing_recipe_rel.id</code>.
      */
-    public void setIid(Integer iid) {
-        this.iid = iid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -97,14 +101,29 @@ public class TbIngRecipeRel implements Serializable {
         this.cat = cat;
     }
 
+    /**
+     * Getter for <code>public.tb_ing_recipe_rel.name</code>.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Setter for <code>public.tb_ing_recipe_rel.name</code>.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbIngRecipeRel (");
 
-        sb.append(iid);
+        sb.append(id);
         sb.append(", ").append(rid);
         sb.append(", ").append(amount);
         sb.append(", ").append(cat);
+        sb.append(", ").append(name);
 
         sb.append(")");
         return sb.toString();

@@ -42,29 +42,22 @@ class Crawler {
             val batch = 2000
             var last = 0
             while (true){
+
                 val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
                     .and(TB_RECIPE.ID.gt(last))
                     .orderBy(TB_RECIPE.ID).limit(batch).fetch()
                 if (list.isEmpty()) break
                 last =list.last().id
                 list.forEach {recipe->
+                    log.info("id:{}", recipe.id)
                     val ings = objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
                     ings.forEach { ing->
                         dslContext.trans {
-                            val et = selectFrom(TB_INGREDIENT).where(TB_INGREDIENT.NAME.eq(ing.name)).fetchAny()
-                            val id = if (et == null){
-                                val tb = TB_INGREDIENT.newRecord().apply {
-                                    this.name = ing.name
-                                }
-                                insertInto(TB_INGREDIENT).set(tb).returning().fetchOne()?.id
-                            }else {
-                                et.id
-                            }?:return@trans
                             TB_ING_RECIPE_REL.newRecord().apply {
-                                this.iid = id
                                 this.rid = recipe.id
                                 this.amount = ing.amount
                                 this.cat = ing.cat
+                                this.name = ing.name
                             }.let(this::executeInsert)
                             recipe.status = 1
                         }

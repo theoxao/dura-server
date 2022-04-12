@@ -8,8 +8,9 @@ import com.theoxao.duraemon.orm.dto.Public;
 import com.theoxao.duraemon.orm.dto.tables.records.TbIngRecipeRelRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Name;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -41,9 +42,9 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
     }
 
     /**
-     * The column <code>public.tb_ing_recipe_rel.iid</code>.
+     * The column <code>public.tb_ing_recipe_rel.id</code>.
      */
-    public final TableField<TbIngRecipeRelRecord, Integer> IID = createField(DSL.name("iid"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbIngRecipeRelRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.tb_ing_recipe_rel.rid</code>.
@@ -59,6 +60,11 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
      * The column <code>public.tb_ing_recipe_rel.cat</code>.
      */
     public final TableField<TbIngRecipeRelRecord, String> CAT = createField(DSL.name("cat"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.tb_ing_recipe_rel.name</code>.
+     */
+    public final TableField<TbIngRecipeRelRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(1024), this, "");
 
     private TbIngRecipeRel(Name alias, Table<TbIngRecipeRelRecord> aliased) {
         this(alias, aliased, null);
@@ -95,6 +101,11 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
     }
 
     @Override
+    public Identity<TbIngRecipeRelRecord, Integer> getIdentity() {
+        return (Identity<TbIngRecipeRelRecord, Integer>) super.getIdentity();
+    }
+
+    @Override
     public TbIngRecipeRel as(String alias) {
         return new TbIngRecipeRel(DSL.name(alias), this);
     }
@@ -121,11 +132,11 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, Integer, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, Integer, String, String, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }
