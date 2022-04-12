@@ -42,29 +42,28 @@ class Crawler {
             val batch = 2000
             var last = 0
             while (true){
-
                 val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
                     .and(TB_RECIPE.ID.gt(last))
                     .orderBy(TB_RECIPE.ID).limit(batch).fetch()
                 if (list.isEmpty()) break
                 last =list.last().id
-                list.forEach {recipe->
+                val result = list.flatMap {recipe->
                     log.info("id:{}", recipe.id)
-                    val ings = objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
-                    ings.forEach { ing->
-                        dslContext.trans {
-                            TB_ING_RECIPE_REL.newRecord().apply {
-                                this.rid = recipe.id
-                                this.amount = ing.amount
-                                this.cat = ing.cat
-                                this.name = ing.name
-                            }.let(this::executeInsert)
-                            recipe.status = 1
+                    objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
+                        .onEach { it.oid = recipe.id }
+                }.map { recipe->
+                        TB_ING_RECIPE_REL.newRecord().apply {
+                            this.rid = recipe.oid
+                            this.amount = recipe.amount
+                            this.cat = recipe.cat
+                            this.name = recipe.name
                         }
-                    }
                 }
                 dslContext.trans {
-                    batchUpdate(list).execute()
+                    batchUpdate(list.onEach {
+                        it.status = 1
+                    }).execute()
+                    batchInsert(result).execute()
                 }
             }
         }.start()

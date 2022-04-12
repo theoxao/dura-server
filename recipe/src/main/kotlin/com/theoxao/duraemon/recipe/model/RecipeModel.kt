@@ -311,6 +311,8 @@ class RecipeModel {
 
     class Ingredient {
 
+        var oid:Int? = null
+
         @JsonProperty("amount")
         var amount: String? = null
 
