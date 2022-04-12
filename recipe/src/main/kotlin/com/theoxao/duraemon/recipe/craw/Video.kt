@@ -41,7 +41,7 @@ class Video {
 
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
-    @PostConstruct
+//    @PostConstruct
     fun init() {
         val where = dslContext.select(DSL.field("t2.oid", Int::class.java)).from(
             DSL.select(IMAGE_MAPPER.OID).from(IMAGE_MAPPER).where(IMAGE_MAPPER.TYPE.eq(2)).groupBy(IMAGE_MAPPER.OID)
