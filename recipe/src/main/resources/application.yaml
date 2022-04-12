@@ -16,7 +16,7 @@ spring:
         minimum-idle: 5
     master:
       type: com.zaxxer.hikari.HikariDataSource
-      jdbc-url: jdbc:postgresql://www.theoxao.com:5432/duraemon?useSSL=false&characterEncoding=utf8
+      jdbc-url: jdbc:postgresql://127.0.0.1:5432/duraemon?useSSL=false&characterEncoding=utf8
       driver-class-name: org.postgresql.Driver
       username: postgres
       password: ${MONGO_PASSWORD}
