@@ -367,13 +367,6 @@ class RecipeModel {
             var urlPattern: String? = null
         }
 
-        class Video{
-            var uuid:String?  =null
-            var ident:String? = null
-            var url:String? = null
-            var width:Int? = null
-            var height:Int? = null
-        }
     }
 
     class MinorAuthor

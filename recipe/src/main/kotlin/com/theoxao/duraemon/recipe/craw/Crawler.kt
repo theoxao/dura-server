@@ -15,6 +15,7 @@ import org.jooq.DSLContext
 import org.jooq.JSON
 import org.jooq.impl.DSL
 import org.slf4j.LoggerFactory
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.time.Duration
@@ -44,7 +45,7 @@ class Crawler {
 //        .writeTimeout(Duration.ofSeconds(30))
 //        .connectTimeout(Duration.ofSeconds(30)).build()
 
-    //    @Scheduled(cron = "* * 12 1/1 * ?")
+    @Scheduled(cron = "* * 12 1/1 * ?")
     fun scheduled() {
         val max = masterDSLContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max - 2000)..(max + 2000)).toMutableList().craw()
@@ -185,65 +186,21 @@ class Crawler {
                     if (response.isSuccessful) {
                         log.error("request@{} is ok", id)
                         response.body?.string()?.let { bytes ->
-                            masterDSLContext.transaction { config ->
-                                RECIPE_JSON.newRecord().apply {
-                                    this.id = id
-                                    this.recipeJson = JSON.valueOf(bytes)
-                                }.let {
-                                    DSL.using(config).executeInsert(it)
+                                val resp = objectMapper.readValue(bytes, ResponseWrapper::class.java)
+                                if ( resp.status != "ok") {
+                                    log.error("request@{} is not ok" , id)
+                                    response.closeQuietly()
+                                    return@let
                                 }
-                            }
-//                                val resp = objectMapper.readValue(json, ResponseWrapper::class.java)
-//                                if ( resp.status != "ok") {
-//                                    log.error("request@{} is not ok" , id)
-//                                    response.closeQuietly()
-//                                    return@let
-//                                }
-//                                log.error("request@{} is ok" , id)
-//                                resp.content?.get("recipe")?.let { recipe->
-//                                    val mapperList = arrayListOf<ImageMapperRecord>()
-//                                    recipe.image?.ident?.let { ident->
-//                                        mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-//                                            val uid = UUID.randomUUID().toString()
-//                                            this.uuid= uid
-//                                            recipe.image?.uuid =   uid
-//                                            this.oid = recipe.id
-//                                            this.type = 0
-//                                            this.imageUrl = ident
-//                                        })
-//                                    }
-//                                    recipe.instruction?.filterNotNull()?.forEach {
-//                                        it.image?.ident?.let { ident->
-//                                            mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-//                                                val uid = UUID.randomUUID().toString()
-//                                                this.uuid= uid
-//                                                it.image?.uuid = uid
-//                                                this.oid = recipe.id
-//                                                this.type = 0
-//                                                this.imageUrl = ident
-//                                            })
-//                                        }
-//                                        it.video?.url?.let { url->
-//                                            mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-//                                                val uid = UUID.randomUUID().toString()
-//                                                this.uuid= uid
-//                                                it.video?.uuid = uid
-//                                                this.oid = recipe.id
-//                                                this.type = 1
-//                                                this.imageUrl = url
-//                                            })
-//                                        }
-//                                    }
-//                                    val record = recipe.toRecipe()
-//                                    masterDSLContext.transaction { config ->
-//                                        record?.let {
-//                                            DSL.using(config).insertInto(TB_RECIPE).set(it).onConflictDoNothing().execute()
-//                                        }
-//                                        if (mapperList.isNotEmpty()){
-//                                            DSL.using(config).batchInsert(mapperList).execute()
-//                                        }
-//                                    }
-//                                }
+                                log.error("request@{} is ok" , id)
+                                resp.content?.get("recipe")?.let { recipe->
+                                    val record = recipe.toRecipe()
+                                    masterDSLContext.transaction { config ->
+                                        record?.let {
+                                            DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
+                                        }
+                                    }
+                                }
                         }
                     }
                     response.closeQuietly()
