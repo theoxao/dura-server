@@ -4,10 +4,10 @@
 package com.theoxao.duraemon.orm.dto;
 
 
-import com.theoxao.duraemon.orm.dto.tables.ImageMapper;
-import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
+import com.theoxao.duraemon.orm.dto.tables.TbIngRecipeRel;
+import com.theoxao.duraemon.orm.dto.tables.TbIngredient;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
 import com.theoxao.duraemon.orm.dto.tables.TbItemDetail;
 import com.theoxao.duraemon.orm.dto.tables.TbLocation;
@@ -35,16 +35,6 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.image_mapper</code>.
-     */
-    public final ImageMapper IMAGE_MAPPER = ImageMapper.IMAGE_MAPPER;
-
-    /**
-     * The table <code>public.recipe_json</code>.
-     */
-    public final RecipeJson RECIPE_JSON = RecipeJson.RECIPE_JSON;
-
-    /**
      * The table <code>public.tb_category</code>.
      */
     public final TbCategory TB_CATEGORY = TbCategory.TB_CATEGORY;
@@ -53,6 +43,16 @@ public class Public extends SchemaImpl {
      * The table <code>public.tb_goods</code>.
      */
     public final TbGoods TB_GOODS = TbGoods.TB_GOODS;
+
+    /**
+     * The table <code>public.tb_ing_recipe_rel</code>.
+     */
+    public final TbIngRecipeRel TB_ING_RECIPE_REL = TbIngRecipeRel.TB_ING_RECIPE_REL;
+
+    /**
+     * The table <code>public.tb_ingredient</code>.
+     */
+    public final TbIngredient TB_INGREDIENT = TbIngredient.TB_INGREDIENT;
 
     /**
      * The table <code>public.tb_item</code>.
@@ -90,10 +90,10 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            ImageMapper.IMAGE_MAPPER,
-            RecipeJson.RECIPE_JSON,
             TbCategory.TB_CATEGORY,
             TbGoods.TB_GOODS,
+            TbIngRecipeRel.TB_ING_RECIPE_REL,
+            TbIngredient.TB_INGREDIENT,
             TbItem.TB_ITEM,
             TbItemDetail.TB_ITEM_DETAIL,
             TbLocation.TB_LOCATION,

@@ -4,10 +4,10 @@
 package com.theoxao.duraemon.orm.dto;
 
 
-import com.theoxao.duraemon.orm.dto.tables.ImageMapper;
-import com.theoxao.duraemon.orm.dto.tables.RecipeJson;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
+import com.theoxao.duraemon.orm.dto.tables.TbIngRecipeRel;
+import com.theoxao.duraemon.orm.dto.tables.TbIngredient;
 import com.theoxao.duraemon.orm.dto.tables.TbItem;
 import com.theoxao.duraemon.orm.dto.tables.TbItemDetail;
 import com.theoxao.duraemon.orm.dto.tables.TbLocation;
@@ -21,16 +21,6 @@ import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
 public class Tables {
 
     /**
-     * The table <code>public.image_mapper</code>.
-     */
-    public static final ImageMapper IMAGE_MAPPER = ImageMapper.IMAGE_MAPPER;
-
-    /**
-     * The table <code>public.recipe_json</code>.
-     */
-    public static final RecipeJson RECIPE_JSON = RecipeJson.RECIPE_JSON;
-
-    /**
      * The table <code>public.tb_category</code>.
      */
     public static final TbCategory TB_CATEGORY = TbCategory.TB_CATEGORY;
@@ -39,6 +29,16 @@ public class Tables {
      * The table <code>public.tb_goods</code>.
      */
     public static final TbGoods TB_GOODS = TbGoods.TB_GOODS;
+
+    /**
+     * The table <code>public.tb_ing_recipe_rel</code>.
+     */
+    public static final TbIngRecipeRel TB_ING_RECIPE_REL = TbIngRecipeRel.TB_ING_RECIPE_REL;
+
+    /**
+     * The table <code>public.tb_ingredient</code>.
+     */
+    public static final TbIngredient TB_INGREDIENT = TbIngredient.TB_INGREDIENT;
 
     /**
      * The table <code>public.tb_item</code>.

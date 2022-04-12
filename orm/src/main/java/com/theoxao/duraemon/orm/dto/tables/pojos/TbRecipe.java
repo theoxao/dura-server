@@ -38,6 +38,7 @@ public class TbRecipe implements Serializable {
     private String        comment;
     private String        cooked;
     private String        collect;
+    private Integer       status;
 
     public TbRecipe() {}
 
@@ -62,6 +63,7 @@ public class TbRecipe implements Serializable {
         this.comment = value.comment;
         this.cooked = value.cooked;
         this.collect = value.collect;
+        this.status = value.status;
     }
 
     public TbRecipe(
@@ -84,7 +86,8 @@ public class TbRecipe implements Serializable {
         String        pv,
         String        comment,
         String        cooked,
-        String        collect
+        String        collect,
+        Integer       status
     ) {
         this.id = id;
         this.desc = desc;
@@ -106,6 +109,7 @@ public class TbRecipe implements Serializable {
         this.comment = comment;
         this.cooked = cooked;
         this.collect = collect;
+        this.status = status;
     }
 
     /**
@@ -388,6 +392,20 @@ public class TbRecipe implements Serializable {
         this.collect = collect;
     }
 
+    /**
+     * Getter for <code>public.tb_recipe.status</code>.
+     */
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    /**
+     * Setter for <code>public.tb_recipe.status</code>.
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbRecipe (");
@@ -412,6 +430,7 @@ public class TbRecipe implements Serializable {
         sb.append(", ").append(comment);
         sb.append(", ").append(cooked);
         sb.append(", ").append(collect);
+        sb.append(", ").append(status);
 
         sb.append(")");
         return sb.toString();

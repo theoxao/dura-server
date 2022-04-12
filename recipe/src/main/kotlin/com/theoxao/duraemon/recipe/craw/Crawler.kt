@@ -1,10 +1,7 @@
 package com.theoxao.duraemon.recipe.craw
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.theoxao.duraemon.orm.dto.Tables
-import com.theoxao.duraemon.orm.dto.Tables.RECIPE_JSON
-import com.theoxao.duraemon.orm.dto.Tables.TB_RECIPE
-import com.theoxao.duraemon.orm.dto.tables.records.ImageMapperRecord
+import com.theoxao.duraemon.orm.dto.Tables.*
 import com.theoxao.duraemon.orm.dto.tables.records.TbRecipeRecord
 import com.theoxao.duraemon.recipe.model.RecipeModel
 import com.theoxao.duraemon.recipe.model.ResponseWrapper
@@ -22,7 +19,6 @@ import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import javax.annotation.PostConstruct
 import javax.annotation.Resource
 
@@ -34,20 +30,56 @@ class Crawler {
     private val log = LoggerFactory.getLogger(this::class.java)
 
     @Resource(name = "masterDSLContext")
-    lateinit var masterDSLContext: DSLContext
+    lateinit var dslContext: DSLContext
 
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-//    val http = OkHttpClient.Builder()
-//        .callTimeout(Duration.ofSeconds(30))
-//        .readTimeout(Duration.ofSeconds(30))
-//        .writeTimeout(Duration.ofSeconds(30))
-//        .connectTimeout(Duration.ofSeconds(30)).build()
+    @Scheduled(cron = "* 5 12 1/1 * ?")
+    @PostConstruct
+    fun init(){
+        Thread{
+            val batch = 2000
+            var last = 0
+            while (true){
+                val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
+                    .and(TB_RECIPE.ID.gt(last))
+                    .orderBy(TB_RECIPE.ID).limit(batch).fetch()
+                if (list.isEmpty()) break
+                last =list.last().id
+                list.forEach {recipe->
+                    val ings = objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
+                    ings.forEach { ing->
+                        dslContext.trans {
+                            val et = selectFrom(TB_INGREDIENT).where(TB_INGREDIENT.NAME.eq(ing.name)).fetchAny()
+                            val id = if (et == null){
+                                val tb = TB_INGREDIENT.newRecord().apply {
+                                    this.name = ing.name
+                                }
+                                insertInto(TB_INGREDIENT).set(tb).returning().fetchOne()?.id
+                            }else {
+                                et.id
+                            }?:return@trans
+                            TB_ING_RECIPE_REL.newRecord().apply {
+                                this.iid = id
+                                this.rid = recipe.id
+                                this.amount = ing.amount
+                                this.cat = ing.cat
+                            }.let(this::executeInsert)
+                            recipe.status = 1
+                        }
+                    }
+                }
+                dslContext.trans {
+                    batchUpdate(list).execute()
+                }
+            }
+        }.start()
+    }
 
     @Scheduled(cron = "* * 12 1/1 * ?")
     fun scheduled() {
-        val max = masterDSLContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
+        val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max - 2000)..(max + 2000)).toMutableList().craw()
     }
 
@@ -82,81 +114,6 @@ class Crawler {
         (106724821 downTo 100000000).toMutableList().craw()
     }
 
-//    @PostConstruct
-    fun ii() {
-        val batch = 1000
-        while (true) {
-            val mapperList = arrayListOf<ImageMapperRecord>()
-            val list = masterDSLContext.selectFrom(RECIPE_JSON).where(RECIPE_JSON.TO_OBJ.eq(false)).limit(batch).fetch()
-            val ids = list.map { it.id }
-            val records = list
-                .map { json ->
-                    val resp = objectMapper.readValue(json.recipeJson.data()
-                        .replace("\u0000" , "")
-                        .replace("0x00", "")
-                        .replace("\\u0000",""),
-                        ResponseWrapper::class.java)
-                    if (resp.status != "ok") {
-                        log.error("request@{} is not ok", json.id)
-                        return@map  null
-                    }
-                    log.error("request@{} is ok", json.id)
-                    return@map  resp.content?.get("recipe")?.let { origin ->
-                        val record = origin.toRecipe()?:return@let null
-                        val image = objectMapper.readValue(record.image.data(), RecipeModel.Image::class.java)
-                        image?.ident?.let { ident ->
-                            mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-                                val uid = UUID.randomUUID().toString()
-                                this.uuid = uid
-                                image.uuid = uid
-                                record.image = image.toJson()
-                                this.oid = record.id
-                                this.type = 0
-                                this.imageUrl = ident
-                            })
-                        }
-                        val instrs = objectMapper.readValue<List<RecipeModel.Instruction>>(
-                            record.instruction.data(),
-                            objectMapper.typeFactory.constructParametricType(
-                                List::class.java,
-                                RecipeModel.Instruction::class.java
-                            )
-                        )
-                        instrs?.forEach {
-                            it.image?.ident?.let { ident ->
-                                mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-                                    val id = UUID.randomUUID().toString()
-                                    this.uuid = id
-                                    it.image?.uuid = id
-                                    this.oid = record.id
-                                    this.type = 0
-                                    this.imageUrl = ident
-                                })
-                            }
-                            it.video?.url?.let { url ->
-                                mapperList.add(Tables.IMAGE_MAPPER.newRecord().apply {
-                                    val id = UUID.randomUUID().toString()
-                                    this.uuid = id
-                                    it.video?.uuid = id
-                                    this.oid = record.id
-                                    this.type = 1
-                                    this.imageUrl = url
-                                })
-                            }
-                        }
-                        record.instruction = instrs.toJson()
-                        return@let record
-                    }
-                }.filterNotNull()
-            masterDSLContext.trans {
-                batchInsert(records).execute()
-                batchInsert(mapperList).execute()
-                update(RECIPE_JSON).set(RECIPE_JSON.TO_OBJ, true).where(RECIPE_JSON.ID.`in`(ids)).execute()
-            }
-        }
-
-    }
-
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
     val base = "/home/theo/recipe"
@@ -186,21 +143,22 @@ class Crawler {
                     if (response.isSuccessful) {
                         log.error("request@{} is ok", id)
                         response.body?.string()?.let { bytes ->
-                                val resp = objectMapper.readValue(bytes, ResponseWrapper::class.java)
-                                if ( resp.status != "ok") {
-                                    log.error("request@{} is not ok" , id)
-                                    response.closeQuietly()
-                                    return@let
-                                }
-                                log.error("request@{} is ok" , id)
-                                resp.content?.get("recipe")?.let { recipe->
-                                    val record = recipe.toRecipe()
-                                    masterDSLContext.transaction { config ->
-                                        record?.let {
-                                            DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing().execute()
-                                        }
+                            val resp = objectMapper.readValue(bytes, ResponseWrapper::class.java)
+                            if (resp.status != "ok") {
+                                log.error("request@{} is not ok", id)
+                                response.closeQuietly()
+                                return@let
+                            }
+                            log.error("request@{} is ok", id)
+                            resp.content?.get("recipe")?.let { recipe ->
+                                val record = recipe.toRecipe()
+                                dslContext.transaction { config ->
+                                    record?.let {
+                                        DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing()
+                                            .execute()
                                     }
                                 }
+                            }
                         }
                     }
                     response.closeQuietly()

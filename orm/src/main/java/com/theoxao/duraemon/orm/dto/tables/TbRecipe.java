@@ -14,7 +14,7 @@ import java.util.List;
 import org.jooq.Field;
 import org.jooq.JSON;
 import org.jooq.Name;
-import org.jooq.Row20;
+import org.jooq.Row21;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -147,6 +147,11 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
      */
     public final TableField<TbRecipeRecord, String> COLLECT = createField(DSL.name("collect"), SQLDataType.VARCHAR(10), this, "");
 
+    /**
+     * The column <code>public.tb_recipe.status</code>.
+     */
+    public final TableField<TbRecipeRecord, Integer> STATUS = createField(DSL.name("status"), SQLDataType.INTEGER.defaultValue(DSL.field("0", SQLDataType.INTEGER)), this, "");
+
     private TbRecipe(Name alias, Table<TbRecipeRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -220,11 +225,11 @@ public class TbRecipe extends TableImpl<TbRecipeRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row20 type methods
+    // Row21 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row20<Integer, String, JSON, JSON, String, String, String, JSON, LocalDateTime, JSON, JSON, JSON, LocalDateTime, LocalDateTime, String, String, String, String, String, String> fieldsRow() {
-        return (Row20) super.fieldsRow();
+    public Row21<Integer, String, JSON, JSON, String, String, String, JSON, LocalDateTime, JSON, JSON, JSON, LocalDateTime, LocalDateTime, String, String, String, String, String, String, Integer> fieldsRow() {
+        return (Row21) super.fieldsRow();
     }
 }
