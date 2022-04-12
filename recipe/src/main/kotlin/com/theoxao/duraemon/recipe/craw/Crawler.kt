@@ -38,35 +38,30 @@ class Crawler {
     @Scheduled(cron = "* 5 12 1/1 * ?")
     @PostConstruct
     fun init(){
-        Thread{
-            val batch = 2000
-            var last = 0
-            while (true){
-                val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
-                    .and(TB_RECIPE.ID.gt(last))
-                    .orderBy(TB_RECIPE.ID).limit(batch).fetch()
-                if (list.isEmpty()) break
-                last =list.last().id
-                val result = list.flatMap {recipe->
-                    log.info("id:{}", recipe.id)
-                    objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
-                        .onEach { it.oid = recipe.id }
-                }.map { recipe->
-                        TB_ING_RECIPE_REL.newRecord().apply {
-                            this.rid = recipe.oid
-                            this.amount = recipe.amount
-                            this.cat = recipe.cat
-                            this.name = recipe.name
-                        }
-                }
-                dslContext.trans {
-                    batchUpdate(list.onEach {
-                        it.status = 1
-                    }).execute()
-                    batchInsert(result).execute()
-                }
+        val batch = 1000
+        while (true){
+            val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
+                .orderBy(TB_RECIPE.ID).limit(batch).fetch()
+            if (list.isEmpty()) break
+            val result = list.flatMap {recipe->
+                log.info("id:{}", recipe.id)
+                objectMapper.readValue<List<RecipeModel.Ingredient>>(recipe.ingredient.data(), objectMapper.typeFactory.constructParametricType(List::class.java, RecipeModel.Ingredient::class.java))
+                    .onEach { it.oid = recipe.id }
+            }.map { recipe->
+                    TB_ING_RECIPE_REL.newRecord().apply {
+                        this.rid = recipe.oid
+                        this.amount = recipe.amount
+                        this.cat = recipe.cat
+                        this.name = recipe.name
+                    }
             }
-        }.start()
+            dslContext.trans {
+                batchUpdate(list.onEach {
+                    it.status = 1
+                }).execute()
+                batchInsert(result).execute()
+            }
+        }
     }
 
     @Scheduled(cron = "* * 12 1/1 * ?")
