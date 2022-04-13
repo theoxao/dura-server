@@ -35,9 +35,7 @@ class Crawler {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-    @Scheduled(cron = "* 5 12 1/1 * ?")
-    @PostConstruct
-    fun init(){
+    fun ingredient(){
         val batch = 1000
         while (true){
             val list = dslContext.selectFrom(TB_RECIPE).where(TB_RECIPE.STATUS.eq(0))
@@ -139,10 +137,21 @@ class Crawler {
                             log.error("request@{} is ok", id)
                             resp.content?.get("recipe")?.let { recipe ->
                                 val record = recipe.toRecipe()
-                                dslContext.transaction { config ->
+                                val ings = recipe.ingredient?.filterNotNull()?.map { ing->
+                                    TB_ING_RECIPE_REL.newRecord().apply {
+                                        this.rid = ing.oid
+                                        this.amount = ing.amount
+                                        this.cat = ing.cat
+                                        this.name = ing.name
+                                    }
+                                }
+                                dslContext.trans {
                                     record?.let {
-                                        DSL.using(config).insertInto(TB_RECIPE).set(record).onConflictDoNothing()
+                                       insertInto(TB_RECIPE).set(record).onConflictDoNothing()
                                             .execute()
+                                    }
+                                    ings?.let {
+                                        batchInsert(it)
                                     }
                                 }
                             }
