@@ -137,21 +137,10 @@ class Crawler {
                             log.error("request@{} is ok", id)
                             resp.content?.get("recipe")?.let { recipe ->
                                 val record = recipe.toRecipe()
-                                val ings = recipe.ingredient?.filterNotNull()?.map { ing->
-                                    TB_ING_RECIPE_REL.newRecord().apply {
-                                        this.rid = ing.oid
-                                        this.amount = ing.amount
-                                        this.cat = ing.cat
-                                        this.name = ing.name
-                                    }
-                                }
                                 dslContext.trans {
                                     record?.let {
                                        insertInto(TB_RECIPE).set(record).onConflictDoNothing()
                                             .execute()
-                                    }
-                                    ings?.let {
-                                        batchInsert(it)
                                     }
                                 }
                             }
