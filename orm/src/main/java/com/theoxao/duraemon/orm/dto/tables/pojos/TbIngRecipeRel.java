@@ -20,6 +20,7 @@ public class TbIngRecipeRel implements Serializable {
     private String  amount;
     private String  cat;
     private String  name;
+    private Integer iid;
 
     public TbIngRecipeRel() {}
 
@@ -29,6 +30,7 @@ public class TbIngRecipeRel implements Serializable {
         this.amount = value.amount;
         this.cat = value.cat;
         this.name = value.name;
+        this.iid = value.iid;
     }
 
     public TbIngRecipeRel(
@@ -36,13 +38,15 @@ public class TbIngRecipeRel implements Serializable {
         Integer rid,
         String  amount,
         String  cat,
-        String  name
+        String  name,
+        Integer iid
     ) {
         this.id = id;
         this.rid = rid;
         this.amount = amount;
         this.cat = cat;
         this.name = name;
+        this.iid = iid;
     }
 
     /**
@@ -115,6 +119,20 @@ public class TbIngRecipeRel implements Serializable {
         this.name = name;
     }
 
+    /**
+     * Getter for <code>public.tb_ing_recipe_rel.iid</code>.
+     */
+    public Integer getIid() {
+        return this.iid;
+    }
+
+    /**
+     * Setter for <code>public.tb_ing_recipe_rel.iid</code>.
+     */
+    public void setIid(Integer iid) {
+        this.iid = iid;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbIngRecipeRel (");
@@ -124,6 +142,7 @@ public class TbIngRecipeRel implements Serializable {
         sb.append(", ").append(amount);
         sb.append(", ").append(cat);
         sb.append(", ").append(name);
+        sb.append(", ").append(iid);
 
         sb.append(")");
         return sb.toString();

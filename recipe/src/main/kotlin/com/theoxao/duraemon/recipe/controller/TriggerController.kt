@@ -20,6 +20,7 @@ class TriggerController {
         when(operate){
             "ingredient"->crawler.ingredient()
             "scheduled"->  crawler.scheduled()
+            "relate"->crawler.relateIngredient()
         }
         return "ok"
     }

@@ -10,7 +10,7 @@ import com.theoxao.duraemon.orm.dto.tables.records.TbIngRecipeRelRecord;
 import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.Name;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -65,6 +65,11 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
      * The column <code>public.tb_ing_recipe_rel.name</code>.
      */
     public final TableField<TbIngRecipeRelRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(1024), this, "");
+
+    /**
+     * The column <code>public.tb_ing_recipe_rel.iid</code>.
+     */
+    public final TableField<TbIngRecipeRelRecord, Integer> IID = createField(DSL.name("iid"), SQLDataType.INTEGER, this, "");
 
     private TbIngRecipeRel(Name alias, Table<TbIngRecipeRelRecord> aliased) {
         this(alias, aliased, null);
@@ -132,11 +137,11 @@ public class TbIngRecipeRel extends TableImpl<TbIngRecipeRelRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, Integer, String, String, String> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row6<Integer, Integer, String, String, String, Integer> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

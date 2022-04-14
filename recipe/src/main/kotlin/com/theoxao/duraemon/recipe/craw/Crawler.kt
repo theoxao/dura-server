@@ -35,6 +35,7 @@ class Crawler {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
+    @Scheduled(cron = "* * 13 1/1 * ?")
     fun ingredient(){
         val batch = 1000
         while (true){
@@ -60,6 +61,27 @@ class Crawler {
                 batchInsert(result).execute()
             }
         }
+    }
+
+    @Scheduled(cron = "* * 14 1/1 * ?")
+    fun relateIngredient(){
+        val batch = 1000
+        while(true){
+           val list = dslContext.select(TB_ING_RECIPE_REL.NAME).from(TB_ING_RECIPE_REL)
+                .where(TB_ING_RECIPE_REL.IID.isNull).groupBy(TB_ING_RECIPE_REL.NAME).limit(batch).fetch()
+            if (list.isEmpty()) break
+            list.map { it.value1() }.filter { it.isNotBlank() }.forEach { name->
+                log.info("name:{}"  , name)
+                dslContext.trans {
+                    val ing = selectFrom(TB_INGREDIENT).where(TB_INGREDIENT.NAME.eq(name)).fetchAny()?:
+                    insertInto(TB_INGREDIENT).set(TB_INGREDIENT.newRecord().apply {
+                        this.name = name
+                    }).returning().fetchOne()!!
+                    update(TB_ING_RECIPE_REL).set(TB_ING_RECIPE_REL.IID,ing.id).where(TB_ING_RECIPE_REL.NAME.eq(name)).execute()
+                }
+            }
+        }
+        log.info("finished")
     }
 
     @Scheduled(cron = "* * 12 1/1 * ?")
