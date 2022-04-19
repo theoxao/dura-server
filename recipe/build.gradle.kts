@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("net.sourceforge.htmlcleaner:htmlcleaner:2.26")
+    implementation("com.huaban:jieba-analysis:1.0.2")
 
     implementation("joda-time:joda-time:2.10.6")
 
