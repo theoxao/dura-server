@@ -13,6 +13,7 @@ import com.theoxao.duraemon.orm.dto.tables.pojos.TbItemDetail
 import org.jooq.DSLContext
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.annotation.Resource
 
@@ -30,7 +31,7 @@ class ItemService {
         val total = dslContext.fetchCount(sql)
         val list = sql.limit(size).offset((page - 1) * size).fetchInto(ItemView::class.java).onEach {
             it.details = dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ITEM_ID.eq(it.id))
-                .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
+//                .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
                 .orderBy(TB_ITEM_DETAIL.UPDATE_TIME.desc())
                 .limit(10)
                 .fetchInto(ItemDetailView::class.java)
@@ -77,7 +78,7 @@ class ItemService {
 
     fun itemDetailList(tid: Int, page: Int, size: Int): PageView<ItemDetailView> {
         val sql = dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ITEM_ID.eq(tid))
-            .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
+//            .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
         val total = dslContext.fetchCount(sql)
         val list = sql.orderBy(TB_ITEM_DETAIL.UPDATE_TIME.desc()).limit(size).offset((page - 1) * size)
             .fetchInto(ItemDetailView::class.java)
@@ -125,7 +126,7 @@ class ItemService {
 
     fun expiryDetail(did: Int) {
         dslContext.trans {
-            update(TB_ITEM_DETAIL).set(TB_ITEM_DETAIL.EXPIRY, 1).where(TB_ITEM_DETAIL.ID.eq(did)).execute()
+            update(TB_ITEM_DETAIL).set(TB_ITEM_DETAIL.EXPIRY, LocalDateTime.now()).where(TB_ITEM_DETAIL.ID.eq(did)).execute()
         }
     }
 
