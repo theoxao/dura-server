@@ -10,3 +10,6 @@ spring:
       password: ${MONGO_PASSWORD}
     url: jdbc:postgresql://127.0.0.1:5432/duraemon?useSSL=false&characterEncoding=utf8
     driver-class-name: org.postgresql.Driver
+
+duraemon:
+  filePath: /data/static/duraemon
