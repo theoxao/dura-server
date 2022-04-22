@@ -16,8 +16,8 @@ class CommonController {
     lateinit var commonService: CommonService
 
     @GetMapping("/search")
-    fun search(keyword: String, page: Int, size: Int, type: Int): CommonView<*> {
-        return success(commonService.search(keyword, type, page, size))
+    fun search(keyword: String, offset:Int, type: Int): CommonView<*> {
+        return success(commonService.search(keyword, type, offset))
     }
 
 }
