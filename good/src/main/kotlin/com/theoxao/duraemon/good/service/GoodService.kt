@@ -1,12 +1,10 @@
 package com.theoxao.duraemon.good.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.theoxao.duraemon.good.common.*
 import com.theoxao.duraemon.good.common.ResponseCode.RECORD_NOT_FOUND
-import com.theoxao.duraemon.good.common.CommonException
-import com.theoxao.duraemon.good.common.PageView
-import com.theoxao.duraemon.good.common.list2Json
-import com.theoxao.duraemon.good.common.trans
 import com.theoxao.duraemon.good.model.GoodUpdateRequest
+import com.theoxao.duraemon.orm.dto.Tables.TB_CATEGORY
 import com.theoxao.duraemon.orm.dto.Tables.TB_GOODS
 import com.theoxao.duraemon.orm.dto.tables.pojos.TbGoods
 import org.jooq.DSLContext
@@ -64,7 +62,12 @@ class GoodService {
     }
 
     fun good(id: Int): Any {
-        return dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(id)).fetchAnyInto(TbGoods::class.java)?:throw CommonException(RECORD_NOT_FOUND)
+        val cateMap = dslContext.selectFrom(TB_CATEGORY).fetch().associateBy({it.id}, {it.name})
+        val view = dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(id)).fetchAnyInto(GoodDetailView::class.java)?:throw CommonException(RECORD_NOT_FOUND)
+        return view.apply {
+            this.cateStr = cateMap[this.cate]
+            this.subCateStr = cateMap[this.subCate]
+        }
     }
 
 
