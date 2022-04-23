@@ -18,6 +18,10 @@ class GoodController {
     @Resource
     lateinit var goodService: GoodService
 
+    @GetMapping("/{id}")
+    fun good(@PathVariable id: Int):CommonView<*>{
+        return success(goodService.good(id))
+    }
 
     @GetMapping("/list")
     fun goodList(page: Int, size: Int, cid: Int, keyword: String?): CommonView<PageView<TbGoods>> {

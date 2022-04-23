@@ -63,5 +63,9 @@ class GoodService {
         }
     }
 
+    fun good(id: Int): Any {
+        return dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(id)).fetchAnyInto(TbGoods::class.java)?:throw CommonException(RECORD_NOT_FOUND)
+    }
+
 
 }
