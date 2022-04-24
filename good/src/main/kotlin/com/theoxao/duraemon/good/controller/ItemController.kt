@@ -65,4 +65,9 @@ class ItemController {
         return success(itemService.itemDetail(did))
     }
 
+    @GetMapping("/detailByGood/{gid}")
+    fun getDetailListByGood(@PathVariable gid: Int, offset:Int, limit:Int?, order:String):CommonView<*>{
+        return success(itemService.getDetailListByGood(gid, offset , limit , order))
+    }
+
 }

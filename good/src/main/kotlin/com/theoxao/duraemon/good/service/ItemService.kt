@@ -138,4 +138,13 @@ class ItemService {
         return dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ID.eq(did)).fetchAnyInto(TbItemDetail::class.java)
     }
 
+    fun getDetailListByGood(gid: Int, offset: Int, limit: Int?, order: String): Any {
+        return dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.GOOD_ID.eq(gid))
+            .orderBy(when(order){
+                "update_time" -> TB_ITEM_DETAIL.UPDATE_TIME.desc()
+                "expiry_time" -> TB_ITEM_DETAIL.BEST_FAVOR
+                else-> throw CommonException(ResponseCode.PARAMETER_ERROR)
+            }).offset(offset).limit(limit?:5).fetchInto(TbItemDetail::class.java)
+    }
+
 }
