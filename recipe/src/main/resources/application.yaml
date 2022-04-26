@@ -7,7 +7,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     slave:
       username: postgres
-      jdbc-url: jdbc:postgresql://172.29.135.216:15432/dura?useSSL=false&characterEncoding=utf8
+      jdbc-url: jdbc:postgresql://106.12.81.91:15432/dura?useSSL=false&characterEncoding=utf8
       driver-class-name: org.postgresql.Driver
       password: ${MONGO_PASSWORD}
       hikari:
@@ -16,7 +16,7 @@ spring:
         minimum-idle: 5
     master:
       type: com.zaxxer.hikari.HikariDataSource
-      jdbc-url: jdbc:postgresql://127.0.0.1:5432/dura?useSSL=false&characterEncoding=utf8
+      jdbc-url: jdbc:postgresql://106.12.81.91:5432/dura?useSSL=false&characterEncoding=utf8
       driver-class-name: org.postgresql.Driver
       username: postgres
       password: ${MONGO_PASSWORD}

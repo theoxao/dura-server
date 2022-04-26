@@ -70,5 +70,13 @@ class GoodService {
         }
     }
 
+    fun getByName(name: String , limit:Int): Any {
+        val cateMap = dslContext.selectFrom(TB_CATEGORY).fetch().associateBy({it.id}, {it.name})
+        return dslContext.selectFrom(TB_GOODS).where(TB_GOODS.NAME.like("$name%")).limit(limit).fetchInto(GoodDetailView::class.java).onEach {
+            it.cateStr = cateMap[it.cate]
+            it.subCateStr = cateMap[it.subCate]
+        }
+    }
+
 
 }
