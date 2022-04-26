@@ -35,7 +35,7 @@ class Crawler {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-    @Scheduled(cron = "* * 13 1/1 * ?")
+//    @Scheduled(cron = "* * 13 1/1 * ?")
     fun ingredient(){
         val batch = 1000
         while (true){
@@ -63,7 +63,7 @@ class Crawler {
         }
     }
 
-    @Scheduled(cron = "* * 14 1/1 * ?")
+//    @Scheduled(cron = "* * 14 1/1 * ?")
     fun relateIngredient(){
         val batch = 1000
         while(true){
@@ -88,6 +88,8 @@ class Crawler {
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max - 2000)..(max + 2000)).toMutableList().craw()
+        ingredient()
+        relateIngredient()
     }
 
     fun RecipeModel?.toRecipe(): TbRecipeRecord? {
