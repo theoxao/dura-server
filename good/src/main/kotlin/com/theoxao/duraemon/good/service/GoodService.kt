@@ -5,7 +5,6 @@ import com.theoxao.duraemon.good.common.*
 import com.theoxao.duraemon.good.common.ResponseCode.RECORD_NOT_FOUND
 import com.theoxao.duraemon.good.model.GoodUpdateRequest
 import com.theoxao.duraemon.orm.dto.Tables.*
-import com.theoxao.duraemon.orm.dto.tables.pojos.TbGoodCandidate
 import com.theoxao.duraemon.orm.dto.tables.pojos.TbGoods
 import org.jooq.DSLContext
 import org.jooq.impl.DSL
@@ -80,9 +79,15 @@ class GoodService {
     }
 
     fun candidate(name: String): Any {
-        return dslContext.selectFrom(TB_GOOD_CANDIDATE).where(TB_GOOD_CANDIDATE.NAME.startsWith(name))
-            .orderBy(DSL.length(TB_GOOD_CANDIDATE.NAME),TB_GOOD_CANDIDATE.COUNT.desc()).limit(10).fetchInto(TbGoodCandidate::class.java)
+        return dslContext.select().from(TB_GOOD_CANDIDATE)
+            .leftJoin(TB_GOODS).on(TB_GOODS.NAME.eq(TB_GOOD_CANDIDATE.NAME))
+            .where(TB_GOOD_CANDIDATE.NAME.startsWith(name))
+            .orderBy(DSL.length(TB_GOOD_CANDIDATE.NAME),TB_GOOD_CANDIDATE.COUNT.desc()).limit(10)
+            .fetch {
+                it.into(TB_GOOD_CANDIDATE).into(GoodCandidateView::class.java).apply {
+                    goodId = it.get(TB_GOODS.ID)
+                }
+            }
     }
-
 
 }

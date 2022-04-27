@@ -28,3 +28,13 @@ class GoodDetailView:BaseView{
     var createTime: LocalDateTime? = null
     var updateTime: LocalDateTime? = null
 }
+
+class GoodCandidateView:BaseView{
+    var id: String? = null
+    var name: String? = null
+    var from: String? = null
+    var cate: Int? = null
+    var subCate: Int? = null
+    var count: Int? = null
+    var goodId:Int? = null
+}
