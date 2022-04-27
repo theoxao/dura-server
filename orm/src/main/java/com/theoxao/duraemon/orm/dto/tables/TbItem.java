@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row15;
@@ -50,7 +51,7 @@ public class TbItem extends TableImpl<TbItemRecord> {
     /**
      * The column <code>public.tb_item.id</code>.
      */
-    public final TableField<TbItemRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TbItemRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.tb_item.good_id</code>.
@@ -154,6 +155,11 @@ public class TbItem extends TableImpl<TbItemRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public Identity<TbItemRecord, Integer> getIdentity() {
+        return (Identity<TbItemRecord, Integer>) super.getIdentity();
     }
 
     @Override

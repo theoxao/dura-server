@@ -4,7 +4,9 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.Ing;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
+import com.theoxao.duraemon.orm.dto.tables.TbGoodCandidate;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbIngRecipeRel;
 import com.theoxao.duraemon.orm.dto.tables.TbIngredient;
@@ -21,9 +23,19 @@ import com.theoxao.duraemon.orm.dto.tables.TbRecipe;
 public class Tables {
 
     /**
+     * The table <code>public.ing</code>.
+     */
+    public static final Ing ING = Ing.ING;
+
+    /**
      * The table <code>public.tb_category</code>.
      */
     public static final TbCategory TB_CATEGORY = TbCategory.TB_CATEGORY;
+
+    /**
+     * The table <code>public.tb_good_candidate</code>.
+     */
+    public static final TbGoodCandidate TB_GOOD_CANDIDATE = TbGoodCandidate.TB_GOOD_CANDIDATE;
 
     /**
      * The table <code>public.tb_goods</code>.

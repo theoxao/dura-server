@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row17;
@@ -51,7 +52,7 @@ public class TbItemDetail extends TableImpl<TbItemDetailRecord> {
     /**
      * The column <code>public.tb_item_detail.id</code>.
      */
-    public final TableField<TbItemDetailRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TbItemDetailRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.tb_item_detail.item_id</code>.
@@ -79,19 +80,19 @@ public class TbItemDetail extends TableImpl<TbItemDetailRecord> {
     public final TableField<TbItemDetailRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.tb_item_detail.pd</code>.
+     * The column <code>public.tb_item_detail.pd</code>. 生产日期
      */
-    public final TableField<TbItemDetailRecord, LocalDate> PD = createField(DSL.name("pd"), SQLDataType.LOCALDATE, this, "");
+    public final TableField<TbItemDetailRecord, LocalDate> PD = createField(DSL.name("pd"), SQLDataType.LOCALDATE, this, "生产日期");
 
     /**
-     * The column <code>public.tb_item_detail.qty</code>.
+     * The column <code>public.tb_item_detail.qty</code>. 数量
      */
-    public final TableField<TbItemDetailRecord, Integer> QTY = createField(DSL.name("qty"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbItemDetailRecord, Integer> QTY = createField(DSL.name("qty"), SQLDataType.INTEGER, this, "数量");
 
     /**
-     * The column <code>public.tb_item_detail.best_favor</code>.
+     * The column <code>public.tb_item_detail.best_favor</code>. 保质期
      */
-    public final TableField<TbItemDetailRecord, Integer> BEST_FAVOR = createField(DSL.name("best_favor"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbItemDetailRecord, Integer> BEST_FAVOR = createField(DSL.name("best_favor"), SQLDataType.INTEGER, this, "保质期");
 
     /**
      * The column <code>public.tb_item_detail.shelf_life</code>.
@@ -99,24 +100,24 @@ public class TbItemDetail extends TableImpl<TbItemDetailRecord> {
     public final TableField<TbItemDetailRecord, Integer> SHELF_LIFE = createField(DSL.name("shelf_life"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.tb_item_detail.storage</code>.
+     * The column <code>public.tb_item_detail.storage</code>. 储存方式-未拆封
      */
-    public final TableField<TbItemDetailRecord, String> STORAGE = createField(DSL.name("storage"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<TbItemDetailRecord, String> STORAGE = createField(DSL.name("storage"), SQLDataType.VARCHAR(255), this, "储存方式-未拆封");
 
     /**
-     * The column <code>public.tb_item_detail.used_storage</code>.
+     * The column <code>public.tb_item_detail.used_storage</code>. 储存方式-已拆封
      */
-    public final TableField<TbItemDetailRecord, String> USED_STORAGE = createField(DSL.name("used_storage"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<TbItemDetailRecord, String> USED_STORAGE = createField(DSL.name("used_storage"), SQLDataType.VARCHAR(255), this, "储存方式-已拆封");
 
     /**
-     * The column <code>public.tb_item_detail.batch_code</code>.
+     * The column <code>public.tb_item_detail.batch_code</code>. 批次编号
      */
-    public final TableField<TbItemDetailRecord, String> BATCH_CODE = createField(DSL.name("batch_code"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<TbItemDetailRecord, String> BATCH_CODE = createField(DSL.name("batch_code"), SQLDataType.VARCHAR(255), this, "批次编号");
 
     /**
-     * The column <code>public.tb_item_detail.cost</code>.
+     * The column <code>public.tb_item_detail.cost</code>. 价格
      */
-    public final TableField<TbItemDetailRecord, Integer> COST = createField(DSL.name("cost"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbItemDetailRecord, Integer> COST = createField(DSL.name("cost"), SQLDataType.INTEGER, this, "价格");
 
     /**
      * The column <code>public.tb_item_detail.expiry</code>.
@@ -165,6 +166,11 @@ public class TbItemDetail extends TableImpl<TbItemDetailRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public Identity<TbItemDetailRecord, Integer> getIdentity() {
+        return (Identity<TbItemDetailRecord, Integer>) super.getIdentity();
     }
 
     @Override

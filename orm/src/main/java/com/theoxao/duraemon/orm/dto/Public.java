@@ -4,7 +4,9 @@
 package com.theoxao.duraemon.orm.dto;
 
 
+import com.theoxao.duraemon.orm.dto.tables.Ing;
 import com.theoxao.duraemon.orm.dto.tables.TbCategory;
+import com.theoxao.duraemon.orm.dto.tables.TbGoodCandidate;
 import com.theoxao.duraemon.orm.dto.tables.TbGoods;
 import com.theoxao.duraemon.orm.dto.tables.TbIngRecipeRel;
 import com.theoxao.duraemon.orm.dto.tables.TbIngredient;
@@ -35,9 +37,19 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
+     * The table <code>public.ing</code>.
+     */
+    public final Ing ING = Ing.ING;
+
+    /**
      * The table <code>public.tb_category</code>.
      */
     public final TbCategory TB_CATEGORY = TbCategory.TB_CATEGORY;
+
+    /**
+     * The table <code>public.tb_good_candidate</code>.
+     */
+    public final TbGoodCandidate TB_GOOD_CANDIDATE = TbGoodCandidate.TB_GOOD_CANDIDATE;
 
     /**
      * The table <code>public.tb_goods</code>.
@@ -90,7 +102,9 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
+            Ing.ING,
             TbCategory.TB_CATEGORY,
+            TbGoodCandidate.TB_GOOD_CANDIDATE,
             TbGoods.TB_GOODS,
             TbIngRecipeRel.TB_ING_RECIPE_REL,
             TbIngredient.TB_INGREDIENT,

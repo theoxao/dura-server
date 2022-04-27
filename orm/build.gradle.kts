@@ -27,7 +27,7 @@ jooq {
     version = "3.14.7"
     jdbc {
         driver = "org.postgresql.Driver"
-        url = "jdbc:postgresql://www.theoxao.com:5432/duraemon"
+        url = "jdbc:postgresql://106.12.81.91:5432/dura"
         user = "postgres"
         password = System.getenv("MONGO_PASSWORD")
     }

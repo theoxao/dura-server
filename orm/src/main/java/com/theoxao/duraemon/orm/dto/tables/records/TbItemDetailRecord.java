@@ -110,42 +110,42 @@ public class TbItemDetailRecord extends UpdatableRecordImpl<TbItemDetailRecord> 
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.pd</code>.
+     * Setter for <code>public.tb_item_detail.pd</code>. 生产日期
      */
     public void setPd(LocalDate value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.pd</code>.
+     * Getter for <code>public.tb_item_detail.pd</code>. 生产日期
      */
     public LocalDate getPd() {
         return (LocalDate) get(6);
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.qty</code>.
+     * Setter for <code>public.tb_item_detail.qty</code>. 数量
      */
     public void setQty(Integer value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.qty</code>.
+     * Getter for <code>public.tb_item_detail.qty</code>. 数量
      */
     public Integer getQty() {
         return (Integer) get(7);
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.best_favor</code>.
+     * Setter for <code>public.tb_item_detail.best_favor</code>. 保质期
      */
     public void setBestFavor(Integer value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.best_favor</code>.
+     * Getter for <code>public.tb_item_detail.best_favor</code>. 保质期
      */
     public Integer getBestFavor() {
         return (Integer) get(8);
@@ -166,56 +166,56 @@ public class TbItemDetailRecord extends UpdatableRecordImpl<TbItemDetailRecord> 
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.storage</code>.
+     * Setter for <code>public.tb_item_detail.storage</code>. 储存方式-未拆封
      */
     public void setStorage(String value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.storage</code>.
+     * Getter for <code>public.tb_item_detail.storage</code>. 储存方式-未拆封
      */
     public String getStorage() {
         return (String) get(10);
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.used_storage</code>.
+     * Setter for <code>public.tb_item_detail.used_storage</code>. 储存方式-已拆封
      */
     public void setUsedStorage(String value) {
         set(11, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.used_storage</code>.
+     * Getter for <code>public.tb_item_detail.used_storage</code>. 储存方式-已拆封
      */
     public String getUsedStorage() {
         return (String) get(11);
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.batch_code</code>.
+     * Setter for <code>public.tb_item_detail.batch_code</code>. 批次编号
      */
     public void setBatchCode(String value) {
         set(12, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.batch_code</code>.
+     * Getter for <code>public.tb_item_detail.batch_code</code>. 批次编号
      */
     public String getBatchCode() {
         return (String) get(12);
     }
 
     /**
-     * Setter for <code>public.tb_item_detail.cost</code>.
+     * Setter for <code>public.tb_item_detail.cost</code>. 价格
      */
     public void setCost(Integer value) {
         set(13, value);
     }
 
     /**
-     * Getter for <code>public.tb_item_detail.cost</code>.
+     * Getter for <code>public.tb_item_detail.cost</code>. 价格
      */
     public Integer getCost() {
         return (Integer) get(13);

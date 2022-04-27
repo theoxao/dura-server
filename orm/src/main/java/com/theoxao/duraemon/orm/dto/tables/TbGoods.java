@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
 import org.jooq.Row11;
@@ -50,7 +51,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     /**
      * The column <code>public.tb_goods.id</code>.
      */
-    public final TableField<TbGoodsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TbGoodsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.tb_goods.name</code>.
@@ -58,39 +59,39 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     public final TableField<TbGoodsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>public.tb_goods.desc</code>.
+     * The column <code>public.tb_goods.desc</code>. 描述
      */
-    public final TableField<TbGoodsRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.CLOB, this, "");
+    public final TableField<TbGoodsRecord, String> DESC = createField(DSL.name("desc"), SQLDataType.CLOB, this, "描述");
 
     /**
-     * The column <code>public.tb_goods.cate</code>.
+     * The column <code>public.tb_goods.cate</code>. 分类ID
      */
-    public final TableField<TbGoodsRecord, Integer> CATE = createField(DSL.name("cate"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbGoodsRecord, Integer> CATE = createField(DSL.name("cate"), SQLDataType.INTEGER, this, "分类ID");
 
     /**
-     * The column <code>public.tb_goods.sub_cate</code>.
+     * The column <code>public.tb_goods.sub_cate</code>. 子分类ID
      */
-    public final TableField<TbGoodsRecord, Integer> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbGoodsRecord, Integer> SUB_CATE = createField(DSL.name("sub_cate"), SQLDataType.INTEGER, this, "子分类ID");
 
     /**
-     * The column <code>public.tb_goods.remain_batch</code>.
+     * The column <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
-    public final TableField<TbGoodsRecord, Integer> REMAIN_BATCH = createField(DSL.name("remain_batch"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbGoodsRecord, Integer> REMAIN_BATCH = createField(DSL.name("remain_batch"), SQLDataType.INTEGER.defaultValue(DSL.field("0", SQLDataType.INTEGER)), this, "剩余批次");
 
     /**
-     * The column <code>public.tb_goods.recent_price</code>.
+     * The column <code>public.tb_goods.recent_price</code>. 最近购买价格
      */
-    public final TableField<TbGoodsRecord, Integer> RECENT_PRICE = createField(DSL.name("recent_price"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbGoodsRecord, Integer> RECENT_PRICE = createField(DSL.name("recent_price"), SQLDataType.INTEGER.defaultValue(DSL.field("0", SQLDataType.INTEGER)), this, "最近购买价格");
 
     /**
      * The column <code>public.tb_goods.images</code>.
      */
-    public final TableField<TbGoodsRecord, JSON> IMAGES = createField(DSL.name("images"), SQLDataType.JSON, this, "");
+    public final TableField<TbGoodsRecord, JSON> IMAGES = createField(DSL.name("images"), SQLDataType.JSON.defaultValue(DSL.field("'[]'::json", SQLDataType.JSON)), this, "");
 
     /**
-     * The column <code>public.tb_goods.need_buy</code>.
+     * The column <code>public.tb_goods.need_buy</code>. 是否需要购买-购买优先级
      */
-    public final TableField<TbGoodsRecord, Integer> NEED_BUY = createField(DSL.name("need_buy"), SQLDataType.INTEGER, this, "");
+    public final TableField<TbGoodsRecord, Integer> NEED_BUY = createField(DSL.name("need_buy"), SQLDataType.INTEGER.defaultValue(DSL.field("0", SQLDataType.INTEGER)), this, "是否需要购买-购买优先级");
 
     /**
      * The column <code>public.tb_goods.create_time</code>.
@@ -134,6 +135,11 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public Identity<TbGoodsRecord, Integer> getIdentity() {
+        return (Identity<TbGoodsRecord, Integer>) super.getIdentity();
     }
 
     @Override

@@ -28,6 +28,11 @@ class GoodController {
         return success(goodService.getByName(name , limit?:10))
     }
 
+    @GetMapping("/candidate")
+    fun candidate(name:String):CommonView<*>{
+        return success(goodService.candidate(name))
+    }
+
     @GetMapping("/list")
     fun goodList(page: Int, size: Int, cid: Int, keyword: String?): CommonView<PageView<TbGoods>> {
         return success(goodService.list(cid, keyword, page, size))

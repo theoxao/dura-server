@@ -53,70 +53,70 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.desc</code>.
+     * Setter for <code>public.tb_goods.desc</code>. 描述
      */
     public void setDesc(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.desc</code>.
+     * Getter for <code>public.tb_goods.desc</code>. 描述
      */
     public String getDesc() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>public.tb_goods.cate</code>.
+     * Setter for <code>public.tb_goods.cate</code>. 分类ID
      */
     public void setCate(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.cate</code>.
+     * Getter for <code>public.tb_goods.cate</code>. 分类ID
      */
     public Integer getCate() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>public.tb_goods.sub_cate</code>.
+     * Setter for <code>public.tb_goods.sub_cate</code>. 子分类ID
      */
     public void setSubCate(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.sub_cate</code>.
+     * Getter for <code>public.tb_goods.sub_cate</code>. 子分类ID
      */
     public Integer getSubCate() {
         return (Integer) get(4);
     }
 
     /**
-     * Setter for <code>public.tb_goods.remain_batch</code>.
+     * Setter for <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
     public void setRemainBatch(Integer value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.remain_batch</code>.
+     * Getter for <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
     public Integer getRemainBatch() {
         return (Integer) get(5);
     }
 
     /**
-     * Setter for <code>public.tb_goods.recent_price</code>.
+     * Setter for <code>public.tb_goods.recent_price</code>. 最近购买价格
      */
     public void setRecentPrice(Integer value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.recent_price</code>.
+     * Getter for <code>public.tb_goods.recent_price</code>. 最近购买价格
      */
     public Integer getRecentPrice() {
         return (Integer) get(6);
@@ -137,14 +137,14 @@ public class TbGoodsRecord extends UpdatableRecordImpl<TbGoodsRecord> implements
     }
 
     /**
-     * Setter for <code>public.tb_goods.need_buy</code>.
+     * Setter for <code>public.tb_goods.need_buy</code>. 是否需要购买-购买优先级
      */
     public void setNeedBuy(Integer value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>public.tb_goods.need_buy</code>.
+     * Getter for <code>public.tb_goods.need_buy</code>. 是否需要购买-购买优先级
      */
     public Integer getNeedBuy() {
         return (Integer) get(8);

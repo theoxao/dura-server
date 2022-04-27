@@ -101,70 +101,70 @@ public class TbGoods implements Serializable {
     }
 
     /**
-     * Getter for <code>public.tb_goods.desc</code>.
+     * Getter for <code>public.tb_goods.desc</code>. 描述
      */
     public String getDesc() {
         return this.desc;
     }
 
     /**
-     * Setter for <code>public.tb_goods.desc</code>.
+     * Setter for <code>public.tb_goods.desc</code>. 描述
      */
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
     /**
-     * Getter for <code>public.tb_goods.cate</code>.
+     * Getter for <code>public.tb_goods.cate</code>. 分类ID
      */
     public Integer getCate() {
         return this.cate;
     }
 
     /**
-     * Setter for <code>public.tb_goods.cate</code>.
+     * Setter for <code>public.tb_goods.cate</code>. 分类ID
      */
     public void setCate(Integer cate) {
         this.cate = cate;
     }
 
     /**
-     * Getter for <code>public.tb_goods.sub_cate</code>.
+     * Getter for <code>public.tb_goods.sub_cate</code>. 子分类ID
      */
     public Integer getSubCate() {
         return this.subCate;
     }
 
     /**
-     * Setter for <code>public.tb_goods.sub_cate</code>.
+     * Setter for <code>public.tb_goods.sub_cate</code>. 子分类ID
      */
     public void setSubCate(Integer subCate) {
         this.subCate = subCate;
     }
 
     /**
-     * Getter for <code>public.tb_goods.remain_batch</code>.
+     * Getter for <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
     public Integer getRemainBatch() {
         return this.remainBatch;
     }
 
     /**
-     * Setter for <code>public.tb_goods.remain_batch</code>.
+     * Setter for <code>public.tb_goods.remain_batch</code>. 剩余批次
      */
     public void setRemainBatch(Integer remainBatch) {
         this.remainBatch = remainBatch;
     }
 
     /**
-     * Getter for <code>public.tb_goods.recent_price</code>.
+     * Getter for <code>public.tb_goods.recent_price</code>. 最近购买价格
      */
     public Integer getRecentPrice() {
         return this.recentPrice;
     }
 
     /**
-     * Setter for <code>public.tb_goods.recent_price</code>.
+     * Setter for <code>public.tb_goods.recent_price</code>. 最近购买价格
      */
     public void setRecentPrice(Integer recentPrice) {
         this.recentPrice = recentPrice;
@@ -185,14 +185,14 @@ public class TbGoods implements Serializable {
     }
 
     /**
-     * Getter for <code>public.tb_goods.need_buy</code>.
+     * Getter for <code>public.tb_goods.need_buy</code>. 是否需要购买-购买优先级
      */
     public Integer getNeedBuy() {
         return this.needBuy;
     }
 
     /**
-     * Setter for <code>public.tb_goods.need_buy</code>.
+     * Setter for <code>public.tb_goods.need_buy</code>. 是否需要购买-购买优先级
      */
     public void setNeedBuy(Integer needBuy) {
         this.needBuy = needBuy;
