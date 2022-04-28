@@ -88,8 +88,8 @@ class Crawler {
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max - 2000)..(max + 2000)).toMutableList().craw()
-        ingredient()
-        relateIngredient()
+//        ingredient()
+//        relateIngredient()
     }
 
     fun RecipeModel?.toRecipe(): TbRecipeRecord? {
