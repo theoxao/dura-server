@@ -1,5 +1,6 @@
 package com.theoxao.duraemon.good.service
 
+import com.theoxao.duraemon.good.common.CategoryView
 import com.theoxao.duraemon.good.common.CommonException
 import com.theoxao.duraemon.good.common.ResponseCode
 import com.theoxao.duraemon.good.common.trans
@@ -40,6 +41,19 @@ class CateService {
                 executeUpdate(cate)
             }
         }
+    }
+
+    fun categories(): Any {
+        val cates = dslContext.selectFrom(TB_CATEGORY).fetchInto(CategoryView::class.java)
+        val root = cates.filter { it.pid == null || it.pid == 0 || it.level == 1}
+        val map = cates.groupBy { it.pid }
+        fun List<CategoryView>.mapChildren(){
+            this.forEach {
+                it.children = map[it.id]?.apply { this.mapChildren() }
+            }
+        }
+        root.mapChildren()
+        return root
     }
 
 

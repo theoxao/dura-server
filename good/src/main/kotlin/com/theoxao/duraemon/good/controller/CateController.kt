@@ -16,6 +16,11 @@ class CateController {
     @Resource
     lateinit var cateService: CateService
 
+    @GetMapping("")
+    fun category():CommonView<*>{
+        return success(cateService.categories())
+    }
+
     /**
      * @param level 分类级别
      */

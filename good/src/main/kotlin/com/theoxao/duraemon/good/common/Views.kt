@@ -38,3 +38,11 @@ class GoodCandidateView:BaseView{
     var count: Int? = null
     var goodId:Int? = null
 }
+
+class CategoryView:BaseView{
+    var id: Int? = null
+    var name: String? = null
+    var level: Int? = null
+    var pid: Int? = null
+    var children:List<CategoryView>? = null
+}
