@@ -9,6 +9,7 @@ import com.theoxao.duraemon.orm.dto.tables.pojos.TbGoods
 import org.jooq.DSLContext
 import org.jooq.impl.DSL
 import org.springframework.stereotype.Service
+import javax.annotation.PostConstruct
 import javax.annotation.Resource
 
 @Service
@@ -19,6 +20,9 @@ class GoodService {
 
     @Resource
     lateinit var objectMapper: ObjectMapper
+
+    @Resource
+    lateinit var cateService: CateService
 
     fun list(cid: Int, keyword: String?, page: Int, size: Int): PageView<TbGoods> {
         val sql = dslContext.selectFrom(TB_GOODS).where(TB_GOODS.CATE.eq(cid)).apply {
@@ -62,7 +66,7 @@ class GoodService {
     }
 
     fun good(id: Int): Any {
-        val cateMap = dslContext.selectFrom(TB_CATEGORY).fetch().associateBy({it.id}, {it.name})
+        val cateMap =cateService.cateMap
         val view = dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(id)).fetchAnyInto(GoodDetailView::class.java)?:throw CommonException(RECORD_NOT_FOUND)
         return view.apply {
             this.cateStr = cateMap[this.cate]
@@ -78,14 +82,16 @@ class GoodService {
         }
     }
 
-    fun candidate(name: String): Any {
+    fun suggestion(name: String): Any {
         return dslContext.select().from(TB_GOOD_CANDIDATE)
             .leftJoin(TB_GOODS).on(TB_GOODS.NAME.eq(TB_GOOD_CANDIDATE.NAME))
             .where(TB_GOOD_CANDIDATE.NAME.startsWith(name))
             .orderBy(DSL.length(TB_GOOD_CANDIDATE.NAME),TB_GOOD_CANDIDATE.COUNT.desc()).limit(10)
             .fetch {
                 it.into(TB_GOOD_CANDIDATE).into(GoodCandidateView::class.java).apply {
-                    goodId = it.get(TB_GOODS.ID)
+                    this.goodId = it.get(TB_GOODS.ID)
+                    this.cateStr = cateService.cateMap[this.cate]
+                    this.subCateStr  = cateService.cateMap[this.subCate]
                 }
             }
     }

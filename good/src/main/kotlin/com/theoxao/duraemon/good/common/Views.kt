@@ -34,7 +34,9 @@ class GoodCandidateView:BaseView{
     var name: String? = null
     var from: String? = null
     var cate: Int? = null
+    var cateStr:String? = null
     var subCate: Int? = null
+    var subCateStr:String? = null
     var count: Int? = null
     var goodId:Int? = null
 }

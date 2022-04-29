@@ -17,6 +17,10 @@ class CateService {
     @Resource
     lateinit var dslContext: DSLContext
 
+    var cateMap: Map<Int, String> = mutableMapOf()
+        get() = field.ifEmpty { dslContext.selectFrom(TB_CATEGORY).fetch().associateBy({ it.id }, { it.name }) }
+
+
     fun list(level: Int?): MutableList<TbCategory> {
         return dslContext.selectFrom(TB_CATEGORY).apply {
             if (level != null) where(TB_CATEGORY.LEVEL.eq(level))
@@ -33,9 +37,10 @@ class CateService {
                     this.pid = request.pid
                 }.let(this::executeInsert)
             } else {
-                val cate = selectFrom(TB_CATEGORY).where(TB_CATEGORY.ID.eq(request.id)).fetchAny() ?: throw CommonException(
-                    ResponseCode.RECORD_NOT_FOUND
-                )
+                val cate =
+                    selectFrom(TB_CATEGORY).where(TB_CATEGORY.ID.eq(request.id)).fetchAny() ?: throw CommonException(
+                        ResponseCode.RECORD_NOT_FOUND
+                    )
                 cate.name = request.name
                 cate.pid = request.pid
                 executeUpdate(cate)
@@ -44,10 +49,10 @@ class CateService {
     }
 
     fun categories(): Any {
-        val cates = dslContext.selectFrom(TB_CATEGORY).fetchInto(CategoryView::class.java)
-        val root = cates.filter { it.pid == null || it.pid == 0 || it.level == 1}
-        val map = cates.groupBy { it.pid }
-        fun List<CategoryView>.mapChildren(){
+        val categories = dslContext.selectFrom(TB_CATEGORY).fetchInto(CategoryView::class.java)
+        val root = categories.filter { it.pid == null || it.pid == 0 || it.level == 1 }
+        val map = categories.groupBy { it.pid }
+        fun List<CategoryView>.mapChildren() {
             this.forEach {
                 it.children = map[it.id]?.apply { this.mapChildren() }
             }

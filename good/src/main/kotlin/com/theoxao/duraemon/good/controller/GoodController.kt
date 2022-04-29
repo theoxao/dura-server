@@ -28,9 +28,9 @@ class GoodController {
         return success(goodService.getByName(name , limit?:10))
     }
 
-    @GetMapping("/candidate")
-    fun candidate(name:String):CommonView<*>{
-        return success(goodService.candidate(name))
+    @GetMapping("/suggestion")
+    fun suggestion(name:String):CommonView<*>{
+        return success(goodService.suggestion(name))
     }
 
     @GetMapping("/list")
