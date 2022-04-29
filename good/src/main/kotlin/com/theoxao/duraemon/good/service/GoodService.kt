@@ -86,7 +86,7 @@ class GoodService {
         return dslContext.select().from(TB_GOOD_CANDIDATE)
             .leftJoin(TB_GOODS).on(TB_GOODS.NAME.eq(TB_GOOD_CANDIDATE.NAME))
             .where(TB_GOOD_CANDIDATE.NAME.startsWith(name))
-            .orderBy(DSL.length(TB_GOOD_CANDIDATE.NAME),TB_GOOD_CANDIDATE.COUNT.desc()).limit(10)
+            .orderBy(DSL.length(TB_GOOD_CANDIDATE.NAME),TB_GOOD_CANDIDATE.COUNT.desc()).limit(20)
             .fetch {
                 it.into(TB_GOOD_CANDIDATE).into(GoodCandidateView::class.java).apply {
                     this.goodId = it.get(TB_GOODS.ID)
