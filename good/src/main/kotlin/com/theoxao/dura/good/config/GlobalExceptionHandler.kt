@@ -1,6 +1,6 @@
 package com.theoxao.dura.good.config
 
-import com.theoxao.duraemon.good.common.CommonException
+import com.theoxao.dura.good.common.CommonException
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.HandlerExceptionResolver

@@ -1,10 +1,10 @@
 package com.theoxao.dura.good.controller
 
-import com.theoxao.duraemon.good.common.CommonView
-import com.theoxao.duraemon.good.common.success
-import com.theoxao.duraemon.good.model.CategoryUpdateRequest
-import com.theoxao.duraemon.good.service.CateService
-import com.theoxao.duraemon.orm.dto.tables.pojos.TbCategory
+import com.theoxao.dura.good.common.CommonView
+import com.theoxao.dura.good.common.success
+import com.theoxao.dura.good.model.CategoryUpdateRequest
+import com.theoxao.dura.good.service.CateService
+import com.theoxao.dura.orm.dto.tables.pojos.TbCategory
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 

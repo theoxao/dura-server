@@ -1,9 +1,9 @@
 package com.theoxao.dura.good.controller
 
-import com.theoxao.duraemon.good.common.CommonView
-import com.theoxao.duraemon.good.common.success
-import com.theoxao.duraemon.good.service.LocationService
-import com.theoxao.duraemon.orm.dto.tables.pojos.TbLocation
+import com.theoxao.dura.good.common.CommonView
+import com.theoxao.dura.good.common.success
+import com.theoxao.dura.good.service.LocationService
+import com.theoxao.dura.orm.dto.tables.pojos.TbLocation
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

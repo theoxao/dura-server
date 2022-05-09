@@ -1,8 +1,8 @@
 package com.theoxao.dura.good.controller
 
-import com.theoxao.duraemon.good.common.CommonView
-import com.theoxao.duraemon.good.common.success
-import com.theoxao.duraemon.good.service.CommonService
+import com.theoxao.dura.good.common.CommonView
+import com.theoxao.dura.good.common.success
+import com.theoxao.dura.good.service.CommonService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

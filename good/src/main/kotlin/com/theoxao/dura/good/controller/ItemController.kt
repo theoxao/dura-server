@@ -1,13 +1,13 @@
 package com.theoxao.dura.good.controller
 
-import com.theoxao.duraemon.good.common.CommonView
-import com.theoxao.duraemon.good.common.PageView
-import com.theoxao.duraemon.good.common.success
-import com.theoxao.duraemon.good.model.ItemDetailUpdateRequest
-import com.theoxao.duraemon.good.model.ItemDetailView
-import com.theoxao.duraemon.good.model.ItemUpdateRequest
-import com.theoxao.duraemon.good.model.ItemView
-import com.theoxao.duraemon.good.service.ItemService
+import com.theoxao.dura.good.common.CommonView
+import com.theoxao.dura.good.common.PageView
+import com.theoxao.dura.good.common.success
+import com.theoxao.dura.good.model.ItemDetailUpdateRequest
+import com.theoxao.dura.good.model.ItemDetailView
+import com.theoxao.dura.good.model.ItemUpdateRequest
+import com.theoxao.dura.good.model.ItemView
+import com.theoxao.dura.good.service.ItemService
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 

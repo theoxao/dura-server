@@ -1,6 +1,6 @@
 package com.theoxao.dura.good.common
 
-import com.theoxao.duraemon.good.model.BaseView
+import com.theoxao.dura.good.model.BaseView
 import org.jooq.JSON
 import java.time.LocalDateTime
 
@@ -29,7 +29,7 @@ class GoodDetailView:BaseView{
     var updateTime: LocalDateTime? = null
 }
 
-class GoodCandidateView:BaseView{
+class GoodCandidateView: BaseView {
     var id: String? = null
     var name: String? = null
     var from: String? = null
