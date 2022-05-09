@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Row4;
 import org.jooq.Schema;
@@ -48,7 +49,7 @@ public class TbCategory extends TableImpl<TbCategoryRecord> {
     /**
      * The column <code>public.tb_category.id</code>.
      */
-    public final TableField<TbCategoryRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TbCategoryRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.tb_category.name</code>.
@@ -97,6 +98,11 @@ public class TbCategory extends TableImpl<TbCategoryRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public Identity<TbCategoryRecord, Integer> getIdentity() {
+        return (Identity<TbCategoryRecord, Integer>) super.getIdentity();
     }
 
     @Override

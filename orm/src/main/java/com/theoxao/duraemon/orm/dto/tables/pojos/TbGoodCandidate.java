@@ -21,6 +21,8 @@ public class TbGoodCandidate implements Serializable {
     private Integer cate;
     private Integer subCate;
     private Integer count;
+    private String  py;
+    private String  pyShort;
 
     public TbGoodCandidate() {}
 
@@ -31,6 +33,8 @@ public class TbGoodCandidate implements Serializable {
         this.cate = value.cate;
         this.subCate = value.subCate;
         this.count = value.count;
+        this.py = value.py;
+        this.pyShort = value.pyShort;
     }
 
     public TbGoodCandidate(
@@ -39,7 +43,9 @@ public class TbGoodCandidate implements Serializable {
         String  from,
         Integer cate,
         Integer subCate,
-        Integer count
+        Integer count,
+        String  py,
+        String  pyShort
     ) {
         this.id = id;
         this.name = name;
@@ -47,6 +53,8 @@ public class TbGoodCandidate implements Serializable {
         this.cate = cate;
         this.subCate = subCate;
         this.count = count;
+        this.py = py;
+        this.pyShort = pyShort;
     }
 
     /**
@@ -133,6 +141,34 @@ public class TbGoodCandidate implements Serializable {
         this.count = count;
     }
 
+    /**
+     * Getter for <code>public.tb_good_candidate.py</code>.
+     */
+    public String getPy() {
+        return this.py;
+    }
+
+    /**
+     * Setter for <code>public.tb_good_candidate.py</code>.
+     */
+    public void setPy(String py) {
+        this.py = py;
+    }
+
+    /**
+     * Getter for <code>public.tb_good_candidate.py_short</code>.
+     */
+    public String getPyShort() {
+        return this.pyShort;
+    }
+
+    /**
+     * Setter for <code>public.tb_good_candidate.py_short</code>.
+     */
+    public void setPyShort(String pyShort) {
+        this.pyShort = pyShort;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbGoodCandidate (");
@@ -143,6 +179,8 @@ public class TbGoodCandidate implements Serializable {
         sb.append(", ").append(cate);
         sb.append(", ").append(subCate);
         sb.append(", ").append(count);
+        sb.append(", ").append(py);
+        sb.append(", ").append(pyShort);
 
         sb.append(")");
         return sb.toString();

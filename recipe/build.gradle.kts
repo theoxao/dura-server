@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("net.sourceforge.htmlcleaner:htmlcleaner:2.26")
     implementation("com.huaban:jieba-analysis:1.0.2")
+    implementation("io.github.tokenjan:pinyin4j:2.6.1")
 
     implementation("joda-time:joda-time:2.10.6")
 

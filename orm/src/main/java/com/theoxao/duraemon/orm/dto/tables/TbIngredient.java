@@ -14,7 +14,7 @@ import java.util.List;
 import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.Name;
-import org.jooq.Row3;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -61,6 +61,16 @@ public class TbIngredient extends TableImpl<TbIngredientRecord> {
      * The column <code>public.tb_ingredient.insert_time</code>.
      */
     public final TableField<TbIngredientRecord, LocalDateTime> INSERT_TIME = createField(DSL.name("insert_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.tb_ingredient.py</code>.
+     */
+    public final TableField<TbIngredientRecord, String> PY = createField(DSL.name("py"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.tb_ingredient.py_short</code>.
+     */
+    public final TableField<TbIngredientRecord, String> PY_SHORT = createField(DSL.name("py_short"), SQLDataType.VARCHAR(31), this, "");
 
     private TbIngredient(Name alias, Table<TbIngredientRecord> aliased) {
         this(alias, aliased, null);
@@ -140,11 +150,11 @@ public class TbIngredient extends TableImpl<TbIngredientRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, LocalDateTime> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row5<Integer, String, LocalDateTime, String, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

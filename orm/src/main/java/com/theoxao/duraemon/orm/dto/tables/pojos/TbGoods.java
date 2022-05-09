@@ -29,6 +29,8 @@ public class TbGoods implements Serializable {
     private Integer       needBuy;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private String        py;
+    private String        pyShort;
 
     public TbGoods() {}
 
@@ -44,6 +46,8 @@ public class TbGoods implements Serializable {
         this.needBuy = value.needBuy;
         this.createTime = value.createTime;
         this.updateTime = value.updateTime;
+        this.py = value.py;
+        this.pyShort = value.pyShort;
     }
 
     public TbGoods(
@@ -57,7 +61,9 @@ public class TbGoods implements Serializable {
         JSON          images,
         Integer       needBuy,
         LocalDateTime createTime,
-        LocalDateTime updateTime
+        LocalDateTime updateTime,
+        String        py,
+        String        pyShort
     ) {
         this.id = id;
         this.name = name;
@@ -70,6 +76,8 @@ public class TbGoods implements Serializable {
         this.needBuy = needBuy;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.py = py;
+        this.pyShort = pyShort;
     }
 
     /**
@@ -226,6 +234,34 @@ public class TbGoods implements Serializable {
         this.updateTime = updateTime;
     }
 
+    /**
+     * Getter for <code>public.tb_goods.py</code>.
+     */
+    public String getPy() {
+        return this.py;
+    }
+
+    /**
+     * Setter for <code>public.tb_goods.py</code>.
+     */
+    public void setPy(String py) {
+        this.py = py;
+    }
+
+    /**
+     * Getter for <code>public.tb_goods.py_short</code>.
+     */
+    public String getPyShort() {
+        return this.pyShort;
+    }
+
+    /**
+     * Setter for <code>public.tb_goods.py_short</code>.
+     */
+    public void setPyShort(String pyShort) {
+        this.pyShort = pyShort;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbGoods (");
@@ -241,6 +277,8 @@ public class TbGoods implements Serializable {
         sb.append(", ").append(needBuy);
         sb.append(", ").append(createTime);
         sb.append(", ").append(updateTime);
+        sb.append(", ").append(py);
+        sb.append(", ").append(pyShort);
 
         sb.append(")");
         return sb.toString();

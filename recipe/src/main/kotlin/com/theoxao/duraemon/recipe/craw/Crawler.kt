@@ -84,7 +84,7 @@ class Crawler {
         log.info("finished")
     }
 
-    @Scheduled(cron = "* * 12 1/1 * ?")
+    @Scheduled(cron = "0 0 12 ? * ?")
     fun scheduled() {
         val max = dslContext.select(DSL.max(TB_RECIPE.ID)).from(TB_RECIPE).fetchAny()?.value1()!!
         ((max - 2000)..(max + 2000)).toMutableList().craw()
@@ -118,10 +118,6 @@ class Crawler {
         }
     }
 
-    //    @PostConstruct
-    fun i() {
-        (106724821 downTo 100000000).toMutableList().craw()
-    }
 
     fun Any?.toJson(): JSON? = this?.let { JSON.valueOf(objectMapper.writeValueAsString(it)) }
 
@@ -162,6 +158,11 @@ class Crawler {
                             resp.content?.get("recipe")?.let { recipe ->
                                 val record = recipe.toRecipe()
                                 dslContext.trans {
+                                    recipe.ingredient?.forEach {
+                                        if (it?.name?.isNotBlank()==true){
+                                            val ing = selectFrom(TB_INGREDIENT).where(TB_INGREDIENT.NAME.eq(it.name)).fetchAny()
+                                        }
+                                    }
                                     record?.let {
                                        insertInto(TB_RECIPE).set(record).onConflictDoNothing()
                                             .execute()

@@ -19,6 +19,8 @@ public class TbIngredient implements Serializable {
     private Integer       id;
     private String        name;
     private LocalDateTime insertTime;
+    private String        py;
+    private String        pyShort;
 
     public TbIngredient() {}
 
@@ -26,16 +28,22 @@ public class TbIngredient implements Serializable {
         this.id = value.id;
         this.name = value.name;
         this.insertTime = value.insertTime;
+        this.py = value.py;
+        this.pyShort = value.pyShort;
     }
 
     public TbIngredient(
         Integer       id,
         String        name,
-        LocalDateTime insertTime
+        LocalDateTime insertTime,
+        String        py,
+        String        pyShort
     ) {
         this.id = id;
         this.name = name;
         this.insertTime = insertTime;
+        this.py = py;
+        this.pyShort = pyShort;
     }
 
     /**
@@ -80,6 +88,34 @@ public class TbIngredient implements Serializable {
         this.insertTime = insertTime;
     }
 
+    /**
+     * Getter for <code>public.tb_ingredient.py</code>.
+     */
+    public String getPy() {
+        return this.py;
+    }
+
+    /**
+     * Setter for <code>public.tb_ingredient.py</code>.
+     */
+    public void setPy(String py) {
+        this.py = py;
+    }
+
+    /**
+     * Getter for <code>public.tb_ingredient.py_short</code>.
+     */
+    public String getPyShort() {
+        return this.pyShort;
+    }
+
+    /**
+     * Setter for <code>public.tb_ingredient.py_short</code>.
+     */
+    public void setPyShort(String pyShort) {
+        this.pyShort = pyShort;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbIngredient (");
@@ -87,6 +123,8 @@ public class TbIngredient implements Serializable {
         sb.append(id);
         sb.append(", ").append(name);
         sb.append(", ").append(insertTime);
+        sb.append(", ").append(py);
+        sb.append(", ").append(pyShort);
 
         sb.append(")");
         return sb.toString();

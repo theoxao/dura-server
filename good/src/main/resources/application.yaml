@@ -12,4 +12,4 @@ spring:
     driver-class-name: org.postgresql.Driver
 
 duraemon:
-  filePath: /data/static/duraemon
+  filePath: /data/static/dura

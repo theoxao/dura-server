@@ -13,7 +13,7 @@ import java.util.List;
 import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.Name;
-import org.jooq.Row6;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -75,6 +75,16 @@ public class TbGoodCandidate extends TableImpl<TbGoodCandidateRecord> {
      * The column <code>public.tb_good_candidate.count</code>.
      */
     public final TableField<TbGoodCandidateRecord, Integer> COUNT = createField(DSL.name("count"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.tb_good_candidate.py</code>.
+     */
+    public final TableField<TbGoodCandidateRecord, String> PY = createField(DSL.name("py"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.tb_good_candidate.py_short</code>.
+     */
+    public final TableField<TbGoodCandidateRecord, String> PY_SHORT = createField(DSL.name("py_short"), SQLDataType.VARCHAR(31), this, "");
 
     private TbGoodCandidate(Name alias, Table<TbGoodCandidateRecord> aliased) {
         this(alias, aliased, null);
@@ -154,11 +164,11 @@ public class TbGoodCandidate extends TableImpl<TbGoodCandidateRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<String, String, String, Integer, Integer, Integer> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row8<String, String, String, Integer, Integer, Integer, String, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

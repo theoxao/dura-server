@@ -19,7 +19,8 @@ class ImageService {
         val fileName = System.currentTimeMillis().toString() + ext
         val file = File("$filePath/$fileName")
         image.transferTo(file)
-        return file.absolutePath
+        return file.absolutePath.replace(filePath,"https://static.theoxao.com/dura")
+
     }
 
 }
