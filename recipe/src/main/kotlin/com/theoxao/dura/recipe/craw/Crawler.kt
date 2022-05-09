@@ -145,7 +145,6 @@ class Crawler {
 
                 override fun onResponse(call: Call, response: Response) {
                     if (response.isSuccessful) {
-                        log.error("request@{} is ok", id)
                         response.body?.string()?.let { bytes ->
                             val resp = objectMapper.readValue(bytes, ResponseWrapper::class.java)
                             if (resp.status != "ok") {
