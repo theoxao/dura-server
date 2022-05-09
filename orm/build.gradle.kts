@@ -46,14 +46,14 @@ jooq {
             isSpringAnnotations = true
         }
         target {
-            packageName = "com.theoxao.duraemon.orm.dto"
+            packageName = "com.theoxao.dura.orm.dto"
             directory = "src/main/java"
         }
     }
 }
 
 task<Delete>("cleanJooq") {
-    delete("${projectDir}/src/main/java/com/theoxao/duraemon/orm/dto")
+    delete("${projectDir}/src/main/java/com/theoxao/dura/orm/dto")
 }
 
 tasks.named("jooq"){

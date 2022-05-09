@@ -11,5 +11,6 @@ spring:
     url: jdbc:postgresql://106.12.81.91:5432/dura?useSSL=false&characterEncoding=utf8
     driver-class-name: org.postgresql.Driver
 
-duraemon:
+dura:
   filePath: /data/static/dura
+  httpBase: https://static.theoxao.com/dura
