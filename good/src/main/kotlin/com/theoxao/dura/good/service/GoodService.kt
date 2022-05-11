@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.theoxao.dura.good.common.*
 import com.theoxao.dura.good.common.ResponseCode.RECORD_NOT_FOUND
 import com.theoxao.dura.good.model.GoodUpdateRequest
+import com.theoxao.dura.good.utils.py
+import com.theoxao.dura.good.utils.pys
 import com.theoxao.dura.orm.dto.Tables.*
 import com.theoxao.dura.orm.dto.tables.pojos.TbGoods
 import org.jooq.DSLContext
@@ -50,6 +52,8 @@ class GoodService {
                 good.recentPrice = request.recentPrice
                 good.images = objectMapper list2Json request.images
                 good.needBuy = request.needBuy
+                good.py = request.name?.py()
+                good.pyShort = request.name?.pys()
                 executeUpdate(good)
             }
            result = dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(request.id)).fetchAnyInto(GoodDetailView::class.java).apply {
@@ -58,6 +62,14 @@ class GoodService {
             }
         } else {
             dslContext.trans {
+                TB_GOOD_CANDIDATE.newRecord().apply {
+                    this.name = request.name
+                    this.from = "user"
+                    this.cate = request.cate
+                    this.subCate = request.subCate
+                    this.py = request.name?.py()
+                    this.pyShort = request.name?.pys()
+                }
                 val good = TB_GOODS.newRecord().apply {
                     this.name = request.name
                     this.cate = request.cate
@@ -66,8 +78,9 @@ class GoodService {
                     this.recentPrice = request.recentPrice
                     this.images = objectMapper list2Json request.images
                     this.needBuy = request.needBuy ?: 0
+                    this.py = request.name?.py()
+                    this.pyShort = request.name?.pys()
                 }
-
                result = insertInto(TB_GOODS).set(good).returning().fetchOne()?.into(GoodDetailView::class.java).apply {
                     this?.cateStr = cateMap[this?.cate]
                     this?.subCateStr = cateMap[this?.subCate]
