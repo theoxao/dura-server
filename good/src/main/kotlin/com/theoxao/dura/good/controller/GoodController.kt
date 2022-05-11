@@ -40,8 +40,7 @@ class GoodController {
 
     @PostMapping("/update")
     fun update(@RequestBody request: GoodUpdateRequest): CommonView<*> {
-        goodService.update(request)
-        return success()
+        return success(goodService.update(request))
     }
 
 }

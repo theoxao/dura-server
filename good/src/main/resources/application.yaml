@@ -12,5 +12,5 @@ spring:
     driver-class-name: org.postgresql.Driver
 
 dura:
-  filePath: /data/static/dura
+  filePath: /Users/theo/dura
   httpBase: https://static.theoxao.com/dura

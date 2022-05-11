@@ -35,7 +35,9 @@ class GoodService {
         return PageView(list, total).withPageInfo(page, size)
     }
 
-    fun update(request: GoodUpdateRequest) {
+    fun update(request: GoodUpdateRequest):Any? {
+        val cateMap =cateService.cateMap
+        var result: GoodDetailView? = null
         if (request.id != null) {
             dslContext.trans {
                 val good = selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(request.id)).fetchAny() ?: throw CommonException(
@@ -50,9 +52,13 @@ class GoodService {
                 good.needBuy = request.needBuy
                 executeUpdate(good)
             }
+           result = dslContext.selectFrom(TB_GOODS).where(TB_GOODS.ID.eq(request.id)).fetchAnyInto(GoodDetailView::class.java).apply {
+                this?.cateStr = cateMap[this?.cate]
+                this?.subCateStr = cateMap[this?.subCate]
+            }
         } else {
             dslContext.trans {
-                TB_GOODS.newRecord().apply {
+                val good = TB_GOODS.newRecord().apply {
                     this.name = request.name
                     this.cate = request.cate
                     this.subCate = request.subCate
@@ -60,9 +66,15 @@ class GoodService {
                     this.recentPrice = request.recentPrice
                     this.images = objectMapper list2Json request.images
                     this.needBuy = request.needBuy ?: 0
-                }.let(this::executeInsert)
+                }
+
+               result = insertInto(TB_GOODS).set(good).returning().fetchOne()?.into(GoodDetailView::class.java).apply {
+                    this?.cateStr = cateMap[this?.cate]
+                    this?.subCateStr = cateMap[this?.subCate]
+                }
             }
         }
+        return result
     }
 
     fun good(id: Int): Any {
