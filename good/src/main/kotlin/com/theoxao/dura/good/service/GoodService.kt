@@ -47,6 +47,7 @@ class GoodService {
                 )
                 good.name = request.name
                 good.cate = request.cate
+                good.desc = request.desc
                 good.subCate = request.subCate
                 good.remainBatch = request.remainBatch
                 good.recentPrice = request.recentPrice
@@ -62,7 +63,7 @@ class GoodService {
             }
         } else {
             dslContext.trans {
-                TB_GOOD_CANDIDATE.newRecord().apply {
+                val candidate =TB_GOOD_CANDIDATE.newRecord().apply {
                     this.name = request.name
                     this.from = "user"
                     this.cate = request.cate
@@ -70,8 +71,10 @@ class GoodService {
                     this.py = request.name?.py()
                     this.pyShort = request.name?.pys()
                 }
+                insertInto(TB_GOOD_CANDIDATE).set(candidate).onConflictDoNothing().execute()
                 val good = TB_GOODS.newRecord().apply {
                     this.name = request.name
+                    this.desc = request.desc
                     this.cate = request.cate
                     this.subCate = request.subCate
                     this.remainBatch = request.remainBatch
@@ -81,7 +84,7 @@ class GoodService {
                     this.py = request.name?.py()
                     this.pyShort = request.name?.pys()
                 }
-               result = insertInto(TB_GOODS).set(good).returning().fetchOne()?.into(GoodDetailView::class.java).apply {
+               result = insertInto(TB_GOODS).set(good).onConflictDoNothing().returning().fetchOne()?.into(GoodDetailView::class.java).apply {
                     this?.cateStr = cateMap[this?.cate]
                     this?.subCateStr = cateMap[this?.subCate]
                 }

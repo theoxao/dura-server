@@ -5,6 +5,7 @@ import java.io.Serializable
 class GoodUpdateRequest : Serializable {
     var id: Int? = null
     var name: String? = null
+    var desc:String? = null
     var cate: Int? = null
     var subCate: Int? = null
     var remainBatch: Int? = null
