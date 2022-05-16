@@ -43,4 +43,9 @@ class GoodController {
         return success(goodService.update(request))
     }
 
+    @GetMapping("/storage")
+    fun storage(gid:Int?, cid:Int?):CommonView<*>{
+        return success(goodService.storage(gid, cid))
+    }
+
 }

@@ -14,6 +14,7 @@ import com.theoxao.dura.orm.dto.tables.TbItem;
 import com.theoxao.dura.orm.dto.tables.TbItemDetail;
 import com.theoxao.dura.orm.dto.tables.TbLocation;
 import com.theoxao.dura.orm.dto.tables.TbRecipe;
+import com.theoxao.dura.orm.dto.tables.TbStorage;
 
 
 /**
@@ -71,4 +72,9 @@ public class Tables {
      * The table <code>public.tb_recipe</code>.
      */
     public static final TbRecipe TB_RECIPE = TbRecipe.TB_RECIPE;
+
+    /**
+     * The table <code>public.tb_storage</code>.
+     */
+    public static final TbStorage TB_STORAGE = TbStorage.TB_STORAGE;
 }

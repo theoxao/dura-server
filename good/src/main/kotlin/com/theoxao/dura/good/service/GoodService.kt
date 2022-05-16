@@ -8,6 +8,8 @@ import com.theoxao.dura.good.utils.py
 import com.theoxao.dura.good.utils.pys
 import com.theoxao.dura.orm.dto.Tables.*
 import com.theoxao.dura.orm.dto.tables.pojos.TbGoods
+import com.theoxao.dura.orm.dto.tables.pojos.TbItemDetail
+import com.theoxao.dura.orm.dto.tables.pojos.TbStorage
 import org.jooq.DSLContext
 import org.jooq.impl.DSL
 import org.springframework.stereotype.Service
@@ -122,6 +124,18 @@ class GoodService {
                     this.subCateStr  = cateService.cateMap[this.subCate]
                 }
             }
+    }
+
+    fun storage(gid: Int?, cid: Int?): Any {
+        val storages = dslContext.selectFrom(TB_STORAGE).fetchInto(TbStorage::class.java)
+        var result = storages
+        if (cid!=null){
+            result = storages.filter {
+                objectMapper.readValue<List<Int>>(it.cates.data(), objectMapper.typeFactory.constructParametricType(List::class.java, Int::class.java))
+                .contains(cid)
+            }
+        }
+        return result
     }
 
 }

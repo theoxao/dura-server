@@ -14,6 +14,7 @@ import com.theoxao.dura.orm.dto.tables.TbItem;
 import com.theoxao.dura.orm.dto.tables.TbItemDetail;
 import com.theoxao.dura.orm.dto.tables.TbLocation;
 import com.theoxao.dura.orm.dto.tables.TbRecipe;
+import com.theoxao.dura.orm.dto.tables.TbStorage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +88,11 @@ public class Public extends SchemaImpl {
     public final TbRecipe TB_RECIPE = TbRecipe.TB_RECIPE;
 
     /**
+     * The table <code>public.tb_storage</code>.
+     */
+    public final TbStorage TB_STORAGE = TbStorage.TB_STORAGE;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -111,6 +117,7 @@ public class Public extends SchemaImpl {
             TbItem.TB_ITEM,
             TbItemDetail.TB_ITEM_DETAIL,
             TbLocation.TB_LOCATION,
-            TbRecipe.TB_RECIPE);
+            TbRecipe.TB_RECIPE,
+            TbStorage.TB_STORAGE);
     }
 }
