@@ -94,7 +94,7 @@ class ItemService {
                     )
                 detail.name = request.name
                 detail.images = objectMapper list2Json request.images
-                detail.pd = LocalDate.parse(request.pd, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                detail.pd =request.pd
                 detail.qty = request.qty
                 detail.bestFavor = request.bestFavor
                 detail.shelfLife = request.shelfLife
@@ -111,7 +111,7 @@ class ItemService {
                 detail.goodId = request.goodId
                 detail.name = request.name
                 detail.images = objectMapper list2Json request.images
-                detail.pd = LocalDate.parse(request.pd, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                detail.pd = request.pd
                 detail.qty = request.qty
                 detail.bestFavor = request.bestFavor
                 detail.shelfLife = request.shelfLife
