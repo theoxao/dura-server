@@ -1,6 +1,7 @@
 package com.theoxao.dura.good.model
 
 import java.io.Serializable
+import java.time.LocalDate
 
 class GoodUpdateRequest : Serializable {
     var id: Int? = null
@@ -35,7 +36,7 @@ class ItemDetailUpdateRequest : Serializable {
     var goodId: Int? = null
     var name: String? = null
     var images: List<String>? = arrayListOf()
-    var pd: String? = null
+    var pd: LocalDate? = null
     var qty: Int? = null
     var bestFavor: Int? = null
     var shelfLife: Int? = null
