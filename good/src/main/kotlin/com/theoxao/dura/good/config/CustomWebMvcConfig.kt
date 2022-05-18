@@ -26,19 +26,12 @@ class CustomWebMvcConfig : InitializingBean {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-    @Resource
-    lateinit var requestMappingHandlerAdapter:RequestMappingHandlerAdapter
 
     override fun afterPropertiesSet() {
         val sm = SimpleModule()
 //        sm.addSerializer(BaseView::class.java, MicroViewSerializer())
         sm.addSerializer(JSON::class.java, JsonViewSerializer(objectMapper))
         objectMapper.registerModule(sm)
-        val initializer = requestMappingHandlerAdapter.webBindingInitializer as ConfigurableWebBindingInitializer
-        if (initializer.conversionService != null) {
-            val genericConversionService = initializer.conversionService as GenericConversionService
-            genericConversionService.addConverter(LocalDateConvertor())
-        }
     }
 
     @Bean
@@ -64,22 +57,3 @@ class CustomWebMvcConfig : InitializingBean {
 //    }
 }
 
-
-class LocalDateConvertor : Converter<String ,LocalDate>{
-    override fun convert(source: String): LocalDate? {
-        if(source.length==10){
-            if (source.contains("-"))
-                return LocalDate.parse(source, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            if(source.contains("/"))
-                return LocalDate.parse(source, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-        }
-        if(source.length==19){
-            if (source.contains("-"))
-                return LocalDateTime.parse(source, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).toLocalDate()
-            if(source.contains("/"))
-                return LocalDateTime.parse(source, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")).toLocalDate()
-        }
-        return null
-    }
-
-}
