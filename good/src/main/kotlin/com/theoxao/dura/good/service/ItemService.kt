@@ -10,11 +10,10 @@ import com.theoxao.dura.orm.dto.Tables.TB_ITEM
 import com.theoxao.dura.orm.dto.Tables.TB_ITEM_DETAIL
 import com.theoxao.dura.orm.dto.tables.pojos.TbItem
 import com.theoxao.dura.orm.dto.tables.pojos.TbItemDetail
+import org.jetbrains.annotations.NotNull
 import org.jooq.DSLContext
 import org.springframework.stereotype.Service
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.annotation.Resource
 
 @Service
@@ -26,17 +25,15 @@ class ItemService {
     @Resource
     lateinit var objectMapper: ObjectMapper
 
-    fun itemList(gid: Int, page: Int, size: Int): PageView<ItemView> {
+    fun itemList(gid: Int): List<ItemView> {
         val sql = dslContext.selectFrom(TB_ITEM).where(TB_ITEM.GOOD_ID.eq(gid))
-        val total = dslContext.fetchCount(sql)
-        val list = sql.limit(size).offset((page - 1) * size).fetchInto(ItemView::class.java).onEach {
-            it.details = dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ITEM_ID.eq(it.id))
+        return sql.fetchInto(ItemView::class.java).onEach {
+            it?.details = dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ITEM_ID.eq(it?.id))
 //                .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
                 .orderBy(TB_ITEM_DETAIL.UPDATE_TIME.desc())
                 .limit(10)
                 .fetchInto(ItemDetailView::class.java)
         }
-        return PageView(list, total)
     }
 
     fun updateItem(request: ItemUpdateRequest) {

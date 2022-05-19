@@ -24,8 +24,8 @@ class ItemController {
      * @param gid: good id
      */
     @GetMapping("/list/{gid}")
-    fun itemList(@PathVariable gid: Int, page: Int, size: Int): CommonView<PageView<ItemView>> {
-        return success(itemService.itemList(gid, page, size))
+    fun itemList(@PathVariable gid: Int): CommonView<List<ItemView>> {
+        return success(itemService.itemList(gid))
     }
 
     @GetMapping("/{tid}")
