@@ -33,6 +33,8 @@ public class TbItem implements Serializable {
     private String        remark;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private String        ingrendient;
+    private String        brand;
 
     public TbItem() {}
 
@@ -52,6 +54,8 @@ public class TbItem implements Serializable {
         this.remark = value.remark;
         this.createTime = value.createTime;
         this.updateTime = value.updateTime;
+        this.ingrendient = value.ingrendient;
+        this.brand = value.brand;
     }
 
     public TbItem(
@@ -69,7 +73,9 @@ public class TbItem implements Serializable {
         String        usedStorage,
         String        remark,
         LocalDateTime createTime,
-        LocalDateTime updateTime
+        LocalDateTime updateTime,
+        String        ingrendient,
+        String        brand
     ) {
         this.id = id;
         this.goodId = goodId;
@@ -86,6 +92,8 @@ public class TbItem implements Serializable {
         this.remark = remark;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.ingrendient = ingrendient;
+        this.brand = brand;
     }
 
     /**
@@ -298,6 +306,34 @@ public class TbItem implements Serializable {
         this.updateTime = updateTime;
     }
 
+    /**
+     * Getter for <code>public.tb_item.ingrendient</code>.
+     */
+    public String getIngrendient() {
+        return this.ingrendient;
+    }
+
+    /**
+     * Setter for <code>public.tb_item.ingrendient</code>.
+     */
+    public void setIngrendient(String ingrendient) {
+        this.ingrendient = ingrendient;
+    }
+
+    /**
+     * Getter for <code>public.tb_item.brand</code>.
+     */
+    public String getBrand() {
+        return this.brand;
+    }
+
+    /**
+     * Setter for <code>public.tb_item.brand</code>.
+     */
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbItem (");
@@ -317,6 +353,8 @@ public class TbItem implements Serializable {
         sb.append(", ").append(remark);
         sb.append(", ").append(createTime);
         sb.append(", ").append(updateTime);
+        sb.append(", ").append(ingrendient);
+        sb.append(", ").append(brand);
 
         sb.append(")");
         return sb.toString();

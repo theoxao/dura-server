@@ -15,7 +15,7 @@ import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
-import org.jooq.Row15;
+import org.jooq.Row17;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -123,6 +123,16 @@ public class TbItem extends TableImpl<TbItemRecord> {
      */
     public final TableField<TbItemRecord, LocalDateTime> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
 
+    /**
+     * The column <code>public.tb_item.ingrendient</code>.
+     */
+    public final TableField<TbItemRecord, String> INGRENDIENT = createField(DSL.name("ingrendient"), SQLDataType.VARCHAR(1024), this, "");
+
+    /**
+     * The column <code>public.tb_item.brand</code>.
+     */
+    public final TableField<TbItemRecord, String> BRAND = createField(DSL.name("brand"), SQLDataType.VARCHAR(256), this, "");
+
     private TbItem(Name alias, Table<TbItemRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -201,11 +211,11 @@ public class TbItem extends TableImpl<TbItemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row15 type methods
+    // Row17 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Row17<Integer, Integer, String, JSON, String, String, Integer, String, Integer, Integer, String, String, String, LocalDateTime, LocalDateTime, String, String> fieldsRow() {
+        return (Row17) super.fieldsRow();
     }
 }

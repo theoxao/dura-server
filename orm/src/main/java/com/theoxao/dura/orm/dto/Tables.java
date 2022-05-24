@@ -5,6 +5,7 @@ package com.theoxao.dura.orm.dto;
 
 
 import com.theoxao.dura.orm.dto.tables.Ing;
+import com.theoxao.dura.orm.dto.tables.TbBrand;
 import com.theoxao.dura.orm.dto.tables.TbCategory;
 import com.theoxao.dura.orm.dto.tables.TbGoodCandidate;
 import com.theoxao.dura.orm.dto.tables.TbGoods;
@@ -27,6 +28,11 @@ public class Tables {
      * The table <code>public.ing</code>.
      */
     public static final Ing ING = Ing.ING;
+
+    /**
+     * The table <code>public.tb_brand</code>.
+     */
+    public static final TbBrand TB_BRAND = TbBrand.TB_BRAND;
 
     /**
      * The table <code>public.tb_category</code>.

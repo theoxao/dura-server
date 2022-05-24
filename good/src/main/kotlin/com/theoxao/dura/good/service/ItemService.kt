@@ -27,13 +27,7 @@ class ItemService {
 
     fun itemList(gid: Int): List<ItemView> {
         val sql = dslContext.selectFrom(TB_ITEM).where(TB_ITEM.GOOD_ID.eq(gid))
-        return sql.fetchInto(ItemView::class.java).onEach {
-            it?.details = dslContext.selectFrom(TB_ITEM_DETAIL).where(TB_ITEM_DETAIL.ITEM_ID.eq(it?.id))
-//                .and(TB_ITEM_DETAIL.EXPIRY.eq(0))
-                .orderBy(TB_ITEM_DETAIL.UPDATE_TIME.desc())
-                .limit(10)
-                .fetchInto(ItemDetailView::class.java)
-        }
+        return sql.fetchInto(ItemView::class.java)
     }
 
     fun updateItem(request: ItemUpdateRequest) {

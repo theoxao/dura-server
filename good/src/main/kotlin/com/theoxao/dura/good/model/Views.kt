@@ -23,6 +23,8 @@ class ItemView : BaseView {
     var createTime: LocalDateTime? = null
     var updateTime: LocalDateTime? = null
     var details: List<ItemDetailView> = arrayListOf()
+    var ingredient:String? = null
+    var brand:String? = null
 }
 
 class ItemDetailView : BaseView {

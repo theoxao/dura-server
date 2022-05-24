@@ -5,6 +5,7 @@ package com.theoxao.dura.orm.dto;
 
 
 import com.theoxao.dura.orm.dto.tables.Ing;
+import com.theoxao.dura.orm.dto.tables.TbBrand;
 import com.theoxao.dura.orm.dto.tables.TbCategory;
 import com.theoxao.dura.orm.dto.tables.TbGoodCandidate;
 import com.theoxao.dura.orm.dto.tables.TbGoods;
@@ -41,6 +42,11 @@ public class Public extends SchemaImpl {
      * The table <code>public.ing</code>.
      */
     public final Ing ING = Ing.ING;
+
+    /**
+     * The table <code>public.tb_brand</code>.
+     */
+    public final TbBrand TB_BRAND = TbBrand.TB_BRAND;
 
     /**
      * The table <code>public.tb_category</code>.
@@ -109,6 +115,7 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
             Ing.ING,
+            TbBrand.TB_BRAND,
             TbCategory.TB_CATEGORY,
             TbGoodCandidate.TB_GOOD_CANDIDATE,
             TbGoods.TB_GOODS,
