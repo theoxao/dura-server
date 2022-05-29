@@ -8,8 +8,15 @@ import com.theoxao.dura.good.model.ItemDetailView
 import com.theoxao.dura.good.model.ItemUpdateRequest
 import com.theoxao.dura.good.model.ItemView
 import com.theoxao.dura.good.service.ItemService
+import org.springframework.web.bind.ServletRequestDataBinder
 import org.springframework.web.bind.annotation.*
+import java.beans.PropertyEditorSupport
+import java.text.DateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.annotation.Resource
+import javax.servlet.http.HttpServletRequest
 
 
 @RestController
@@ -18,6 +25,22 @@ class ItemController {
 
     @Resource
     lateinit var itemService: ItemService
+
+    @InitBinder
+    fun bindDate(request: HttpServletRequest, binder: ServletRequestDataBinder){
+        binder.registerCustomEditor(LocalDate::class.java,  object : PropertyEditorSupport(){
+            override fun setAsText(text: String?) {
+               value =  when{
+                   text.isNullOrBlank()->null
+                   text.length == 10 && text.contains("-") ->LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                   text.length == 10 && text.contains("/") ->LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                   text.length == 19 && text.contains("-") -> LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).toLocalDate()
+                   text.length == 19 && text.contains("/") -> LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")).toLocalDate()
+                   else -> null
+                }
+            }
+        })
+    }
 
     /**
      * 查询物品下面所有item
