@@ -26,22 +26,6 @@ class ItemController {
     @Resource
     lateinit var itemService: ItemService
 
-    @InitBinder
-    fun bindDate(request: HttpServletRequest, binder: ServletRequestDataBinder){
-        binder.registerCustomEditor(LocalDate::class.java,  object : PropertyEditorSupport(){
-            override fun setAsText(text: String?) {
-               value =  when{
-                   text.isNullOrBlank()->null
-                   text.length == 10 && text.contains("-") ->LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                   text.length == 10 && text.contains("/") ->LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-                   text.length == 19 && text.contains("-") -> LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).toLocalDate()
-                   text.length == 19 && text.contains("/") -> LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")).toLocalDate()
-                   else -> null
-                }
-            }
-        })
-    }
-
     /**
      * 查询物品下面所有item
      * @param gid: good id

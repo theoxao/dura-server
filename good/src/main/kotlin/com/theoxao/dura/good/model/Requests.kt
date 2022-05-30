@@ -1,5 +1,9 @@
 package com.theoxao.dura.good.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.theoxao.dura.good.config.LocalDateJsonFormatter
 import java.io.Serializable
 import java.time.LocalDate
 
@@ -36,6 +40,7 @@ class ItemDetailUpdateRequest : Serializable {
     var goodId: Int? = null
     var name: String? = null
     var images: List<String>? = arrayListOf()
+    @JsonDeserialize(using = LocalDateJsonFormatter::class)
     var pd: LocalDate? = null
     var qty: Int? = null
     var bestFavor: Int? = null
