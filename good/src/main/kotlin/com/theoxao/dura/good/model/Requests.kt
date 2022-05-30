@@ -30,6 +30,7 @@ class ItemUpdateRequest : Serializable {
     var bestFavor: Int? = null
     var shelfLife: Int? = null
     var storage: String? = null
+    var brand:String? =  null
     var usedStorage: String? = null
     var remark: String? = null
 }

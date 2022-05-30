@@ -14,7 +14,7 @@ import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.JSON;
 import org.jooq.Name;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -61,6 +61,11 @@ public class TbBrand extends TableImpl<TbBrandRecord> {
      * The column <code>public.tb_brand.cate</code>.
      */
     public final TableField<TbBrandRecord, JSON> CATE = createField(DSL.name("cate"), SQLDataType.JSON, this, "");
+
+    /**
+     * The column <code>public.tb_brand.item_count</code>.
+     */
+    public final TableField<TbBrandRecord, Integer> ITEM_COUNT = createField(DSL.name("item_count"), SQLDataType.INTEGER, this, "");
 
     private TbBrand(Name alias, Table<TbBrandRecord> aliased) {
         this(alias, aliased, null);
@@ -140,11 +145,11 @@ public class TbBrand extends TableImpl<TbBrandRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, JSON> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Integer, String, JSON, Integer> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

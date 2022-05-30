@@ -20,6 +20,7 @@ public class TbBrand implements Serializable {
     private Integer id;
     private String  name;
     private JSON    cate;
+    private Integer itemCount;
 
     public TbBrand() {}
 
@@ -27,16 +28,19 @@ public class TbBrand implements Serializable {
         this.id = value.id;
         this.name = value.name;
         this.cate = value.cate;
+        this.itemCount = value.itemCount;
     }
 
     public TbBrand(
         Integer id,
         String  name,
-        JSON    cate
+        JSON    cate,
+        Integer itemCount
     ) {
         this.id = id;
         this.name = name;
         this.cate = cate;
+        this.itemCount = itemCount;
     }
 
     /**
@@ -81,6 +85,20 @@ public class TbBrand implements Serializable {
         this.cate = cate;
     }
 
+    /**
+     * Getter for <code>public.tb_brand.item_count</code>.
+     */
+    public Integer getItemCount() {
+        return this.itemCount;
+    }
+
+    /**
+     * Setter for <code>public.tb_brand.item_count</code>.
+     */
+    public void setItemCount(Integer itemCount) {
+        this.itemCount = itemCount;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TbBrand (");
@@ -88,6 +106,7 @@ public class TbBrand implements Serializable {
         sb.append(id);
         sb.append(", ").append(name);
         sb.append(", ").append(cate);
+        sb.append(", ").append(itemCount);
 
         sb.append(")");
         return sb.toString();
