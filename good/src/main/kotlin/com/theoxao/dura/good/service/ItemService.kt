@@ -46,6 +46,7 @@ class ItemService {
                 item.storage = request.storage
                 item.usedStorage = request.usedStorage
                 item.remark = request.remark
+                item.brand = request.brand
                 this.executeUpdate(item)
             }
         } else {
