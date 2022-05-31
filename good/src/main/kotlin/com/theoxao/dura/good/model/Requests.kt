@@ -60,3 +60,8 @@ class CategoryUpdateRequest : Serializable {
     var name: String? = null
     var pid: Int? = null
 }
+
+class BrandAddRequest:Serializable{
+    var name:String? = null
+    var cats:List<Int>? = arrayListOf();
+}
